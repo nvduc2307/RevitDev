@@ -286,7 +286,12 @@ namespace RevitDevelop.Utils.RevParameters
                             //parameter binding 
                             InstanceBinding newIB = app.Create.NewInstanceBinding(categorySet);
                             //parameter group to text
+#if REVIT2024 || REVIT2025
+                            var dforgeid = new ForgeTypeId("autodesk.parameter.group:identityData-1.0.0");
+                            doc.ParameterBindings.Insert(externalDefinition_With, newIB, dforgeid);
+#else
                             doc.ParameterBindings.Insert(externalDefinition_With, newIB, BuiltInParameterGroup.PG_IDENTITY_DATA);
+#endif
                         }
                         catch (Exception ex)
                         {
