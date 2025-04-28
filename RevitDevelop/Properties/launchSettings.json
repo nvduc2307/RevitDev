@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "RevitDevelop": {
+      "commandName": "Project"
+    },
+    "R21": {
+      "commandName": "Executable"
+    },
+    "R22": {
+      "commandName": "Executable"
+    }
+  }
+}
