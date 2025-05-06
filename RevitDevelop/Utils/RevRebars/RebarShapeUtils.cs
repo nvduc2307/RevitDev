@@ -64,7 +64,7 @@ namespace RevitDevelop.Utils.RevRebars
                                     continue;
                                 foreach (Parameter p in rebarShape.Parameters)
                                 {
-                                    if (p.Id.GetId() == paramId.GetId())
+                                    if (p.Id.ToString() == paramId.ToString())
                                     {
                                         segmentParamNames.Add(new Tuple<string, Guid>(p.Definition.Name, p.GUID));
                                         break;

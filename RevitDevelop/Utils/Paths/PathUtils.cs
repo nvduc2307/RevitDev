@@ -4,6 +4,10 @@ namespace RevitDevelop.Utils.Paths
 {
     public static class PathUtils
     {
+        public static string PathDatas
+        {
+            get => $"{AssemblyDirectory}\\Resources\\Datas";
+        }
         public static string FamiliesBase
         {
             get => $"{AssemblyDirectory}\\Resources\\FamiliesBases";

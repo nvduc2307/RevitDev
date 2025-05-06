@@ -87,6 +87,15 @@
         <Resource Include="Resources\Icons\RibbonIcon32.png" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Tools\CreateScheduleRebar\" />
+      <Folder Include="Tools\CreateStructuralRebars\" />
+      <Folder Include="Tools\SettingRebars\SettingRebarTags\" />
+      <Folder Include="Tools\SettingRebars\SettingParameter\" />
+      <Folder Include="Tools\ShopDrawingRebars\CreateTagRebars\" />
+      <Folder Include="Tools\ShopDrawingRebars\CreatePullOutRebars\" />
+    </ItemGroup>
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
       <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release R21&quot; xcopy &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)\$(TargetName)&quot; /E /H /C /I /K /D /Y&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release R22&quot; xcopy &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)\$(TargetName)&quot; /E /H /C /I /K /D /Y&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release R23&quot; xcopy &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)\$(TargetName)&quot; /E /H /C /I /K /D /Y&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release R24&quot; xcopy &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)\$(TargetName)&quot; /E /H /C /I /K /D /Y&#xD;&#xA;&#xD;&#xA;copy &quot;$(ProjectDir)*.addin&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)&quot;" />
     </Target>
