@@ -6,7 +6,7 @@ namespace RevitDevelop.Utils.RevCurves
     {
         public static XYZ Direction(this Curve c)
         {
-            return (c.GetEndPoint(0) - c.GetEndPoint(1)).Normalize(); 
+            return (c.GetEndPoint(0) - c.GetEndPoint(1)).Normalize();
         }
         public static XYZ Direction(this Line l)
         {
@@ -87,6 +87,12 @@ namespace RevitDevelop.Utils.RevCurves
             catch (Exception)
             {
             }
+        }
+        public static List<XYZ> GetPoints(this List<Curve> curves)
+        {
+            var ps = curves.Select(x => x.GetEndPoint(0)).ToList();
+            ps.Add(curves.Last().GetEndPoint(1));
+            return ps;
         }
     }
 }

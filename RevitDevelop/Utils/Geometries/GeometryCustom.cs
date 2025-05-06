@@ -256,6 +256,39 @@ namespace RevitDevelop.Utils.Geometries
             }
             return result;
         }
+        public static Line CreateLine(this XYZ p1, XYZ p2)
+        {
+            return Line.CreateBound(p1, p2);
+        }
+        public static List<Curve> PointsToCurves(this List<XYZ> points, bool isClose = false)
+        {
+            var curves = new List<Curve>();
+            try
+            {
+                var pc = points.Count;
+                for (int i = 0; i < pc; i++)
+                {
+                    if (isClose)
+                    {
+                        var j = i == 0 ? pc - 1 : i - 1;
+                        curves.Add(points[j].CreateLine(points[i]));
+                    }
+                    else
+                    {
+                        if (i < pc - 1)
+                        {
+                            var sp = points[i];
+                            var ep = points[i + 1];
+                            curves.Add(sp.CreateLine(ep));
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+            }
+            return curves;
+        }
 
     }
 }
