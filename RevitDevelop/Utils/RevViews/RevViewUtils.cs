@@ -1,4 +1,6 @@
-﻿using RevitDevelop.Utils.StringUtils;
+﻿using RevitDevelop.Utils.FilterElementsInRevit;
+using RevitDevelop.Utils.RevCurves;
+using RevitDevelop.Utils.StringUtils;
 
 namespace RevitDevelop.Utils.RevViews
 {
@@ -42,7 +44,7 @@ namespace RevitDevelop.Utils.RevViews
             {
             }
         }
-        public static void SetViewRangeBeam(this ViewPlan view, double topPlane = 0, double cutPlane = 0, double bottomPlane = -1000/304.8, double viewDepth = -2000/304.8)
+        public static void SetViewRangeBeam(this ViewPlan view, double topPlane = 0, double cutPlane = 0, double bottomPlane = -1000 / 304.8, double viewDepth = -2000 / 304.8)
         {
             try
             {
@@ -83,6 +85,42 @@ namespace RevitDevelop.Utils.RevViews
             viewRange.SetOffset(PlanViewPlane.ViewDepthPlane, viewDepth);
             if (!viewRange.IsValidObject) return;
             view.SetViewRange(viewRange);
+        }
+        public static ViewSection CreateViewSection(
+            this Document document,
+            Curve lineOnPlan,
+            double heightSection,
+            double depthSection,
+            string nameSection)
+        {
+            ViewSection result = null;
+            try
+            {
+                var viewSections = document.GetViewsFromClass<ViewSection>(false).Select(x => x as View).ToList();
+                IsExistedViewName(nameSection, viewSections, out string nameViewGenerate);
+                var sectionType = new FilteredElementCollector(document)
+                .OfClass(typeof(ViewFamilyType))
+                .Cast<ViewFamilyType>()
+                .FirstOrDefault(x => x.ViewFamily == ViewFamily.Section);
+
+                var trs = Transform.Identity;
+                trs.Origin = lineOnPlan.Mid();
+                trs.BasisX = lineOnPlan.Direction();
+                trs.BasisY = XYZ.BasisZ;
+                trs.BasisZ = lineOnPlan.Direction().CrossProduct(XYZ.BasisZ);
+
+                var box = new BoundingBoxXYZ();
+                box.Transform = trs;
+                box.Min = new XYZ(-lineOnPlan.Length / 2, -heightSection / 2, -depthSection / 2);
+                box.Max = new XYZ(lineOnPlan.Length / 2, heightSection / 2, depthSection / 2);
+
+                result = ViewSection.CreateSection(document, sectionType.Id, box);
+                result.Name = nameViewGenerate;
+            }
+            catch (Exception)
+            {
+            }
+            return result;
         }
     }
 }
