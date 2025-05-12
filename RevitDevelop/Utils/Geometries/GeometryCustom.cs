@@ -260,6 +260,20 @@ namespace RevitDevelop.Utils.Geometries
         {
             return Line.CreateBound(p1, p2);
         }
+        public static XYZ CenterPoint(this List<XYZ> points)
+        {
+            points = points.Distinct(new ComparePoint()).ToList();
+            if (!points.Any()) return null;
+            if (points.Count == 1)
+                return points.FirstOrDefault();
+            var x = points.Select(a => a.X).ToList();
+            var y = points.Select(a => a.Y).ToList();
+            var z = points.Select(a => a.Z).ToList();
+            var min = new XYZ(x.Min(), y.Min(), z.Min());
+            var max = new XYZ(x.Max(), y.Max(), z.Max());
+            var center = max.MidPoint(min);
+            return center;
+        }
         public static List<Curve> PointsToCurves(this List<XYZ> points, bool isClose = false)
         {
             var curves = new List<Curve>();
