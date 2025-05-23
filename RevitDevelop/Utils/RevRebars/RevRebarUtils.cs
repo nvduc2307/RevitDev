@@ -113,7 +113,22 @@ namespace RevitDevelop.Utils.RevRebars
             }
             return results;
         }
-        public static List<Curve> GetCurveOnPlan(this Rebar rebar)
+        private static RebarDirectionTrend GetRebarDirectionTrend(XYZ vtRebar)
+        {
+            var result = RebarDirectionTrend.Up;
+            try
+            {
+                var angleX = vtRebar.AngleTo(XYZ.BasisX) * 180 / Math.PI;
+                var angleY = vtRebar.AngleTo(XYZ.BasisY) * 180 / Math.PI;
+                var angleZ = vtRebar.AngleTo(XYZ.BasisZ) * 180 / Math.PI;
+                result = angleX <= 45 || angleY <= 45 || angleZ <= 45 ? RebarDirectionTrend.Up : RebarDirectionTrend.Down;
+            }
+            catch (Exception)
+            {
+            }
+            return result;
+        }
+        public static List<Curve> GetCurveOnPlan(this Rebar rebar, bool mirror = false)
         {
             var result = new List<Curve>();
             try
@@ -122,10 +137,12 @@ namespace RevitDevelop.Utils.RevRebars
                 var rebVtX = rebVtZ.CrossProduct(XYZ.BasisZ);
                 var rebVtY = rebVtZ.CrossProduct(rebVtX);
                 var ls = rebar.GetCurvesOrgin();
-                var angle = rebVtZ.AngleTo(XYZ.BasisZ);
+                var angle = !mirror
+                    ? rebVtZ.AngleTo(XYZ.BasisZ)
+                    : -rebVtZ.AngleTo(XYZ.BasisZ);
                 var center = ls.GetPoints().CenterPoint();
                 var vtx = rebVtZ.CrossProduct(XYZ.BasisZ);
-                if (Math.Cos((angle * 180 / Math.PI)).IsEqual(0)) throw new Exception();
+                if (CompareInstances.IsAlmostEqual(Math.Cos((angle * 180 / Math.PI)), 0)) throw new Exception();
                 var trsPlan = Transform.CreateRotation(rebVtX, angle);
                 var centerPlan = trsPlan.OfPoint(center);
                 var vtMovePlan = center - centerPlan;
@@ -164,13 +181,15 @@ namespace RevitDevelop.Utils.RevRebars
             }
             return rebar.GetCurvesOrgin();
         }
-        public static List<Curve> GetCurvesGenerateOnPlane(this Rebar rebar, RevRebarDirectionType revRebarDirectionType = RevRebarDirectionType.Up)
+        public static List<Curve> GetCurvesGenerateOnPlane(this Rebar rebar, RevRebarDirectionType revRebarDirectionType = RevRebarDirectionType.Up, bool mirror = false)
         {
-            var ls = rebar.GetCurveOnPlan();
+            var lsOrigin = rebar.GetLinesOrigin();
+            var ls = rebar.GetCurveOnPlan(mirror);
             try
             {
+                var vtTrend = (lsOrigin.LastOrDefault().GetEndPoint(1) - lsOrigin.FirstOrDefault().GetEndPoint(0)).Normalize();
+                var rebarDirectionTrend = GetRebarDirectionTrend(vtTrend);
                 var vtCalAngle = XYZ.BasisY;
-                //if (ls.Count == 1) return ls;
                 var mainCurve = ls.OrderByDescending(x => x.Length).FirstOrDefault();
                 var vtx = mainCurve.Direction();
                 var vtz = XYZ.BasisZ;
@@ -180,6 +199,8 @@ namespace RevitDevelop.Utils.RevRebars
                 vty = vtCheck.DotProduct(vty).IsGreater(0)
                     ? vty
                     : -vty;
+                if (CompareInstances.IsAlmostEqual(vtCheck.Distance().FootToMm(), 0))
+                    vty = vtx.CrossProduct(vtz);
                 var angle = 0.0;
                 switch (revRebarDirectionType)
                 {
@@ -234,6 +255,47 @@ namespace RevitDevelop.Utils.RevRebars
                     {
                     }
                 }
+                var vtTrendNew = (lsNew.LastOrDefault().GetEndPoint(1) - lsNew.FirstOrDefault().GetEndPoint(0)).Normalize();
+                var dk = vtTrendNew.DotProduct(XYZ.BasisX);
+                var isRevert = rebarDirectionTrend == RebarDirectionTrend.Up
+                    ? dk > 0 ? true : false
+                    : dk > 0 ? false : true;
+                if (!isRevert)
+                {
+                    ls = rebar.GetCurveOnPlan(true);
+                    try
+                    {
+                        lsNew = new List<Curve>();
+                        foreach (var curve in ls)
+                        {
+                            try
+                            {
+                                if (curve is Line l)
+                                {
+                                    var p1 = l.GetEndPoint(0).Rotate(center, angle + Math.PI);
+                                    var p2 = l.GetEndPoint(1).Rotate(center, angle + Math.PI);
+                                    var ln = p1.CreateLine(p2);
+                                    lsNew.Add(ln);
+                                }
+                                if (curve is Arc arc)
+                                {
+                                    var arcCustom = new ArcCustom(arc);
+                                    var start = arcCustom.Start.Rotate(center, angle + Math.PI);
+                                    var end = arcCustom.End.Rotate(center, angle + Math.PI);
+                                    var mid = arcCustom.Mid.Rotate(center, angle + Math.PI);
+                                    var darcn = Arc.Create(start, end, mid);
+                                    lsNew.Add(darcn);
+                                }
+                            }
+                            catch (Exception)
+                            {
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
                 return lsNew;
             }
             catch (Exception)
@@ -281,5 +343,33 @@ namespace RevitDevelop.Utils.RevRebars
             }
             return null;
         }
+        public static RebarLapPositionType GetRebarLapPositionType(this Rebar rebar, XYZ posCheck)
+        {
+            var result = RebarLapPositionType.Start;
+            try
+            {
+                var document = rebar.Document;
+                var ls = rebar.GetLinesOrigin();
+                var sp = ls.FirstOrDefault().GetEndPoint(0);
+                var ep = ls.LastOrDefault().GetEndPoint(1);
+                var ds = sp.Distance(posCheck).FootToMm();
+                var de = ep.Distance(posCheck).FootToMm();
+                result = ds > de ? RebarLapPositionType.End : RebarLapPositionType.Start;
+            }
+            catch (Exception)
+            {
+            }
+            return result;
+        }
+    }
+    public enum RebarDirectionTrend
+    {
+        Down = 0,
+        Up = 1,
+    }
+    public enum RebarLapPositionType
+    {
+        Start = 0,
+        End = 1,
     }
 }
