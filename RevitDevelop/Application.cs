@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.UI;
 using Nice3point.Revit.Toolkit.External;
+using RevitDevelop.Updaters;
 
 namespace RevitDevelop
 {
@@ -16,19 +17,23 @@ namespace RevitDevelop
         public RibbonPanel PANEL_SCHEDULE { get; private set; }
         public override void OnStartup()
         {
-            InitPanel();
-            CreateRibbon();
+            _registerUpdater();
         }
-        private void InitPanel()
+        public override void OnShutdown()
         {
-
+            _disposeUpdater();
         }
 
-        private void CreateRibbon()
+        private void _registerUpdater()
         {
-            //PANEL_GENERAL.AddPushButton<StartupCommand>("Execute")
-            //    .SetImage("/RevitDevelop;component/Resources/Icons/PluginIcon16.png")
-            //    .SetLargeImage("/RevitDevelop;component/Resources/Icons/PluginIcon32.png");
+            RebarUpdater.Init(Application);
+            WallCreationUpdater.Init(Application);
         }
+        private void _disposeUpdater()
+        {
+            RebarUpdater.Dispose(Application);
+            WallCreationUpdater.Dispose(Application);
+        }
+
     }
 }
