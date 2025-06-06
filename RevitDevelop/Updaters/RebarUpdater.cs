@@ -17,10 +17,10 @@ namespace RevitDevelop.Updaters
         {
             Document doc = data.GetDocument();
             //
-            foreach (ElementId addedElemId in data.GetAddedElementIds())
+            foreach (ElementId addedElemId in data.GetModifiedElementIds())
             {
                 var rb = doc.GetElement(addedElemId) as Rebar;
-                if (rb != null)
+                if (rb == null)
                     IO.ShowWarning($"{rb.Id} is changed");
             }
         }
@@ -35,7 +35,7 @@ namespace RevitDevelop.Updaters
             UpdaterRegistry.RegisterUpdater(rebarUpdater);
             ElementClassFilter rebarFilter = new ElementClassFilter(typeof(Rebar));
             UpdaterRegistry.AddTrigger(rebarUpdater.GetUpdaterId(), rebarFilter,
-                                   Element.GetChangeTypeElementAddition());
+                                   Element.GetChangeTypeAny());
         }
         public static void Dispose(UIControlledApplication application)
         {
