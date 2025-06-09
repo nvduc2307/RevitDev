@@ -96,6 +96,30 @@
       <Folder Include="Tools\ShopDrawingRebars\CreatePullOutRebars\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Properties\ParameterRebarLap.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ParameterRebarLap.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Properties\PropertySchemalInfo.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>PropertySchemalInfo.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Properties\ParameterRebarLap.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ParameterRebarLap.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Properties\PropertySchemalInfo.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>PropertySchemalInfo.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
       <Exec Command="if &quot;$(ConfigurationName)&quot; == &quot;Release R21&quot; xcopy &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)\$(TargetName)&quot; /E /H /C /I /K /D /Y&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release R22&quot; xcopy &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)\$(TargetName)&quot; /E /H /C /I /K /D /Y&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release R23&quot; xcopy &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)\$(TargetName)&quot; /E /H /C /I /K /D /Y&#xD;&#xA;if &quot;$(ConfigurationName)&quot; == &quot;Release R24&quot; xcopy &quot;$(TargetDir)*&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)\$(TargetName)&quot; /E /H /C /I /K /D /Y&#xD;&#xA;&#xD;&#xA;copy &quot;$(ProjectDir)*.addin&quot; &quot;$(SolutionDir)\..\InnoSetup\Content\$(RevitVersion)&quot;" />
     </Target>

@@ -26,13 +26,11 @@ namespace RevitDevelop
 
         private void _registerUpdater()
         {
-            RebarUpdater.Init(Application);
-            WallCreationUpdater.Init(Application);
+            RebarModifyUpdater.Init(Application);
         }
         private void _disposeUpdater()
         {
-            RebarUpdater.Dispose(Application);
-            WallCreationUpdater.Dispose(Application);
+            RebarModifyUpdater.Dispose(Application);
         }
 
     }
