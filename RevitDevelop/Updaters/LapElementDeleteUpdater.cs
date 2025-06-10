@@ -177,10 +177,10 @@ namespace RevitDevelop.Updaters
             }
         }
 
-        public string GetAdditionalInformation() => "Rebar Updater";
+        public string GetAdditionalInformation() => "Rebar Lap Delete Updater";
         public ChangePriority GetChangePriority() => ChangePriority.Structure;
         public UpdaterId GetUpdaterId() => m_updaterId;
-        public string GetUpdaterName() => "Rebar Updater";
+        public string GetUpdaterName() => "Rebar Lap Delete Updater";
         public static void Init(UIControlledApplication application)
         {
             var rebarUpdater = new LapElementDeleteUpdater(application.ActiveAddInId);
