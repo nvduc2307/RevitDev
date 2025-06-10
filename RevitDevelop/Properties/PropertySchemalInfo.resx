@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="SCHEMAL_LAP_GUID" xml:space="preserve">
+    <value>672899e6-b944-43f7-99e9-aea7309b0256</value>
+  </data>
+  <data name="SCHEMAL_LAP_NAME" xml:space="preserve">
+    <value>LapInfo</value>
+  </data>
   <data name="SCHEMAL_REBAR_LAP_GUID" xml:space="preserve">
     <value>fed30a8b-f35e-4735-a6e9-4eea0ec9c614</value>
   </data>

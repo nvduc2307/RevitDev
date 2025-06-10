@@ -61,6 +61,24 @@ namespace RevitDevelop.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 672899e6-b944-43f7-99e9-aea7309b0256.
+        /// </summary>
+        public static string SCHEMAL_LAP_GUID {
+            get {
+                return ResourceManager.GetString("SCHEMAL_LAP_GUID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LapInfo.
+        /// </summary>
+        public static string SCHEMAL_LAP_NAME {
+            get {
+                return ResourceManager.GetString("SCHEMAL_LAP_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to fed30a8b-f35e-4735-a6e9-4eea0ec9c614.
         /// </summary>
         public static string SCHEMAL_REBAR_LAP_GUID {

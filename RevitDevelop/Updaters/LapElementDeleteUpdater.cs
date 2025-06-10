@@ -8,16 +8,16 @@ using RevitDevelop.Utils.RevRebars;
 
 namespace RevitDevelop.Updaters
 {
-    public class RebarModifyUpdater : IUpdater
+    public class LapElementDeleteUpdater : IUpdater
     {
         static AddInId m_appId;
         static UpdaterId m_updaterId;
         private SchemaInfo m_schemaInfoRebar;
         private SchemaInfo m_schemaInfoLap;
-        public RebarModifyUpdater(AddInId id)
+        public LapElementDeleteUpdater(AddInId id)
         {
             m_appId = id;
-            m_updaterId = new UpdaterId(m_appId, new Guid("56644677-e4f5-44fd-a89d-ed3e8b372afa"));
+            m_updaterId = new UpdaterId(m_appId, new Guid("f7a4d936-dac0-44f1-844e-ba4404fdc636"));
             m_schemaInfoRebar = new SchemaInfo(
                 Properties.PropertySchemalInfo.SCHEMAL_REBAR_LAP_GUID,
                 Properties.PropertySchemalInfo.SCHEMAL_REBAR_LAP_NAME,
@@ -33,7 +33,7 @@ namespace RevitDevelop.Updaters
             {
                 Document doc = data.GetDocument();
                 //
-                foreach (ElementId addedElemId in data.GetModifiedElementIds())
+                foreach (ElementId addedElemId in data.GetDeletedElementIds())
                 {
                     try
                     {
@@ -178,20 +178,20 @@ namespace RevitDevelop.Updaters
         }
 
         public string GetAdditionalInformation() => "Rebar Updater";
-        public ChangePriority GetChangePriority() => ChangePriority.Rebar;
+        public ChangePriority GetChangePriority() => ChangePriority.Structure;
         public UpdaterId GetUpdaterId() => m_updaterId;
         public string GetUpdaterName() => "Rebar Updater";
         public static void Init(UIControlledApplication application)
         {
-            var rebarUpdater = new RebarModifyUpdater(application.ActiveAddInId);
+            var rebarUpdater = new LapElementDeleteUpdater(application.ActiveAddInId);
             UpdaterRegistry.RegisterUpdater(rebarUpdater);
             ElementClassFilter rebarFilter = new ElementClassFilter(typeof(Rebar));
             UpdaterRegistry.AddTrigger(rebarUpdater.GetUpdaterId(), rebarFilter,
-                                   Element.GetChangeTypeAny());
+                                   Element.GetChangeTypeElementDeletion());
         }
         public static void Dispose(UIControlledApplication application)
         {
-            RebarModifyUpdater updater = new RebarModifyUpdater(application.ActiveAddInId);
+            var updater = new LapElementDeleteUpdater(application.ActiveAddInId);
             UpdaterRegistry.UnregisterUpdater(updater.GetUpdaterId());
         }
     }
