@@ -3,6 +3,7 @@ using Autodesk.Revit.UI;
 using Newtonsoft.Json;
 using RevitDevelop.Utils.BoundingBoxs;
 using RevitDevelop.Utils.Entities;
+using RevitDevelop.Utils.RevCurves;
 using RevitDevelop.Utils.RevParameters;
 using RevitDevelop.Utils.RevRebars;
 
@@ -37,135 +38,66 @@ namespace RevitDevelop.Updaters
                 {
                     try
                     {
-                        var rb = doc.GetElement(addedElemId) as Rebar;
-                        if (rb == null)
+                        var lap = doc.GetElement(addedElemId);
+                        if (lap == null)
                             continue;
-                        var bb = rb.get_BoundingBox(doc.ActiveView);
-
-                        var els = bb.GetElementAroundBox(doc, BuiltInCategory.OST_GenericModel)
-                            .Where(x => SchemaInfo.ReadAll(m_schemaInfoLap.SchemaBase, m_schemaInfoLap.SchemaField, x) != null)
-                            .Where(x =>
-                            {
-                                var info = JsonConvert.DeserializeObject<RevLap>(SchemaInfo.ReadAll(m_schemaInfoLap.SchemaBase, m_schemaInfoLap.SchemaField, x).Value);
-                                return info.Hostid.ToString() == rb.Id.ToString();
-                            });
-                        doc.Delete(els.Select(x => x.Id).ToList());
-
+                        var lapInfoSchema = SchemaInfo.ReadAll(m_schemaInfoLap.SchemaBase, m_schemaInfoLap.SchemaField, lap);
+                        if (lapInfoSchema == null) continue;
+                        var lapInfo = JsonConvert.DeserializeObject<RevLap>(lapInfoSchema.Value);
+#if REVIT2024 || REVIT2025
+                        var rb = doc.GetElement(new ElementId(long.Parse(lapInfo.Hostid.ToString()))) as Rebar;
+#else
+                        var rb = doc.GetElement(new ElementId(int.Parse(lapInfo.Hostid.ToString()))) as Rebar;
+#endif
+                        var cs = rb.GetLinesOrigin();
+                        var sp = cs.FirstOrDefault().GetEndPoint(0);
+                        var ep = cs.LastOrDefault().GetEndPoint(1);
+                        var originBox = new BoxElement(lap).LineBox.Mid();
+                        var d1 = originBox.DistanceTo(sp);
+                        var d2 = originBox.DistanceTo(ep);
+                        var lapPos = d1 > d2 ? RevLapPositionType.Start : RevLapPositionType.End;
+                        var lapType = (RevRebarLapType)lapInfo.LapType;
                         var rbLapInfo = RevRebarLap.GetRevRebarLap(rb);
-                        var rebarLapSchemaInfo = SchemaInfo.ReadAll(m_schemaInfoRebar.SchemaBase, m_schemaInfoRebar.SchemaField, rb);
-                        if (rebarLapSchemaInfo == null)
+                        switch (lapPos)
                         {
-                            if (rbLapInfo.LapWeldStart)
-                            {
-                                rbLapInfo.LapCouplerStart = false;
-                                rbLapInfo.LapPlateStart = false;
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_START, rbLapInfo.LapCouplerStart ? "1" : "0");
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_START, rbLapInfo.LapPlateStart ? "1" : "0");
-                            }
-                            if (rbLapInfo.LapCouplerStart)
-                            {
-                                rbLapInfo.LapWeldStart = false;
-                                rbLapInfo.LapPlateStart = false;
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_START, rbLapInfo.LapWeldStart ? "1" : "0");
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_START, rbLapInfo.LapPlateStart ? "1" : "0");
-                            }
-                            if (rbLapInfo.LapPlateStart)
-                            {
-                                rbLapInfo.LapCouplerStart = false;
-                                rbLapInfo.LapWeldStart = false;
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_START, rbLapInfo.LapCouplerStart ? "1" : "0");
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_START, rbLapInfo.LapWeldStart ? "1" : "0");
-                            }
-
-                            if (rbLapInfo.LapWeldEnd)
-                            {
-                                rbLapInfo.LapCouplerEnd = false;
-                                rbLapInfo.LapPlateEnd = false;
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_END, rbLapInfo.LapCouplerEnd ? "1" : "0");
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_END, rbLapInfo.LapPlateEnd ? "1" : "0");
-                            }
-                            if (rbLapInfo.LapCouplerEnd)
-                            {
-                                rbLapInfo.LapWeldEnd = false;
-                                rbLapInfo.LapPlateEnd = false;
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_END, rbLapInfo.LapWeldEnd ? "1" : "0");
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_END, rbLapInfo.LapPlateEnd ? "1" : "0");
-                            }
-                            if (rbLapInfo.LapPlateEnd)
-                            {
-                                rbLapInfo.LapCouplerEnd = false;
-                                rbLapInfo.LapWeldEnd = false;
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_END, rbLapInfo.LapCouplerEnd ? "1" : "0");
-                                rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_END, rbLapInfo.LapWeldEnd ? "1" : "0");
-                            }
-                        }
-                        else
-                        {
-                            var rebarLapSchema = JsonConvert.DeserializeObject<RevRebarLap>(rebarLapSchemaInfo.Value);
-                            if (rebarLapSchema.LapWeldStart != rbLapInfo.LapWeldStart)
-                            {
-                                if (rbLapInfo.LapWeldStart)
+                            case RevLapPositionType.Start:
+                                switch (lapType)
                                 {
-                                    rbLapInfo.LapCouplerStart = false;
-                                    rbLapInfo.LapPlateStart = false;
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_START, rbLapInfo.LapCouplerStart ? "1" : "0");
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_START, rbLapInfo.LapPlateStart ? "1" : "0");
+                                    case RevRebarLapType.Weld:
+                                        rbLapInfo.LapWeldStart = false;
+                                        rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_START, "0");
+                                        break;
+                                    case RevRebarLapType.Coupler:
+                                        rbLapInfo.LapCouplerStart = false;
+                                        rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_START, "0");
+                                        break;
+                                    case RevRebarLapType.PlateStop:
+                                        rbLapInfo.LapPlateStart = false;
+                                        rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_START, "0");
+                                        break;
                                 }
-                            }
-                            if (rebarLapSchema.LapWeldEnd != rbLapInfo.LapWeldEnd)
-                            {
-                                if (rbLapInfo.LapWeldEnd)
+                                break;
+                            case RevLapPositionType.End:
+                                switch (lapType)
                                 {
-                                    rbLapInfo.LapCouplerEnd = false;
-                                    rbLapInfo.LapPlateEnd = false;
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_END, rbLapInfo.LapCouplerEnd ? "1" : "0");
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_END, rbLapInfo.LapPlateEnd ? "1" : "0");
+                                    case RevRebarLapType.Weld:
+                                        rbLapInfo.LapWeldEnd = false;
+                                        rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_END, "0");
+                                        break;
+                                    case RevRebarLapType.Coupler:
+                                        rbLapInfo.LapCouplerEnd = false;
+                                        rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_END, "0");
+                                        break;
+                                    case RevRebarLapType.PlateStop:
+                                        rbLapInfo.LapPlateEnd = false;
+                                        rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_END, "0");
+                                        break;
                                 }
-                            }
-                            if (rebarLapSchema.LapCouplerStart != rbLapInfo.LapCouplerStart)
-                            {
-                                if (rbLapInfo.LapCouplerStart)
-                                {
-                                    rbLapInfo.LapWeldStart = false;
-                                    rbLapInfo.LapPlateStart = false;
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_START, rbLapInfo.LapWeldStart ? "1" : "0");
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_START, rbLapInfo.LapPlateStart ? "1" : "0");
-                                }
-                            }
-                            if (rebarLapSchema.LapCouplerEnd != rbLapInfo.LapCouplerEnd)
-                            {
-                                if (rbLapInfo.LapCouplerEnd)
-                                {
-                                    rbLapInfo.LapWeldEnd = false;
-                                    rbLapInfo.LapPlateEnd = false;
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_END, rbLapInfo.LapWeldEnd ? "1" : "0");
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_PLATE_END, rbLapInfo.LapPlateEnd ? "1" : "0");
-                                }
-                            }
-                            if (rebarLapSchema.LapPlateStart != rbLapInfo.LapPlateStart)
-                            {
-                                if (rbLapInfo.LapPlateStart)
-                                {
-                                    rbLapInfo.LapCouplerStart = false;
-                                    rbLapInfo.LapWeldStart = false;
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_START, rbLapInfo.LapCouplerStart ? "1" : "0");
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_START, rbLapInfo.LapWeldStart ? "1" : "0");
-                                }
-                            }
-                            if (rebarLapSchema.LapPlateEnd != rbLapInfo.LapPlateEnd)
-                            {
-                                if (rbLapInfo.LapPlateEnd)
-                                {
-                                    rbLapInfo.LapCouplerEnd = false;
-                                    rbLapInfo.LapWeldEnd = false;
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_COUPLER_END, rbLapInfo.LapCouplerEnd ? "1" : "0");
-                                    rb.SetParameterValue(Properties.ParameterRebarLap.LAP_WELD_END, rbLapInfo.LapWeldEnd ? "1" : "0");
-                                }
-                            }
+                                break;
                         }
                         m_schemaInfoRebar.SchemaField.Value = JsonConvert.SerializeObject(rbLapInfo);
                         SchemaInfo.Write(m_schemaInfoRebar.SchemaBase, rb, m_schemaInfoRebar.SchemaField);
-                        RevLap.CreateLap(rb, rbLapInfo);
+                        //RevLap.CreateLap(rb, rbLapInfo);
                     }
                     catch (Exception)
                     {
@@ -183,10 +115,10 @@ namespace RevitDevelop.Updaters
         public string GetUpdaterName() => "Rebar Lap Delete Updater";
         public static void Init(UIControlledApplication application)
         {
-            var rebarUpdater = new LapElementDeleteUpdater(application.ActiveAddInId);
-            UpdaterRegistry.RegisterUpdater(rebarUpdater);
-            ElementClassFilter rebarFilter = new ElementClassFilter(typeof(Rebar));
-            UpdaterRegistry.AddTrigger(rebarUpdater.GetUpdaterId(), rebarFilter,
+            var updater = new LapElementDeleteUpdater(application.ActiveAddInId);
+            UpdaterRegistry.RegisterUpdater(updater);
+            ElementClassFilter filter = new ElementClassFilter(typeof(DirectShape));
+            UpdaterRegistry.AddTrigger(updater.GetUpdaterId(), filter,
                                    Element.GetChangeTypeElementDeletion());
         }
         public static void Dispose(UIControlledApplication application)

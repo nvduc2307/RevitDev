@@ -76,11 +76,13 @@ namespace RevitDevelop.Utils.RevRebars
                 {
                     lapStart = sp.CreateSolid(XYZ.BasisZ, width, width).CreateDirectShape(document);
                     document.ActiveView.SetTransparenColorElement(lapStart, colorStart, 0);
+                    lapStart.Pinned = true;
                 }
                 if (revRebarLap.LapWeldEnd || revRebarLap.LapCouplerEnd || revRebarLap.LapPlateEnd)
                 {
                     lapEnd = ep.CreateSolid(XYZ.BasisZ, width, width).CreateDirectShape(document);
                     document.ActiveView.SetTransparenColorElement(lapEnd, colorEnd, 0);
+                    lapEnd.Pinned = true;
                 }
                 if (lapStart != null)
                 {

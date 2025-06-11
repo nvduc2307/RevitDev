@@ -40,17 +40,6 @@ namespace RevitDevelop.Updaters
                         var rb = doc.GetElement(addedElemId) as Rebar;
                         if (rb == null)
                             continue;
-                        var bb = rb.get_BoundingBox(doc.ActiveView);
-
-                        var els = bb.GetElementAroundBox(doc, BuiltInCategory.OST_GenericModel)
-                            .Where(x => SchemaInfo.ReadAll(m_schemaInfoLap.SchemaBase, m_schemaInfoLap.SchemaField, x) != null)
-                            .Where(x =>
-                            {
-                                var info = JsonConvert.DeserializeObject<RevLap>(SchemaInfo.ReadAll(m_schemaInfoLap.SchemaBase, m_schemaInfoLap.SchemaField, x).Value);
-                                return info.Hostid.ToString() == rb.Id.ToString();
-                            });
-                        doc.Delete(els.Select(x => x.Id).ToList());
-
                         var rbLapInfo = RevRebarLap.GetRevRebarLap(rb);
                         var rebarLapSchemaInfo = SchemaInfo.ReadAll(m_schemaInfoRebar.SchemaBase, m_schemaInfoRebar.SchemaField, rb);
                         if (rebarLapSchemaInfo == null)
@@ -165,7 +154,41 @@ namespace RevitDevelop.Updaters
                         }
                         m_schemaInfoRebar.SchemaField.Value = JsonConvert.SerializeObject(rbLapInfo);
                         SchemaInfo.Write(m_schemaInfoRebar.SchemaBase, rb, m_schemaInfoRebar.SchemaField);
-                        RevLap.CreateLap(rb, rbLapInfo);
+
+                        try
+                        {
+                            if (rebarLapSchemaInfo == null)
+                            {
+                                RevLap.CreateLap(rb, rbLapInfo);
+                                throw new Exception();
+                            }
+                            var rebarLapSchema = JsonConvert.DeserializeObject<RevRebarLap>(rebarLapSchemaInfo.Value);
+                            if (rebarLapSchema.LapWeldStart == rbLapInfo.LapWeldStart &&
+                                rebarLapSchema.LapWeldEnd == rbLapInfo.LapWeldEnd &&
+                                rebarLapSchema.LapCouplerStart == rbLapInfo.LapCouplerStart &&
+                                rebarLapSchema.LapCouplerEnd == rbLapInfo.LapCouplerEnd &&
+                                rebarLapSchema.LapPlateStart == rbLapInfo.LapPlateStart &&
+                                rebarLapSchema.LapPlateEnd == rbLapInfo.LapPlateEnd)
+                                throw new Exception();
+                            var bb = rb.get_BoundingBox(doc.ActiveView);
+                            var els = bb.GetElementAroundBox(doc, BuiltInCategory.OST_GenericModel)
+                                .Where(x => SchemaInfo.ReadAll(m_schemaInfoLap.SchemaBase, m_schemaInfoLap.SchemaField, x) != null)
+                                .Where(x =>
+                                {
+                                    var info = JsonConvert.DeserializeObject<RevLap>(SchemaInfo.ReadAll(m_schemaInfoLap.SchemaBase, m_schemaInfoLap.SchemaField, x).Value);
+                                    return info.Hostid.ToString() == rb.Id.ToString();
+                                });
+                            foreach (var el in els)
+                            {
+                                if (el.Pinned)
+                                    el.Pinned = false;
+                                doc.Delete(el.Id);
+                            }
+                            RevLap.CreateLap(rb, rbLapInfo);
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                     catch (Exception)
                     {
