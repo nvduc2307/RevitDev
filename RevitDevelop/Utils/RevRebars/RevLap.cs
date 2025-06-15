@@ -23,6 +23,10 @@ namespace RevitDevelop.Utils.RevRebars
         {
             try
             {
+                var m_schemaInfoRebar = new SchemaInfo(
+                Properties.PropertySchemalInfo.SCHEMAL_REBAR_LAP_GUID,
+                Properties.PropertySchemalInfo.SCHEMAL_REBAR_LAP_NAME,
+                new SchemaField());
                 var schemainfo = new SchemaInfo(
                     Properties.PropertySchemalInfo.SCHEMAL_LAP_GUID,
                     Properties.PropertySchemalInfo.SCHEMAL_LAP_NAME,
@@ -88,12 +92,17 @@ namespace RevitDevelop.Utils.RevRebars
                 {
                     schemainfo.SchemaField.Value = JsonConvert.SerializeObject(revLapInfoStart);
                     SchemaInfo.Write(schemainfo.SchemaBase, lapStart, schemainfo.SchemaField);
+                    revRebarLap.HostStartID = int.Parse(lapStart.Id.ToString());
                 }
                 if (lapEnd != null)
                 {
                     schemainfo.SchemaField.Value = JsonConvert.SerializeObject(revLapInfoEnd);
                     SchemaInfo.Write(schemainfo.SchemaBase, lapEnd, schemainfo.SchemaField);
+                    revRebarLap.HostEndID = int.Parse(lapEnd.Id.ToString());
                 }
+
+                m_schemaInfoRebar.SchemaField.Value = JsonConvert.SerializeObject(revRebarLap);
+                SchemaInfo.Write(m_schemaInfoRebar.SchemaBase, rebar, m_schemaInfoRebar.SchemaField);
             }
             catch (Exception)
             {
