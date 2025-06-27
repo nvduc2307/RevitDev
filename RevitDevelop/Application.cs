@@ -17,11 +17,11 @@ namespace RevitDevelop
         public RibbonPanel PANEL_SCHEDULE { get; private set; }
         public override void OnStartup()
         {
-            _registerUpdater();
+            //_registerUpdater();
         }
         public override void OnShutdown()
         {
-            _disposeUpdater();
+            //_disposeUpdater();
         }
 
         private void _registerUpdater()
