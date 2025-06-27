@@ -4,6 +4,8 @@ namespace RevitDevelop.Utils.RevRebars
 {
     public class RevRebarLap
     {
+        public int HostStartID { get; set; }
+        public int HostEndID { get; set; }
         public bool LapWeldStart { get; set; }
         public bool LapWeldEnd { get; set; }
         public bool LapCouplerStart { get; set; }

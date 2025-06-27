@@ -152,24 +152,8 @@ namespace RevitDevelop.Updaters
                                 }
                             }
                         }
-                        m_schemaInfoRebar.SchemaField.Value = JsonConvert.SerializeObject(rbLapInfo);
-                        SchemaInfo.Write(m_schemaInfoRebar.SchemaBase, rb, m_schemaInfoRebar.SchemaField);
-
                         try
                         {
-                            if (rebarLapSchemaInfo == null)
-                            {
-                                RevLap.CreateLap(rb, rbLapInfo);
-                                throw new Exception();
-                            }
-                            var rebarLapSchema = JsonConvert.DeserializeObject<RevRebarLap>(rebarLapSchemaInfo.Value);
-                            if (rebarLapSchema.LapWeldStart == rbLapInfo.LapWeldStart &&
-                                rebarLapSchema.LapWeldEnd == rbLapInfo.LapWeldEnd &&
-                                rebarLapSchema.LapCouplerStart == rbLapInfo.LapCouplerStart &&
-                                rebarLapSchema.LapCouplerEnd == rbLapInfo.LapCouplerEnd &&
-                                rebarLapSchema.LapPlateStart == rbLapInfo.LapPlateStart &&
-                                rebarLapSchema.LapPlateEnd == rbLapInfo.LapPlateEnd)
-                                throw new Exception();
                             var bb = rb.get_BoundingBox(doc.ActiveView);
                             var els = bb.GetElementAroundBox(doc, BuiltInCategory.OST_GenericModel)
                                 .Where(x => SchemaInfo.ReadAll(m_schemaInfoLap.SchemaBase, m_schemaInfoLap.SchemaField, x) != null)
@@ -177,18 +161,25 @@ namespace RevitDevelop.Updaters
                                 {
                                     var info = JsonConvert.DeserializeObject<RevLap>(SchemaInfo.ReadAll(m_schemaInfoLap.SchemaBase, m_schemaInfoLap.SchemaField, x).Value);
                                     return info.Hostid.ToString() == rb.Id.ToString();
-                                });
+                                }).ToList();
                             foreach (var el in els)
                             {
-                                if (el.Pinned)
-                                    el.Pinned = false;
-                                doc.Delete(el.Id);
+                                try
+                                {
+                                    if (el.Pinned)
+                                        el.Pinned = false;
+                                    doc.Regenerate();
+                                    doc.Delete(el.Id);
+                                }
+                                catch (Exception)
+                                {
+                                }
                             }
-                            RevLap.CreateLap(rb, rbLapInfo);
                         }
                         catch (Exception)
                         {
                         }
+                        RevLap.CreateLap(rb, rbLapInfo);
                     }
                     catch (Exception)
                     {

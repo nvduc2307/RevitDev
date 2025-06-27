@@ -27,10 +27,12 @@ namespace RevitDevelop
         private void _registerUpdater()
         {
             RebarModifyUpdater.Init(Application);
+            LapElementDeleteUpdater.Init(Application);
         }
         private void _disposeUpdater()
         {
             RebarModifyUpdater.Dispose(Application);
+            LapElementDeleteUpdater.Dispose(Application);
         }
 
     }
