@@ -42,10 +42,19 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Tools\SettingRebars\SettingRebarTags\**" />
+      <EmbeddedResource Remove="Tools\SettingRebars\SettingRebarTags\**" />
+      <None Remove="Tools\SettingRebars\SettingRebarTags\**" />
+      <Page Remove="Tools\SettingRebars\SettingRebarTags\**" />
+    </ItemGroup>
+
+    <ItemGroup>
       <None Remove="Resources\FamiliesBases\Metric Detail Item.rft" />
       <None Remove="Resources\FamiliesBases\RebarDetailBase.rfa" />
       <None Remove="Resources\Icons\PluginIcon16.png" />
       <None Remove="Resources\Icons\PluginIcon32.png" />
+      <None Remove="Resources\RebarDatas\RebarDataDiameters.json" />
+      <None Remove="Resources\RebarDatas\RebarDataWeights.json" />
     </ItemGroup>
 
     <ItemGroup>
@@ -53,6 +62,12 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="Resources\FamiliesBases\RebarDetailBase.rfa">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\RebarDatas\RebarDataDiameters.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\RebarDatas\RebarDataWeights.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
@@ -88,15 +103,20 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Resources\ShareParameters\" />
       <Folder Include="Tools\CreateScheduleRebar\" />
       <Folder Include="Tools\CreateStructuralRebars\" />
-      <Folder Include="Tools\SettingRebars\SettingRebarTags\" />
       <Folder Include="Tools\SettingRebars\SettingParameter\" />
       <Folder Include="Tools\ShopDrawingRebars\CreateTagRebars\" />
       <Folder Include="Tools\ShopDrawingRebars\CreatePullOutRebars\" />
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Properties\Langs\ApplicationLangs.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ApplicationLangs.resx</DependentUpon>
+      </Compile>
       <Compile Update="Properties\ParameterRebarLap.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
@@ -110,6 +130,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Update="Properties\Langs\ApplicationLangs.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>ApplicationLangs.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
       <EmbeddedResource Update="Properties\ParameterRebarLap.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>ParameterRebarLap.Designer.cs</LastGenOutput>

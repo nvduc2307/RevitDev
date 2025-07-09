@@ -1,7 +1,11 @@
 ﻿using Newtonsoft.Json;
+using RevitDevelop.Tools.SettingRebars.SettingDiameters.iservices;
 using RevitDevelop.Tools.SettingRebars.SettingDiameters.models;
+using RevitDevelop.Tools.SettingRebars.SettingDiameters.services;
 using RevitDevelop.Tools.SettingRebars.SettingDiameters.views;
 using RevitDevelop.Utils.Directionaries;
+using RevitDevelop.Utils.Entities;
+using RevitDevelop.Utils.Messages;
 using RevitDevelop.Utils.Paths;
 using System.IO;
 
@@ -9,11 +13,18 @@ namespace RevitDevelop.Tools.SettingRebars.SettingDiameters.viewModels
 {
     public partial class RebarDatabasesViewModel : ObservableObject
     {
+        private SettingDiametersCmd _cmd;
+        private ISettingDiametersService _settingDiametersService;
         public RebarDatabasesView ViewMain { get; set; }
         public ElementInstances ElementInstances { get; set; }
-        public RebarDatabasesViewModel(ElementInstances elementInstances)
+        public RebarDatabasesViewModel(
+            SettingDiametersCmd cmd,
+            ElementInstances elementInstances,
+            ISettingDiametersService settingDiametersService)
         {
+            _cmd = cmd;
             ElementInstances = elementInstances;
+            _settingDiametersService = settingDiametersService;
             ViewMain = new RebarDatabasesView() { DataContext = this };
         }
         [RelayCommand]
@@ -21,10 +32,17 @@ namespace RevitDevelop.Tools.SettingRebars.SettingDiameters.viewModels
         {
             try
             {
-                var pathRebarDatabaseCustom = $"{PathUtils.PathDatas}\\{ElementInstances.FILE_REBAR_DATABASE_NAME}";
-                DirectionaryUtils.CreateDirectory(pathRebarDatabaseCustom);
-                var content = JsonConvert.SerializeObject(ElementInstances.RebarBarTypeCustoms);
-                File.WriteAllText(pathRebarDatabaseCustom, content);
+                ElementInstances.SchemalDataDiameter.SchemaField.Value = JsonConvert.SerializeObject(ElementInstances.RebarBarTypeCustoms);
+                using (var ts = new Transaction(_cmd.Document, "name transaction"))
+                {
+                    ts.Start();
+                    //--------
+                    SchemaInfo.Write(ElementInstances.SchemalDataDiameter.SchemaBase, _cmd.Document.ProjectInformation, ElementInstances.SchemalDataDiameter.SchemaField);
+                    _settingDiametersService.CreateDiameterType(ElementInstances.RebarBarTypeCustoms);
+                    //--------
+                    ts.Commit();
+                }
+                IO.ShowInfo("Completed");
                 ViewMain.Close();
             }
             catch (Exception)
@@ -39,12 +57,13 @@ namespace RevitDevelop.Tools.SettingRebars.SettingDiameters.viewModels
         [RelayCommand]
         private void Reset()
         {
-            var pathRebarDatabaseStatic = $"{PathUtils.PathDatas}{ElementInstances.FILE_REBAR_DATABASE_NAME}";
-
-            var dm = File.Exists(pathRebarDatabaseStatic)
-            ? JsonConvert.DeserializeObject<List<RebarDatabaseInfo>>(File.ReadAllText(pathRebarDatabaseStatic))
-            : ElementInstances.RebarBarTypeCustoms.ToList();
-            ElementInstances.RebarBarTypeCustoms = dm.ToList();
+            try
+            {
+                ElementInstances.RebarBarTypeCustoms = ElementInstances.GetRebarBarTypeCustom(true);
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

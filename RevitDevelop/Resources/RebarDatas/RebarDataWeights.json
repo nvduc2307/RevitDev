@@ -1,0 +1,46 @@
+[
+  {
+    "Name": "D10",
+    "WeightPerMeter": 0.56
+  },
+  {
+    "Name": "D13",
+    "WeightPerMeter": 0.995
+  },
+  {
+    "Name": "D16",
+    "WeightPerMeter": 1.56
+  },
+  {
+    "Name": "D19",
+    "WeightPerMeter": 2.25
+  },
+  {
+    "Name": "D22",
+    "WeightPerMeter": 3.04
+  },
+  {
+    "Name": "D25",
+    "WeightPerMeter": 3.98
+  },
+  {
+    "Name": "D29",
+    "WeightPerMeter": 5.04
+  },
+  {
+    "Name": "D32",
+    "WeightPerMeter": 6.23
+  },
+  {
+    "Name": "D35",
+    "WeightPerMeter": 7.51
+  },
+  {
+    "Name": "D38",
+    "WeightPerMeter": 8.95
+  },
+  {
+    "Name": "D41",
+    "WeightPerMeter": 10.5
+  }
+]

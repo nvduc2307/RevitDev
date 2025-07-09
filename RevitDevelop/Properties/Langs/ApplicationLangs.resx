@@ -117,22 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SCHEMAL_LAP_GUID" xml:space="preserve">
-    <value>672899e6-b944-43f7-99e9-aea7309b0256</value>
+  <data name="CMD_REBAR_SETTING_DIAMETER" xml:space="preserve">
+    <value>Diameter</value>
   </data>
-  <data name="SCHEMAL_LAP_NAME" xml:space="preserve">
-    <value>LapInfo</value>
+  <data name="DRAWING" xml:space="preserve">
+    <value>Drawing</value>
   </data>
-  <data name="SCHEMAL_REBAR_DIAMETER_GUID" xml:space="preserve">
-    <value>c2f8f23c-0755-4214-855b-cb98ba1e0b61</value>
+  <data name="PANEL_CONCRETE" xml:space="preserve">
+    <value>Concrete</value>
   </data>
-  <data name="SCHEMAL_REBAR_DIAMETER_NAME" xml:space="preserve">
-    <value>RebarDataDiameterInfo</value>
+  <data name="PANEL_GENERAL" xml:space="preserve">
+    <value>General</value>
   </data>
-  <data name="SCHEMAL_REBAR_LAP_GUID" xml:space="preserve">
-    <value>fed30a8b-f35e-4735-a6e9-4eea0ec9c614</value>
+  <data name="PANEL_REBAR" xml:space="preserve">
+    <value>Rebar</value>
   </data>
-  <data name="SCHEMAL_REBAR_LAP_NAME" xml:space="preserve">
-    <value>RebarLapTypeInfo</value>
+  <data name="PANEL_SCHEDULE" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="PANEL_STEEL" xml:space="preserve">
+    <value>Steel</value>
+  </data>
+  <data name="TAB" xml:space="preserve">
+    <value>Nvd</value>
   </data>
 </root>

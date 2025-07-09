@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         MinHeight="350" 
-        MaxWidth="600"
+        MaxWidth="800"
         SizeToContent="WidthAndHeight">
     <Window.Resources>
         <Style TargetType="Button">
@@ -44,13 +44,6 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox IsEnabled="False" Text="{Binding NameStyle, UpdateSourceTrigger=PropertyChanged, Delay=100}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="BarDiameterReal">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding BarDiameterReal, UpdateSourceTrigger=PropertyChanged, Delay=100}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

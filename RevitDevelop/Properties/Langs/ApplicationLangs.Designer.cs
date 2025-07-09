@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RevitDevelop.Properties {
+namespace RevitDevelop.Properties.Langs {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace RevitDevelop.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PropertySchemalInfo {
+    public class ApplicationLangs {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PropertySchemalInfo() {
+        internal ApplicationLangs() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace RevitDevelop.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RevitDevelop.Properties.PropertySchemalInfo", typeof(PropertySchemalInfo).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("RevitDevelop.Properties.Langs.ApplicationLangs", typeof(ApplicationLangs).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,74 @@ namespace RevitDevelop.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 672899e6-b944-43f7-99e9-aea7309b0256.
+        ///   Looks up a localized string similar to Diameter.
         /// </summary>
-        public static string SCHEMAL_LAP_GUID {
+        public static string CMD_REBAR_SETTING_DIAMETER {
             get {
-                return ResourceManager.GetString("SCHEMAL_LAP_GUID", resourceCulture);
+                return ResourceManager.GetString("CMD_REBAR_SETTING_DIAMETER", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LapInfo.
+        ///   Looks up a localized string similar to Drawing.
         /// </summary>
-        public static string SCHEMAL_LAP_NAME {
+        public static string DRAWING {
             get {
-                return ResourceManager.GetString("SCHEMAL_LAP_NAME", resourceCulture);
+                return ResourceManager.GetString("DRAWING", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to c2f8f23c-0755-4214-855b-cb98ba1e0b61.
+        ///   Looks up a localized string similar to Concrete.
         /// </summary>
-        public static string SCHEMAL_REBAR_DIAMETER_GUID {
+        public static string PANEL_CONCRETE {
             get {
-                return ResourceManager.GetString("SCHEMAL_REBAR_DIAMETER_GUID", resourceCulture);
+                return ResourceManager.GetString("PANEL_CONCRETE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RebarDataDiameterInfo.
+        ///   Looks up a localized string similar to General.
         /// </summary>
-        public static string SCHEMAL_REBAR_DIAMETER_NAME {
+        public static string PANEL_GENERAL {
             get {
-                return ResourceManager.GetString("SCHEMAL_REBAR_DIAMETER_NAME", resourceCulture);
+                return ResourceManager.GetString("PANEL_GENERAL", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to fed30a8b-f35e-4735-a6e9-4eea0ec9c614.
+        ///   Looks up a localized string similar to Rebar.
         /// </summary>
-        public static string SCHEMAL_REBAR_LAP_GUID {
+        public static string PANEL_REBAR {
             get {
-                return ResourceManager.GetString("SCHEMAL_REBAR_LAP_GUID", resourceCulture);
+                return ResourceManager.GetString("PANEL_REBAR", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RebarLapTypeInfo.
+        ///   Looks up a localized string similar to Schedule.
         /// </summary>
-        public static string SCHEMAL_REBAR_LAP_NAME {
+        public static string PANEL_SCHEDULE {
             get {
-                return ResourceManager.GetString("SCHEMAL_REBAR_LAP_NAME", resourceCulture);
+                return ResourceManager.GetString("PANEL_SCHEDULE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steel.
+        /// </summary>
+        public static string PANEL_STEEL {
+            get {
+                return ResourceManager.GetString("PANEL_STEEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nvd.
+        /// </summary>
+        public static string TAB {
+            get {
+                return ResourceManager.GetString("TAB", resourceCulture);
             }
         }
     }
