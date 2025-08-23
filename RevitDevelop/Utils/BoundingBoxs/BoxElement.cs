@@ -38,8 +38,8 @@ namespace RevitDevelop.Utils.BoundingBoxs
             VTX = GetVTX();
             VTY = !VTX.IsParallel(XYZ.BasisZ) ? VTX.CrossProduct(XYZ.BasisZ).Normalize() : VTX.CrossProduct(XYZ.BasisX).Normalize();
             VTZ = VTX.CrossProduct(VTY).Normalize();
-            Outline = GetOutLine(out BoxElementPoint boxElementPoint);
-            LineBox = Outline != null ? Line.CreateBound(Outline.MinimumPoint, Outline.MaximumPoint) : null;
+            Outline = GetOutLine(out BoxElementPoint boxElementPoint, out Line linebox);
+            LineBox = linebox;
             var z = Outline != null ? (Outline.MinimumPoint.Z + Outline.MaximumPoint.Z) / 2 : 0;
             LineBoxMid = Outline != null ? Line.CreateBound(Outline.MinimumPoint.EditZ(z), Outline.MaximumPoint.EditZ(z)) : null;
             LineBoxTop = Outline != null ? Line.CreateBound(Outline.MinimumPoint.EditZ(Outline.MaximumPoint.Z), Outline.MaximumPoint) : null;
@@ -59,8 +59,9 @@ namespace RevitDevelop.Utils.BoundingBoxs
             }
             return results;
         }
-        private Outline GetOutLine(out BoxElementPoint boxElementPoint)
+        private Outline GetOutLine(out BoxElementPoint boxElementPoint, out Line lineBox)
         {
+            lineBox = null;
             boxElementPoint = new BoxElementPoint();
             try
             {
@@ -84,29 +85,32 @@ namespace RevitDevelop.Utils.BoundingBoxs
                 var fzStart = new FaceCustom(VTZ, pzs.FirstOrDefault());
                 var fzEnd = new FaceCustom(VTZ, pzs.LastOrDefault());
 
-                var lb1 = fxStart.FaceIntersectFace(fzStart);
-                var lb2 = fxEnd.FaceIntersectFace(fzStart);
+                var minBotX = pxs.FirstOrDefault().RayPointToFace(VTZ, fzStart);
+                var maxBotX = pxs.LastOrDefault().RayPointToFace(VTZ, fzStart);
 
-                var pb1 = lb1.BasePoint.RayPointToFace(fyStart.Normal, fyStart);
-                var pb2 = lb1.BasePoint.RayPointToFace(fyEnd.Normal, fyEnd);
-                var pb3 = lb2.BasePoint.RayPointToFace(fyEnd.Normal, fyEnd);
-                var pb4 = lb2.BasePoint.RayPointToFace(fyStart.Normal, fyStart);
+                var pb1 = minBotX.RayPointToFace(fyStart.Normal, fyStart);
+                var pb2 = minBotX.RayPointToFace(fyEnd.Normal, fyEnd);
+                var pb3 = maxBotX.RayPointToFace(fyEnd.Normal, fyEnd);
+                var pb4 = maxBotX.RayPointToFace(fyStart.Normal, fyStart);
+
                 boxElementPoint.P1 = pb1;
                 boxElementPoint.P2 = pb2;
                 boxElementPoint.P3 = pb3;
                 boxElementPoint.P4 = pb4;
 
-                var lt1 = fxStart.FaceIntersectFace(fzEnd);
-                var lt2 = fxEnd.FaceIntersectFace(fzEnd);
+                var minTopX = pxs.FirstOrDefault().RayPointToFace(VTZ, fzEnd);
+                var maxTopX = pxs.LastOrDefault().RayPointToFace(VTZ, fzEnd);
 
-                var pt1 = lt1.BasePoint.RayPointToFace(fyStart.Normal, fyStart);
-                var pt2 = lt1.BasePoint.RayPointToFace(fyEnd.Normal, fyEnd);
-                var pt3 = lt2.BasePoint.RayPointToFace(fyEnd.Normal, fyEnd);
-                var pt4 = lt2.BasePoint.RayPointToFace(fyStart.Normal, fyStart);
+                var pt1 = minTopX.RayPointToFace(fyStart.Normal, fyStart);
+                var pt2 = minTopX.RayPointToFace(fyEnd.Normal, fyEnd);
+                var pt3 = maxTopX.RayPointToFace(fyEnd.Normal, fyEnd);
+                var pt4 = maxTopX.RayPointToFace(fyStart.Normal, fyStart);
+
                 boxElementPoint.P5 = pt1;
                 boxElementPoint.P6 = pt2;
                 boxElementPoint.P7 = pt3;
                 boxElementPoint.P8 = pt4;
+                lineBox = Line.CreateBound(pb1, pt3);
 
                 return new Outline(pb1, pt3);
             }
