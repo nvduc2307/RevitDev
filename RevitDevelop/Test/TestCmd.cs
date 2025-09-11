@@ -1,8 +1,18 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB.Architecture;
+using Autodesk.Revit.DB.Plumbing;
+using Autodesk.Revit.UI.Selection;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Newtonsoft.Json;
 using Nice3point.Revit.Toolkit.External;
+using RevitDevelop.Utils.BrowserNodes;
 using RevitDevelop.Utils.RevCurves;
+using RevitDevelop.Utils.RevPipes;
 using RevitDevelop.Utils.SelectFilters;
+using RevitDevelop.Utils.SkipWarning;
+using System.Diagnostics;
+using System.Text;
+using System.Windows.Controls;
 
 namespace RevitDevelop.Test
 {
@@ -17,21 +27,6 @@ namespace RevitDevelop.Test
                 try
                 {
                     //--------
-                    SpatialElementBoundaryOptions options = new SpatialElementBoundaryOptions();
-                    var room = Document.GetElement(UiDocument.Selection.PickObject(Autodesk.Revit.UI.Selection.ObjectType.Element, new GenericSelectionFilter(BuiltInCategory.OST_Rooms))) as Room;
-                    var curves = room.GetBoundarySegments(options)
-                        .FirstOrDefault()
-                        .Select(x => x.GetCurve())
-                        .ToList();
-
-                    using (var ts = new Transaction(Document, "name transaction"))
-                    {
-                        ts.Start();
-                        //--------
-                        Document.CreateCurves(curves);
-                        //--------
-                        ts.Commit();
-                    }
                     //--------
                     tsg.Assimilate();
                 }
