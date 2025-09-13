@@ -4,7 +4,7 @@ using RevitDevelop.Utils.RevDuct;
 
 namespace RevitDevelop.Utils.Compares
 {
-    public class CompareConnector : IEqualityComparer<Element>
+    public class CompareConnectorElement : IEqualityComparer<Element>
     {
         public bool Equals(Element x, Element y)
         {
@@ -23,6 +23,18 @@ namespace RevitDevelop.Utils.Compares
         }
 
         public int GetHashCode(Element obj)
+        {
+            return 0;
+        }
+    }
+    public class CompareConnectorOrigin : IEqualityComparer<Connector>
+    {
+        public bool Equals(Connector x, Connector y)
+        {
+            return x.Origin.IsSame(y.Origin);
+        }
+
+        public int GetHashCode(Connector obj)
         {
             return 0;
         }

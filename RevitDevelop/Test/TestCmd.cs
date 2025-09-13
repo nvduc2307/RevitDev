@@ -10,6 +10,7 @@ using Nice3point.Revit.Toolkit.External;
 using RevitDevelop.Utils.BrowserNodes;
 using RevitDevelop.Utils.Compares;
 using RevitDevelop.Utils.FilterElementsInRevit;
+using RevitDevelop.Utils.Geometries;
 using RevitDevelop.Utils.NumberUtils;
 using RevitDevelop.Utils.RevCurves;
 using RevitDevelop.Utils.RevDuct;
@@ -38,20 +39,27 @@ namespace RevitDevelop.Test
                     //var ductAccessory = Document.GetElement(ductAccessoryRef) as FamilyInstance;
                     //if (ductAccessory == null)
                     //    throw new Exception("obj is not a ductAccessory");
+                    var systemType = Document.GetElementsFromClass<MechanicalSystemType>(true).FirstOrDefault();
+                    var flexDuctTypes = Document.GetElementsFromClass<FlexDuctType>(true);
+                    if (systemType == null)
+                        throw new Exception();
+                    if (!flexDuctTypes.Any())
+                        throw new Exception();
                     var ductRef = UiDocument.Selection.PickObject(ObjectType.Element, new GenericSelectionFilter(BuiltInCategory.OST_DuctCurves));
                     var duct = Document.GetElement(ductRef) as Duct;
                     if (duct == null)
                         throw new Exception("obj is not a duct");
-
+                    var eles = duct.GetGroupDuct();
+                    var connectors = eles.SortConnector()
+                        .ConvertConnectorToPoint(2, 50)
+                        .ToList();
                     using (var ts = new Transaction(Document, "new transaction"))
                     {
                         ts.SkipAllWarnings();
                         ts.Start();
-                        var eles = duct.GetGroupDuct();
-                        UiDocument.Selection.SetElementIds(eles.Select(x=>x.Id).ToList());
+                        duct.DuctToFlexDuct(connectors, systemType, flexDuctTypes);
                         ts.Commit();
                     }
-
                     //--------
                     tsg.Assimilate();
                 }
