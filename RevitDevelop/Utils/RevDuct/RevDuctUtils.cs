@@ -36,8 +36,8 @@ namespace RevitDevelop.Utils.RevDuct
             var vtStart = (ps[1] - ps[0]).Normalize();
             var vtEnd = (ps[qPs - 1] - ps[qPs - 2]).Normalize();
             var fd = FlexDuct.Create(document, systemType.Id, flexDucType.Id, level, ps);
-            fd.StartTangent = vtStart * extent * 2;
-            fd.EndTangent = vtEnd * extent * 2;
+            fd.StartTangent = vtStart * extent;
+            fd.EndTangent = vtEnd * extent;
             switch (ductType)
             {
                 case ConnectorProfileType.Invalid:
@@ -81,6 +81,11 @@ namespace RevitDevelop.Utils.RevDuct
                         {
                             result.Add(connectors[i + 1].Origin - (j + 1) * vt * spacingMm.MmToFoot());
                         }
+                    }
+                    if (connectors[i].Owner is FamilyInstance)
+                    {
+                        //result.Add(connectors[i].Origin + vt * spacingMm.MmToFoot());
+                        //result.Add(connectors[i + 1].Origin - vt * spacingMm.MmToFoot());
                     }
                 }
                 result.Add(connectors[i + 1].Origin);
@@ -187,6 +192,10 @@ namespace RevitDevelop.Utils.RevDuct
                     isDo = false;
                 }
             } while (isDo);
+            if (results.FirstOrDefault() is not Duct)
+                results.RemoveAt(0);
+            if (results.LastOrDefault() is not Duct)
+                results.RemoveAt(results.Count - 1);
             return results;
         }
         public static List<Element> GetGroupDuct(this Element ele)
@@ -217,6 +226,15 @@ namespace RevitDevelop.Utils.RevDuct
                     qelementsTarget = result.Count;
                 }
             }
+            result = result.Where(x =>
+            {
+                if (x is not Duct duct) return true;
+                var connects = duct.GetConnectors();
+                var distance = connects.FirstOrDefault().Origin
+                .DistanceTo(connects.LastOrDefault().Origin)
+                .FootToMm();
+                return distance > 5;
+            }).ToList();
             return SortElement(result);
         }
         public static List<Element> GetGroupDuct(this Document document, Connector connector)

@@ -34,11 +34,6 @@ namespace RevitDevelop.Test
                 tsg.Start();
                 try
                 {
-                    //--------
-                    //var ductAccessoryRef = UiDocument.Selection.PickObject(ObjectType.Element, new GenericSelectionFilter(BuiltInCategory.OST_DuctAccessory));
-                    //var ductAccessory = Document.GetElement(ductAccessoryRef) as FamilyInstance;
-                    //if (ductAccessory == null)
-                    //    throw new Exception("obj is not a ductAccessory");
                     var systemType = Document.GetElementsFromClass<MechanicalSystemType>(true).FirstOrDefault();
                     var flexDuctTypes = Document.GetElementsFromClass<FlexDuctType>(true);
                     if (systemType == null)
@@ -58,6 +53,7 @@ namespace RevitDevelop.Test
                         ts.SkipAllWarnings();
                         ts.Start();
                         duct.DuctToFlexDuct(connectors, systemType, flexDuctTypes);
+                        Document.Delete(eles.Select(x=>x.Id).ToList());
                         ts.Commit();
                     }
                     //--------

@@ -10,7 +10,7 @@ namespace RevitDevelop.Utils.Compares
     {
         public bool Equals(XYZ x, XYZ y)
         {
-            return x.IsSame(y);
+            return x.IsSame(y, 5);
         }
 
         public int GetHashCode(XYZ obj)
