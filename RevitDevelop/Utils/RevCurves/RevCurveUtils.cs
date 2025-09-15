@@ -1,4 +1,5 @@
 ﻿using RevitDevelop.Utils.Geometries;
+using RevitDevelop.Utils.NumberUtils;
 
 namespace RevitDevelop.Utils.RevCurves
 {
@@ -92,6 +93,28 @@ namespace RevitDevelop.Utils.RevCurves
         {
             var ps = curves.Select(x => x.GetEndPoint(0)).ToList();
             ps.Add(curves.Last().GetEndPoint(1));
+            return ps;
+        }
+        public static List<XYZ> GetPoints(this ModelCurve curve, double spacingMm = 100)
+        {
+            //ModelLine, ModelArc, ModelEllipse, ModelNurbSpline
+            if (curve is not ModelLine modelLine)
+                return curve.GeometryCurve.Tessellate().ToList();
+            var l = modelLine.GeometryCurve;
+            if (l.Length.FootToMm() <= spacingMm)
+                return curve.GeometryCurve.Tessellate().ToList();
+            var sp = l.GetEndPoint(0);
+            var ep = l.GetEndPoint(1);
+            var vt = (ep - sp).Normalize();
+            var ps = new List<XYZ>();
+            var du = l.Length.FootToMm() % spacingMm;
+            var q = int.Parse($"{Math.Round((l.Length.FootToMm() - du) / spacingMm, 0)}") + 1;
+            for (int i = 0; i < q; i++)
+            {
+                ps.Add(sp + vt * i * spacingMm.MmToFoot());
+            }
+            if (du >= spacingMm / 5)
+                ps.Add(ep);
             return ps;
         }
     }

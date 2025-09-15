@@ -54,6 +54,16 @@ namespace RevitDevelop.Utils.RevDuct
             }
             return fd;
         }
+        public static FlexDuct CreateFlexDuct(
+            this Document document, 
+            FlexDuctType flexDuctType,
+            MechanicalSystemType systemType,
+            Level level,
+            List<XYZ> ps)
+        {
+            var flexDuct = FlexDuct.Create(document, systemType.Id, flexDuctType.Id, level.Id, ps);
+            return flexDuct;
+        }
         public static List<XYZ> ConvertConnectorToPoint(this List<Connector> connectors, int numDot, double spacingMm)
         {
             var result = new List<XYZ>();
