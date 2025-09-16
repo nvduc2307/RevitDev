@@ -19,6 +19,7 @@ using RevitDevelop.Utils.RevPipes;
 using RevitDevelop.Utils.SelectFilters;
 using RevitDevelop.Utils.SkipWarning;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows.Controls;
 
@@ -34,27 +35,15 @@ namespace RevitDevelop.Test
                 tsg.Start();
                 try
                 {
-                    var systemType = Document.GetElementsFromClass<MechanicalSystemType>(true).FirstOrDefault();
-                    var flexDuctTypes = Document.GetElementsFromClass<FlexDuctType>(true);
-                    if (systemType == null)
-                        throw new Exception();
-                    if (!flexDuctTypes.Any())
-                        throw new Exception();
-                    var ductRef = UiDocument.Selection.PickObject(ObjectType.Element, new GenericSelectionFilter(BuiltInCategory.OST_DuctCurves));
-                    var duct = Document.GetElement(ductRef) as Duct;
-                    if (duct == null)
-                        throw new Exception("obj is not a duct");
-                    var eles = duct.GetGroupDuct();
-                    var connectors = eles.SortConnector()
-                        .ConvertConnectorToPoint(2, 50)
-                        .ToList();
-                    using (var ts = new Transaction(Document, "new transaction"))
+                    var pathFile = "C:\\Users\\Admin\\Desktop\\data.txt";
+                    if (File.Exists(pathFile))
                     {
-                        ts.SkipAllWarnings();
-                        ts.Start();
-                        duct.DuctToFlexDuct(connectors, systemType, flexDuctTypes);
-                        Document.Delete(eles.Select(x=>x.Id).ToList());
-                        ts.Commit();
+                        var paths = File.ReadAllLines(pathFile).ToList();
+                        var item = paths.GetTreeViewItems();
+                        foreach (var key in item.Keys)
+                        {
+                            var ab = item[key];
+                        }
                     }
                     //--------
                     tsg.Assimilate();
