@@ -211,5 +211,45 @@
             }
             return results;
         }
+
+
+        public static List<BrowserNode> BuildItemTree(
+            this List<string> paths)
+        {
+            var results = new List<BrowserNode>();
+            foreach (var path in paths)
+            {
+                string[] parts = path.Split('\\');
+                var noteCurrent = results.FirstOrDefault(x => x.Name == parts.FirstOrDefault());
+                if (noteCurrent == null)
+                {
+                    noteCurrent = new BrowserNode(parts.FirstOrDefault());
+                    results.Add(noteCurrent);
+                }
+                var c = 0;
+                foreach (var part in parts)
+                {
+                    //skip first items
+                    if (c == 0)
+                    {
+                        c++;
+                        continue;
+                    }
+                    //get childrent
+                    //check childent is exist
+                    var childrents = noteCurrent.Children;
+                    var child = childrents.FirstOrDefault(x => x.Name == part);
+                    if (child == null)
+                    {
+                        child = new BrowserNode(part);
+                        child.Parent = noteCurrent;
+                        childrents.Add(child);
+                    }
+                    noteCurrent = child;
+                    c++;
+                }
+            }
+            return results;
+        }
     }
 }

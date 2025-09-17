@@ -39,11 +39,7 @@ namespace RevitDevelop.Test
                     if (File.Exists(pathFile))
                     {
                         var paths = File.ReadAllLines(pathFile).ToList();
-                        var item = paths.GetTreeViewItems();
-                        foreach (var key in item.Keys)
-                        {
-                            var ab = item[key];
-                        }
+                        var items = paths.BuildItemTree();
                     }
                     //--------
                     tsg.Assimilate();
