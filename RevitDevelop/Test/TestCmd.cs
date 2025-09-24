@@ -35,12 +35,10 @@ namespace RevitDevelop.Test
                 tsg.Start();
                 try
                 {
-                    var pathFile = "C:\\Users\\Admin\\Desktop\\data.txt";
-                    if (File.Exists(pathFile))
-                    {
-                        var paths = File.ReadAllLines(pathFile).ToList();
-                        var items = paths.BuildItemTree();
-                    }
+                    var fitting1 = UiDocument.Selection.PickElement(Document, BuiltInCategory.OST_DuctFitting);
+                    var duct = UiDocument.Selection.PickElement(Document, BuiltInCategory.OST_DuctCurves);
+                    var eles = fitting1.GetGroupDuct(duct, 1000);
+                    UiDocument.Selection.SetElementIds(eles.Select(x=>x.Id).ToList());
                     //--------
                     tsg.Assimilate();
                 }

@@ -4,6 +4,7 @@ using RevitDevelop.Utils.Compares;
 using RevitDevelop.Utils.FilterElementsInRevit;
 using RevitDevelop.Utils.Geometries;
 using RevitDevelop.Utils.NumberUtils;
+using RevitDevelop.Utils.RevFaces;
 using RevitDevelop.Utils.RevParameters;
 using RevitDevelop.Utils.SkipWarning;
 using RevitDevelop.Utils.Solids;
@@ -55,7 +56,7 @@ namespace RevitDevelop.Utils.RevDuct
             return fd;
         }
         public static FlexDuct CreateFlexDuct(
-            this Document document, 
+            this Document document,
             FlexDuctType flexDuctType,
             MechanicalSystemType systemType,
             Level level,
@@ -64,7 +65,10 @@ namespace RevitDevelop.Utils.RevDuct
             var flexDuct = FlexDuct.Create(document, systemType.Id, flexDuctType.Id, level.Id, ps);
             return flexDuct;
         }
-        public static List<XYZ> ConvertConnectorToPoint(this List<Connector> connectors, int numDot, double spacingMm)
+        public static List<XYZ> ConvertConnectorToPoint(
+            this List<Connector> connectors, 
+            int numDot, 
+            double spacingMm)
         {
             var result = new List<XYZ>();
             if (connectors.Count % 2 != 0)
@@ -92,11 +96,11 @@ namespace RevitDevelop.Utils.RevDuct
                             result.Add(connectors[i + 1].Origin - (j + 1) * vt * spacingMm.MmToFoot());
                         }
                     }
-                    if (connectors[i].Owner is FamilyInstance)
-                    {
-                        //result.Add(connectors[i].Origin + vt * spacingMm.MmToFoot());
-                        //result.Add(connectors[i + 1].Origin - vt * spacingMm.MmToFoot());
-                    }
+                }
+                if (connectors[i].Owner.Category.BuiltInCategory == BuiltInCategory.OST_DuctFitting)
+                {
+                    result.Add(connectors[i].Origin - connectors[i].CoordinateSystem.BasisZ * spacingMm.MmToFoot());
+                    result.Add(connectors[i + 1].Origin - connectors[i + 1].CoordinateSystem.BasisZ * spacingMm.MmToFoot());
                 }
                 result.Add(connectors[i + 1].Origin);
             }
@@ -202,10 +206,10 @@ namespace RevitDevelop.Utils.RevDuct
                     isDo = false;
                 }
             } while (isDo);
-            if (results.FirstOrDefault() is not Duct)
-                results.RemoveAt(0);
-            if (results.LastOrDefault() is not Duct)
-                results.RemoveAt(results.Count - 1);
+            //if (results.FirstOrDefault() is not Duct)
+            //    results.RemoveAt(0);
+            //if (results.LastOrDefault() is not Duct)
+            //    results.RemoveAt(results.Count - 1);
             return results;
         }
         public static List<Element> GetGroupDuct(this Element ele)
@@ -269,6 +273,112 @@ namespace RevitDevelop.Utils.RevDuct
             .ToList();
             return result;
         }
+        public static List<Element> GetGroupDuct(
+            this Element fittingDuctStart,
+            Element fittingDuctEnd,
+            List<BuiltInCategory> builtInCategoriesValid = null)
+        {
+            var results = new List<Element>();
+            var eleGr1 = GetElements(fittingDuctStart, builtInCategoriesValid);
+            if (!eleGr1.Any(x => x.Id.ToString() == fittingDuctEnd.Id.ToString()))
+                return results;
+            eleGr1 = eleGr1.SortElement();
+            var q = eleGr1.Count();
+            var sIndex = eleGr1.IndexOf(fittingDuctStart);
+            var fittingLast = eleGr1.FirstOrDefault(x => x.Id.ToString() == fittingDuctEnd.Id.ToString());
+            var eIndex = eleGr1.IndexOf(fittingLast);
+            if (eIndex == -1)
+                return results;
+            var max = Math.Max(sIndex, eIndex);
+            var min = Math.Min(sIndex, eIndex);
+            for (int i = 0; i < q; i++)
+            {
+                if (i >= min && i <= max)
+                    results.Add(eleGr1[i]);
+            }
+            return results;
+        }
+        public static List<Element> GetGroupDuct(this Element eleStart, Element eleDirection, double lenthMm = -1)
+        {
+            var results = new List<Element>();
+            var elements = eleStart.GetElements().SortElement();
+            if (!elements.Any(x => x.Id.ToString() == eleDirection.Id.ToString()))
+                return results;
+            var eleDirectionInArr = elements
+                .FirstOrDefault(x => x.Id.ToString() == eleDirection.Id.ToString());
+            var min = elements.IndexOf(eleStart);
+            var max = elements.IndexOf(eleDirectionInArr);
+            if (min > max)
+            {
+                elements.Reverse();
+                min = elements.IndexOf(eleStart);
+                max = elements.IndexOf(eleDirectionInArr);
+            }
+            var q = elements.Count();
+            var eleResults = new List<Element>();
+            for (int i = 0; i < q; i++)
+            {
+                if (i < min)
+                    continue;
+                eleResults.Add(elements[i]);
+            }
+            if (lenthMm <= 0) return eleResults;
+            var lenthTotalMm = 0.0;
+            foreach (var ele in eleResults)
+            {
+                var geos = ele.GetMepGeometry(out XYZ mid).PointsToCurves();
+                var length = Math.Round(geos.Sum(x => x.Length.FootToMm()), 0);
+                var lengthCheck = lenthTotalMm + length;
+                if (lengthCheck <= lenthMm)
+                {
+                    results.Add(ele);
+                    lenthTotalMm += length;
+                }
+                else
+                {
+                    if (lenthTotalMm < lenthMm)
+                    {
+                        results.Add(ele);
+                        lenthTotalMm += length;
+                    }
+                }
+            }
+            return results;
+        }
+        public static List<Element> GetElements(
+            this Element element,
+            List<BuiltInCategory> builtInCategoriesValid = null)
+        {
+            var result = new List<Element>() { element };
+            var q = result.Count;
+            builtInCategoriesValid = builtInCategoriesValid == null
+                ? new List<BuiltInCategory>() 
+                { 
+                    BuiltInCategory.OST_DuctCurves, 
+                    BuiltInCategory.OST_DuctFitting 
+                }
+                : builtInCategoriesValid;
+            for (int i = 0; i < q; i++)
+            {
+                var connectors = result[i].GetConnectors();
+                foreach (var connector in connectors)
+                {
+                    foreach (var obj in connector.AllRefs)
+                    {
+                        if (!(obj is Connector conRef))
+                            continue;
+                        var buildCat = conRef.Owner.Category.BuiltInCategory;
+                        if (!builtInCategoriesValid.Any(x => x == buildCat))
+                            continue;
+                        if (result.Any(x => x.Id.ToString() == conRef.Owner.Id.ToString()))
+                            continue;
+                        result.Add(conRef.Owner);
+                        q++;
+                    }
+                }
+            }
+            return result;
+        }
         public static List<Connector> GetConnectors(this Element element)
         {
             var result = new List<Connector>();
@@ -306,6 +416,33 @@ namespace RevitDevelop.Utils.RevDuct
                         result.Add(connector);
                 }
                 return result;
+            }
+            return result;
+        }
+        public static List<XYZ> GetMepGeometry(this Element element, out XYZ midPoint)
+        {
+            midPoint = null;
+            var result = new List<XYZ>();
+            var connectors = element.GetConnectors();
+            if (connectors.Count != 2)
+                return result;
+            var cate = element.Category.BuiltInCategory;
+            if (cate == BuiltInCategory.OST_DuctCurves)
+                return connectors.Select(x => x.Origin).ToList();
+            if (cate == BuiltInCategory.OST_DuctAccessory)
+                return connectors.Select(x => x.Origin).ToList();
+            if (cate == BuiltInCategory.OST_DuctFitting)
+            {
+                var con1 = connectors.FirstOrDefault();
+                var con2 = connectors.LastOrDefault();
+                var f = new FaceCustom(con1.CoordinateSystem.BasisX, con1.Origin);
+                var pInterSect = con2.Origin.RayPointToFace(con2.CoordinateSystem.BasisZ, f);
+                if (pInterSect == null)
+                    return result;
+                result.Add(con1.Origin);
+                result.Add(pInterSect);
+                result.Add(con2.Origin);
+                midPoint = pInterSect;
             }
             return result;
         }
