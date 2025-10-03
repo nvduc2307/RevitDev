@@ -195,7 +195,6 @@ namespace RevitDevelop.Utils.Solids
             curveLoop.Append(curve4);
             return GeometryCreationUtilities.CreateExtrusionGeometry(new List<CurveLoop> { curveLoop }, XYZ.BasisZ, bb.GetHeight());
         }
-
         public static List<Solid> GetSolids(this Element element)
         {
             var result = new List<Solid>();
@@ -276,6 +275,5 @@ namespace RevitDevelop.Utils.Solids
             list.AddRange(solid.Faces.Cast<Face>());
             return list;
         }
-
     }
 }
