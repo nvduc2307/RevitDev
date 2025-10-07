@@ -9,6 +9,8 @@
         Height="200" 
         Width="200">
     <StackPanel>
-        <CheckBox Content="{Binding TextTest}"/>
+        <CheckBox 
+            IsChecked="{Binding Checked}"
+            Content="{Binding TextTest}"/>
     </StackPanel>
 </Window>

@@ -1,10 +1,22 @@
-﻿using Autodesk.Revit.Attributes;
+﻿using Autodesk.AutoCAD.GraphicsInterface;
+using Autodesk.Revit.Attributes;
 using Autodesk.Revit.UI;
+using Autodesk.Revit.UI.Events;
+using CommunityToolkit.Mvvm.DependencyInjection;
 using Nice3point.Revit.Toolkit.External;
 using RevitDevelop.Test.viewModels;
 using RevitDevelop.Test.views;
 using RevitDevelop.Utils.Compares;
 using RevitDevelop.Utils.Geometries;
+using RevitDevelop.Utils.HookHelper;
+using RevitDevelop.Utils.Idlings;
+using RevitDevelop.Utils.Messages;
+using RevitDevelop.Utils.PressHelpers;
+using RevitDevelop.Utils.RevFaces;
+using RevitDevelop.Utils.RevSketchPlan;
+using RevitDevelop.Utils.SkipWarning;
+using RevitDevelop.Utils.Virture;
+using RevitDevelop.Utils.WindowElements;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,10 +37,47 @@ namespace RevitDevelop.Test
                 tsg.Start();
                 try
                 {
-                    var viewModel = new TestViewModel() { TextTest = "Text" };
-                    _view = new TestView() { DataContext = viewModel };
-                    _view.Loaded += View_Loaded;
-                    _view.ShowDialog();
+                    var view = Document.ActiveView;
+                    if (!(view is ViewPlan || view is ViewSection))
+                        return;
+                    var d = new UserActivityHook(true, false);
+                    d.OnMouseActivity += D_OnMouseActivity1;
+                    //using (var ts = new Transaction(Document, "new transaction"))
+                    //{
+                    //    ts.SkipAllWarnings();
+                    //    ts.Start();
+                    //    Document.SetSketchPlan();
+                    //    ts.Commit();
+                    //}
+
+                    //XYZ A = UiDocument.Selection.PickPoint("Pick first point");
+                    //CurveVisualizationServer curveShost = null;
+                    //IdlingLoop.ExternalAction += () =>
+                    //{
+                    //    view = Document.ActiveView;
+                    //    var level = view.GenLevel;
+                    //    var vtx = view.RightDirection;
+                    //    var vty = view.UpDirection;
+                    //    var vtz = view.ViewDirection;
+                    //    var orgin = view.Origin;
+                    //    var f = new FaceCustom(vtz, orgin);
+                    //    var p = UiDocument.GetModelCoordinatesAtCursor()
+                    //    .RayPointToFace(f.Normal, f);
+                    //    var p0 = A.RayPointToFace(f.Normal, f);
+                    //    if (level != null)
+                    //    {
+                    //        p0 = new XYZ(p0.X, p0.Y, level.Elevation);
+                    //        p = new XYZ(p.X, p0.Y, level.Elevation);
+                    //    }
+                    //    var l = Line.CreateBound(p0, p);
+                    //    if (curveShost != null)
+                    //        curveShost.UnAllRegister();
+                    //    curveShost = new CurveVisualizationServer(UiDocument, new List<Line>() { l });
+                    //    curveShost.Register();
+                    //};
+                    //IdlingLoop.Start(UiApplication);
+                    //if (PressHelper.IsEnterKeyPressed())
+                    //    IdlingLoop.Stop(UiApplication);
                     //--------
                     tsg.Assimilate();
                 }
@@ -40,41 +89,9 @@ namespace RevitDevelop.Test
             }
         }
 
-        private void View_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private void D_OnMouseActivity1(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            var allCheckBoxes = FindVisualChildren<System.Windows.Controls.CheckBox>(_view);
-            var texblock1 = new TextBlock() { Text = "(Anh Yeu Em)", Foreground = new SolidColorBrush(Colors.Red) };
-            var texblock2 = new TextBlock() { Text = "Tho" };
-            var stackP = new StackPanel();
-            stackP.Children.Add(texblock2);
-            stackP.Children.Add(texblock1);
-            stackP.Orientation = Orientation.Horizontal;
-            foreach (var cb in allCheckBoxes)
-            {
-                cb.Content = stackP;
-            }
-        }
-
-
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject root) where T : DependencyObject
-        {
-            if (root == null) yield break;
-
-            var stack = new Stack<DependencyObject>();
-            stack.Push(root);
-
-            while (stack.Count > 0)
-            {
-                var current = stack.Pop();
-
-                int count = VisualTreeHelper.GetChildrenCount(current);
-                for (int i = 0; i < count; i++)
-                {
-                    var child = VisualTreeHelper.GetChild(current, i);
-                    if (child is T t) yield return t;
-                    stack.Push(child);
-                }
-            }
+            var _lastMousePosition = e.Location;
         }
     }
 }

@@ -10,5 +10,7 @@ namespace RevitDevelop.Test.viewModels
     {
         [ObservableProperty]
         private string _textTest;
+        [ObservableProperty]
+        private bool? _checked;
     }
 }

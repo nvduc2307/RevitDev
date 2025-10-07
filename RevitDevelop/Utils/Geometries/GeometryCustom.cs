@@ -1,7 +1,9 @@
-﻿using RevitDevelop.Utils.Compares;
+﻿using Autodesk.Revit.UI;
+using RevitDevelop.Utils.Compares;
 using RevitDevelop.Utils.NumberUtils;
 using RevitDevelop.Utils.RevCurves;
 using RevitDevelop.Utils.RevFaces;
+using RevitDevelop.Utils.RevViews;
 
 namespace RevitDevelop.Utils.Geometries
 {
@@ -302,6 +304,39 @@ namespace RevitDevelop.Utils.Geometries
             {
             }
             return curves;
+        }
+        public static XYZ GetModelCoordinatesAtCursor(this UIDocument uidoc)
+        {
+            UIView uiview = ViewHelper.GetActiveUIView(uidoc);
+            var view = uidoc.Document.ActiveView;
+            if (uiview is null) return XYZ.Zero;
+            Rectangle rect = uiview.GetWindowRectangle();
+            var p = System.Windows.Forms.Cursor.Position;
+            double u = (p.X - rect.Left) / (double)(rect.Right - rect.Left);
+            double v = (p.Y - rect.Top) / (double)(rect.Bottom - rect.Top);
+            XYZ R = view.RightDirection, U = view.UpDirection;
+            double dx = (double)(p.X - rect.Left)
+              / (rect.Right - rect.Left);
+
+            double dy = (double)(p.Y - rect.Bottom)
+              / (rect.Top - rect.Bottom);
+
+            IList<XYZ> corners = uiview.GetZoomCorners();
+            XYZ a = corners[0];
+            XYZ b = corners[1];
+            XYZ diag = b - a;
+            double w = diag.DotProduct(R), hgt = diag.DotProduct(U);
+            XYZ B = a + (u * w) * R + ((1 - v) * hgt) * U;
+
+
+
+            //XYZ v = b - a;
+
+            //XYZ q = a
+            //  + dx * v.X * XYZ.BasisX
+            //  + dy * v.Y * XYZ.BasisY;
+
+            return B;
         }
 
     }

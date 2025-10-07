@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.UI;
 using Nice3point.Revit.Toolkit.External;
 using RevitDevelop.Updaters;
+using RevitDevelop.Utils.Messages;
 
 namespace RevitDevelop
 {
@@ -26,6 +27,7 @@ namespace RevitDevelop
             _initPannelSchedule();
             //_registerUpdater();
         }
+
         public override void OnShutdown()
         {
             //_disposeUpdater();
@@ -33,6 +35,9 @@ namespace RevitDevelop
         private void _initPannelGeneral()
         {
             PANEL_GENERAL = Application.CreatePanel(Properties.Langs.ApplicationLangs.PANEL_GENERAL, Properties.Langs.ApplicationLangs.TAB);
+            PANEL_GENERAL.AddPushButton<Test.TestCmd>("test")
+                    .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
+                    .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
         }
         private void _initPannelConcrete()
         {
