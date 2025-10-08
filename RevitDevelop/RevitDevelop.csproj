@@ -110,6 +110,7 @@
       <Folder Include="Tools\SettingRebars\SettingParameter\" />
       <Folder Include="Tools\ShopDrawingRebars\CreateTagRebars\" />
       <Folder Include="Tools\ShopDrawingRebars\CreatePullOutRebars\" />
+      <Folder Include="Utils\WindowEvent\EventKeys\" />
     </ItemGroup>
 
     <ItemGroup>

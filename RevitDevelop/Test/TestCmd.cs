@@ -17,6 +17,7 @@ using RevitDevelop.Utils.RevSketchPlan;
 using RevitDevelop.Utils.SkipWarning;
 using RevitDevelop.Utils.Virture;
 using RevitDevelop.Utils.WindowElements;
+using RevitDevelop.Utils.WindowEvent.EventMouses;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,7 +32,6 @@ namespace RevitDevelop.Test
         private TestView _view;
         public override void Execute()
         {
-
             using (var tsg = new TransactionGroup(Document, "name transaction group"))
             {
                 tsg.Start();
@@ -40,8 +40,10 @@ namespace RevitDevelop.Test
                     var view = Document.ActiveView;
                     if (!(view is ViewPlan || view is ViewSection))
                         return;
-                    var d = new UserActivityHook(true, false);
-                    d.OnMouseActivity += D_OnMouseActivity1;
+                    var eventMouse1 = new EventMouseHook();
+                    eventMouse1.OnMouseLClick += EventMouse1_OnMouseLClick;
+                    eventMouse1.OnMouseMove += EventMouse1_OnMouseMove;
+                    eventMouse1.Start(System.Windows.Forms.MouseButtons.None);
                     //using (var ts = new Transaction(Document, "new transaction"))
                     //{
                     //    ts.SkipAllWarnings();
@@ -89,9 +91,19 @@ namespace RevitDevelop.Test
             }
         }
 
-        private void D_OnMouseActivity1(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void EventMouse1_OnMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            var _lastMousePosition = e.Location;
+            var pos = e.Location;
+            IO.ShowInfo(pos.ToString());
+        }
+
+        private void EventMouse1_OnMouseLClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (sender is EventMouseHook eventMouse)
+            {
+                eventMouse.OnMouseMidClick -= EventMouse1_OnMouseLClick;
+                eventMouse.OnMouseMove -= EventMouse1_OnMouseMove;
+            }
         }
     }
 }

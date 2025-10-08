@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RevitDevelop.Utils.HookHelper
+namespace RevitDevelop.Utils.WindowEvent.EventMouses
 {
-    public class UserActivityHook
+    public class EventMouseHook
     {
         #region Windows structure definitions
 
@@ -429,120 +429,41 @@ namespace RevitDevelop.Utils.HookHelper
         /// Creates an instance of UserActivityHook object and sets mouse and keyboard hooks.
         /// </summary>
         /// <exception cref="Win32Exception">Any windows problem.</exception>
-        public UserActivityHook()
-        {
-            Start();
-        }
-
-        public UserActivityHook(MouseButtons mouseButton)
-        {
-            switch (mouseButton)
-            {
-                case MouseButtons.Left:
-                    break;
-                case MouseButtons.None:
-                    break;
-                case MouseButtons.Right:
-                    break;
-                case MouseButtons.Middle:
-                    break;
-                case MouseButtons.XButton1:
-                    break;
-                case MouseButtons.XButton2:
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Creates an instance of UserActivityHook object and installs both or one of mouse and/or keyboard hooks and starts rasing events
-        /// </summary>
-        /// <param name="InstallMouseHook"><b>true</b> if mouse events must be monitored</param>
-        /// <param name="InstallKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
-        /// <exception cref="Win32Exception">Any windows problem.</exception>
-        /// <remarks>
-        /// To create an instance without installing hooks call new UserActivityHook(false, false)
-        /// </remarks>
-        public UserActivityHook(bool InstallMouseHook, bool InstallKeyboardHook)
-        {
-            Start(InstallMouseHook, InstallKeyboardHook);
-        }
-
-        /// <summary>
-        /// Destruction.
-        /// </summary>
-        ~UserActivityHook()
-        {
-            //uninstall hooks and do not throw exceptions
-            Stop(true, true, false);
-        }
-
-        /// <summary>
-        /// Occurs when the user moves the mouse, presses any mouse button or scrolls the wheel
-        /// </summary>
-        public event MouseEventHandler OnMouseActivity;
+        private static HookProc MouseHookProcedure;
+        private int hMouseHook = 0;
         public event MouseEventHandler OnMouseLClick;
         public event MouseEventHandler OnMouseRClick;
         public event MouseEventHandler OnMouseLDbClick;
         public event MouseEventHandler OnMouseRDbClick;
         public event MouseEventHandler OnMouseMidClick;
-        /// <summary>
-        /// Occurs when the user presses a key
-        /// </summary>
-        public event KeyEventHandler KeyDown;
-        /// <summary>
-        /// Occurs when the user presses and releases 
-        /// </summary>
-        public event KeyPressEventHandler KeyPress;
-        /// <summary>
-        /// Occurs when the user releases a key
-        /// </summary>
-        public event KeyEventHandler KeyUp;
-
-
-        /// <summary>
-        /// Stores the handle to the mouse hook procedure.
-        /// </summary>
-        private int hMouseHook = 0;
-        /// <summary>
-        /// Stores the handle to the keyboard hook procedure.
-        /// </summary>
-        private int hKeyboardHook = 0;
-
-
-        /// <summary>
-        /// Declare MouseHookProcedure as HookProc type.
-        /// </summary>
-        private static HookProc MouseHookProcedure;
-        /// <summary>
-        /// Declare KeyboardHookProcedure as HookProc type.
-        /// </summary>
-        private static HookProc KeyboardHookProcedure;
-
-
-        /// <summary>
-        /// Installs both mouse and keyboard hooks and starts rasing events
-        /// </summary>
-        /// <exception cref="Win32Exception">Any windows problem.</exception>
-        public void Start()
+        public event MouseEventHandler OnMouseMove;
+        public EventMouseHook()
         {
-            this.Start(true, true);
+            
         }
-
-        /// <summary>
-        /// Installs both or one of mouse and/or keyboard hooks and starts rasing events
-        /// </summary>
-        /// <param name="InstallMouseHook"><b>true</b> if mouse events must be monitored</param>
-        /// <param name="InstallKeyboardHook"><b>true</b> if keyboard events must be monitored</param>
-        /// <exception cref="Win32Exception">Any windows problem.</exception>
-        public void Start(bool InstallMouseHook, bool InstallKeyboardHook)
+        public void Start(MouseButtons mouseButton)
         {
             // install Mouse hook only if it is not installed and must be installed
-            if (hMouseHook == 0 && InstallMouseHook)
+            if (hMouseHook == 0)
             {
                 // Create an instance of HookProc.
-                MouseHookProcedure = new HookProc(MouseHookProc);
+                switch (mouseButton)
+                {
+                    case MouseButtons.Left:
+                        MouseHookProcedure = new HookProc(MouseLeftClickHookProc);
+                        break;
+                    case MouseButtons.Right:
+                        MouseHookProcedure = new HookProc(MouseRightClickHookProc);
+                        break;
+                    case MouseButtons.Middle:
+                        MouseHookProcedure = new HookProc(MouseMiddleClickHookProc);
+                        break;
+                    case MouseButtons.XButton1:
+                    case MouseButtons.XButton2:
+                    case MouseButtons.None:
+                        MouseHookProcedure = new HookProc(MouseWheelHookProc);
+                        break;
+                }
                 //install hook
                 hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, MouseHookProcedure, IntPtr.Zero, 0);
                 //If SetWindowsHookEx fails.
@@ -551,49 +472,13 @@ namespace RevitDevelop.Utils.HookHelper
                     //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
                     int errorCode = Marshal.GetLastWin32Error();
                     //do cleanup
-                    Stop(true, false, false);
-                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
-                    throw new Win32Exception(errorCode);
-                }
-            }
-
-            // install Keyboard hook only if it is not installed and must be installed
-            if (hKeyboardHook == 0 && InstallKeyboardHook)
-            {
-                // Create an instance of HookProc.
-                KeyboardHookProcedure = new HookProc(KeyboardHookProc);
-                //install hook
-                hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardHookProcedure, IntPtr.Zero, 0);
-                //If SetWindowsHookEx fails.
-                if (hKeyboardHook == 0)
-                {
-                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
-                    int errorCode = Marshal.GetLastWin32Error();
-                    //do cleanup
-                    Stop(false, true, false);
+                    Stop(true, false);
                     //Initializes and throws a new instance of the Win32Exception class with the specified error. 
                     throw new Win32Exception(errorCode);
                 }
             }
         }
-
-        /// <summary>
-        /// Stops monitoring both mouse and keyboard events and rasing events.
-        /// </summary>
-        /// <exception cref="Win32Exception">Any windows problem.</exception>
-        public void Stop()
-        {
-            this.Stop(true, true, true);
-        }
-
-        /// <summary>
-        /// Stops monitoring both or one of mouse and/or keyboard events and rasing events.
-        /// </summary>
-        /// <param name="UninstallMouseHook"><b>true</b> if mouse hook must be uninstalled</param>
-        /// <param name="UninstallKeyboardHook"><b>true</b> if keyboard hook must be uninstalled</param>
-        /// <param name="ThrowExceptions"><b>true</b> if exceptions which occured during uninstalling must be thrown</param>
-        /// <exception cref="Win32Exception">Any windows problem.</exception>
-        public void Stop(bool UninstallMouseHook, bool UninstallKeyboardHook, bool ThrowExceptions)
+        public void Stop(bool UninstallMouseHook, bool ThrowExceptions)
         {
             //if mouse hook set and must be uninstalled
             if (hMouseHook != 0 && UninstallMouseHook)
@@ -611,96 +496,52 @@ namespace RevitDevelop.Utils.HookHelper
                     throw new Win32Exception(errorCode);
                 }
             }
-
-            //if keyboard hook set and must be uninstalled
-            if (hKeyboardHook != 0 && UninstallKeyboardHook)
-            {
-                //uninstall hook
-                int retKeyboard = UnhookWindowsHookEx(hKeyboardHook);
-                //reset invalid handle
-                hKeyboardHook = 0;
-                //if failed and exception must be thrown
-                if (retKeyboard == 0 && ThrowExceptions)
-                {
-                    //Returns the error code returned by the last unmanaged function called using platform invoke that has the DllImportAttribute.SetLastError flag set. 
-                    int errorCode = Marshal.GetLastWin32Error();
-                    //Initializes and throws a new instance of the Win32Exception class with the specified error. 
-                    throw new Win32Exception(errorCode);
-                }
-            }
         }
-
-
-        /// <summary>
-        /// A callback function which will be called every time a mouse activity detected.
-        /// </summary>
-        /// <param name="nCode">
-        /// [in] Specifies whether the hook procedure must process the message. 
-        /// If nCode is HC_ACTION, the hook procedure must process the message. 
-        /// If nCode is less than zero, the hook procedure must pass the message to the 
-        /// CallNextHookEx function without further processing and must return the 
-        /// value returned by CallNextHookEx.
-        /// </param>
-        /// <param name="wParam">
-        /// [in] Specifies whether the message was sent by the current thread. 
-        /// If the message was sent by the current thread, it is nonzero; otherwise, it is zero. 
-        /// </param>
-        /// <param name="lParam">
-        /// [in] Pointer to a CWPSTRUCT structure that contains details about the message. 
-        /// </param>
-        /// <returns>
-        /// If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
-        /// If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
-        /// and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
-        /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
-        /// procedure does not call CallNextHookEx, the return value should be zero. 
-        /// </returns>
-        private int MouseHookProc(int nCode, int wParam, IntPtr lParam)
+        private int MouseLeftClickHookProc(int nCode, int wParam, IntPtr lParam)
         {
             // if ok and someone listens to our events
-            if ((nCode >= 0) && (OnMouseActivity != null))
+            if ((nCode >= 0) && (OnMouseLClick != null))
+            {
+                //Marshall the data from callback.
+                var mouseHookStruct = (MouseLLHookStruct)Marshal
+                    .PtrToStructure(lParam, typeof(MouseLLHookStruct));
+                //detect button clicked
+                if (wParam == WM_LBUTTONUP)
+                {
+                    var button = MouseButtons.Left;
+                    short mouseDelta = 0;
+                    int clickCount = 1;
+                    //generate event 
+                    if (button != MouseButtons.None)
+                    {
+                        var e = new MouseEventArgs(
+                            button,
+                            clickCount,
+                            mouseHookStruct.pt.x,
+                            mouseHookStruct.pt.y,
+                            mouseDelta);
+                        //raise it
+                        OnMouseLClick(this, e);
+                    }
+                }
+            }
+            //call next hook
+            //return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
+            return 0;
+        }
+        private int MouseRightClickHookProc(int nCode, int wParam, IntPtr lParam)
+        {
+            // if ok and someone listens to our events
+            if ((nCode >= 0) && (OnMouseRClick != null))
             {
                 //Marshall the data from callback.
                 var mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
-
                 //detect button clicked
-                MouseButtons button = MouseButtons.None;
-                short mouseDelta = 0;
-                switch (wParam)
+                if (wParam == WM_RBUTTONUP)
                 {
-                    case WM_LBUTTONDOWN:
-                        //case WM_LBUTTONUP: 
-                        //case WM_LBUTTONDBLCLK: 
-                        button = MouseButtons.Left;
-                        break;
-                    case WM_RBUTTONDOWN:
-                        //case WM_RBUTTONUP: 
-                        //case WM_RBUTTONDBLCLK: 
-                        button = MouseButtons.Right;
-                        break;
-                    case WM_MOUSEWHEEL:
-                        //If the message is WM_MOUSEWHEEL, the high-order word of mouseData member is the wheel delta. 
-                        //One wheel click is defined as WHEEL_DELTA, which is 120. 
-                        //(value >> 16) & 0xffff; retrieves the high-order word from the given 32-bit value
-                        mouseDelta = (short)((mouseHookStruct.mouseData >> 16) & 0xffff);
-                        //TODO: X BUTTONS (I havent them so was unable to test)
-                        //If the message is WM_XBUTTONDOWN, WM_XBUTTONUP, WM_XBUTTONDBLCLK, WM_NCXBUTTONDOWN, WM_NCXBUTTONUP, 
-                        //or WM_NCXBUTTONDBLCLK, the high-order word specifies which X button was pressed or released, 
-                        //and the low-order word is reserved. This value can be one or more of the following values. 
-                        //Otherwise, mouseData is not used. 
-                        break;
-                }
-
-                //double clicks
-                if (button != MouseButtons.None)
-                {
-                    int clickCount = 0;
-                    if (button != MouseButtons.None)
-                        if (wParam == WM_LBUTTONDBLCLK || wParam == WM_RBUTTONDBLCLK)
-                            clickCount = 2;
-                        else
-                            clickCount = 1;
-
+                    var button = MouseButtons.Right;
+                    short mouseDelta = 0;
+                    int clickCount = 1;
                     //generate event 
                     var e = new MouseEventArgs(
                         button,
@@ -709,96 +550,89 @@ namespace RevitDevelop.Utils.HookHelper
                         mouseHookStruct.pt.y,
                         mouseDelta);
                     //raise it
-                    OnMouseActivity(this, e);
+                    OnMouseRClick(this, e);
                 }
             }
             //call next hook
-            return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
+            //return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
+            return 0;
         }
-
-        /// <summary>
-        /// A callback function which will be called every time a keyboard activity detected.
-        /// </summary>
-        /// <param name="nCode">
-        /// [in] Specifies whether the hook procedure must process the message. 
-        /// If nCode is HC_ACTION, the hook procedure must process the message. 
-        /// If nCode is less than zero, the hook procedure must pass the message to the 
-        /// CallNextHookEx function without further processing and must return the 
-        /// value returned by CallNextHookEx.
-        /// </param>
-        /// <param name="wParam">
-        /// [in] Specifies whether the message was sent by the current thread. 
-        /// If the message was sent by the current thread, it is nonzero; otherwise, it is zero. 
-        /// </param>
-        /// <param name="lParam">
-        /// [in] Pointer to a CWPSTRUCT structure that contains details about the message. 
-        /// </param>
-        /// <returns>
-        /// If nCode is less than zero, the hook procedure must return the value returned by CallNextHookEx. 
-        /// If nCode is greater than or equal to zero, it is highly recommended that you call CallNextHookEx 
-        /// and return the value it returns; otherwise, other applications that have installed WH_CALLWNDPROC 
-        /// hooks will not receive hook notifications and may behave incorrectly as a result. If the hook 
-        /// procedure does not call CallNextHookEx, the return value should be zero. 
-        /// </returns>
-        private int KeyboardHookProc(int nCode, Int32 wParam, IntPtr lParam)
+        private int MouseMiddleClickHookProc(int nCode, int wParam, IntPtr lParam)
         {
-            //indicates if any of underlaing events set e.Handled flag
-            bool handled = false;
-            //it was ok and someone listens to events
-            if ((nCode >= 0) && (KeyDown != null || KeyUp != null || KeyPress != null))
+            // if ok and someone listens to our events
+            if ((nCode >= 0) && (OnMouseMidClick != null))
             {
-                //read structure KeyboardHookStruct at lParam
-                var MyKeyboardHookStruct = (KeyboardHookStruct)Marshal.PtrToStructure(lParam, typeof(KeyboardHookStruct));
-                //raise KeyDown
-                
-                if (KeyDown != null && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN))
+                //Marshall the data from callback.
+                var mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
+                //detect button clicked
+                if (wParam == WM_MBUTTONUP)
                 {
-                    Keys keyData = (Keys)MyKeyboardHookStruct.vkCode;
-                    KeyEventArgs e = new KeyEventArgs(keyData);
-                    KeyDown(this, e);
-                    handled = handled || e.Handled;
+                    var button = MouseButtons.Middle;
+                    short mouseDelta = 0;
+                    int clickCount = 1;
+                    //generate event 
+                    var e = new MouseEventArgs(
+                        button,
+                        clickCount,
+                        mouseHookStruct.pt.x,
+                        mouseHookStruct.pt.y,
+                        mouseDelta);
+                    //raise it
+                    OnMouseMidClick(this, e);
                 }
-
-                // raise KeyPress
-                if (KeyPress != null && wParam == WM_KEYDOWN)
-                {
-                    bool isDownShift = ((GetKeyState(VK_SHIFT) & 0x80) == 0x80 ? true : false);
-                    bool isDownCapslock = (GetKeyState(VK_CAPITAL) != 0 ? true : false);
-
-                    byte[] keyState = new byte[256];
-                    GetKeyboardState(keyState);
-                    byte[] inBuffer = new byte[2];
-                    if (ToAscii(MyKeyboardHookStruct.vkCode,
-                              MyKeyboardHookStruct.scanCode,
-                              keyState,
-                              inBuffer,
-                              MyKeyboardHookStruct.flags) == 1)
-                    {
-                        char key = (char)inBuffer[0];
-                        if ((isDownCapslock ^ isDownShift) && Char.IsLetter(key))
-                            key = Char.ToUpper(key);
-                        KeyPressEventArgs e = new KeyPressEventArgs(key);
-                        KeyPress(this, e);
-                        handled = handled || e.Handled;
-                    }
-                }
-
-                // raise KeyUp
-                if (KeyUp != null && (wParam == WM_KEYUP || wParam == WM_SYSKEYUP))
-                {
-                    Keys keyData = (Keys)MyKeyboardHookStruct.vkCode;
-                    KeyEventArgs e = new KeyEventArgs(keyData);
-                    KeyUp(this, e);
-                    handled = handled || e.Handled;
-                }
-
             }
-
-            //if event handled in application do not handoff to other listeners
-            if (handled)
-                return 1;
-            else
-                return CallNextHookEx(hKeyboardHook, nCode, wParam, lParam);
+            //call next hook
+            //return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
+            return 0;
+        }
+        private int MouseWheelHookProc(int nCode, int wParam, IntPtr lParam)
+        {
+            // if ok and someone listens to our events
+            if ((nCode >= 0) && (OnMouseMove != null))
+            {
+                //Marshall the data from callback.
+                var mouseHookStruct = (MouseLLHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseLLHookStruct));
+                //detect button clicked
+                var mouseDelta = 0;
+                int clickCount = 1;
+                var button = MouseButtons.None;
+                switch (wParam)
+                {
+                    case WM_LBUTTONUP:
+                        button = MouseButtons.Left;
+                        mouseDelta = 0;
+                        clickCount = 1;
+                        //generate event 
+                        var e = new MouseEventArgs(
+                            button,
+                            clickCount,
+                            mouseHookStruct.pt.x,
+                            mouseHookStruct.pt.y,
+                            mouseDelta);
+                        //raise it
+                        if (OnMouseLClick != null)
+                            OnMouseLClick(this, e);
+                        break;
+                    case WM_RBUTTONUP:
+                        break;
+                    case WM_MBUTTONUP:
+                        break;
+                    default:
+                        mouseDelta = (short)((mouseHookStruct.mouseData >> 16) & 0xffff);
+                        //generate event 
+                        e = new MouseEventArgs(
+                            button,
+                            clickCount,
+                            mouseHookStruct.pt.x,
+                            mouseHookStruct.pt.y,
+                            mouseDelta);
+                        //raise it
+                        OnMouseMove(this, e);
+                        break;
+                }
+            }
+            //call next hook
+            return 0;
         }
     }
 }
