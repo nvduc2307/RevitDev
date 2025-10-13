@@ -614,6 +614,19 @@ namespace RevitDevelop.Utils.WindowEvent.EventMouses
                             OnMouseLClick(this, e);
                         break;
                     case WM_RBUTTONUP:
+                        button = MouseButtons.Right;
+                        mouseDelta = 0;
+                        clickCount = 1;
+                        //generate event 
+                        e = new MouseEventArgs(
+                            button,
+                            clickCount,
+                            mouseHookStruct.pt.x,
+                            mouseHookStruct.pt.y,
+                            mouseDelta);
+                        //raise it
+                        if (OnMouseRClick != null)
+                            OnMouseRClick(this, e);
                         break;
                     case WM_MBUTTONUP:
                         break;

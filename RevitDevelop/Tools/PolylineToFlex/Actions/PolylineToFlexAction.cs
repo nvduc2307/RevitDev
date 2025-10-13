@@ -65,14 +65,7 @@ namespace RevitDevelop.Tools.PolylineToFlex.Actions
                 .Select(x=>x.FirstOrDefault())
                 .ToList();
 
-            using (var ts = new Transaction(_document, "new transaction"))
-            {
-                ts.SkipAllWarnings();
-                ts.Start();
-                var flexDuct = _document.CreateFlexDuct(_flexDuctType, _systemType, _level, psGr);
-                flexDuct.get_Parameter(BuiltInParameter.RBS_CURVE_DIAMETER_PARAM).Set(_flexDuctDiamterMm.MmToFoot());
-                ts.Commit();
-            }
+            
 
         }
 
