@@ -5,7 +5,8 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
     public partial class ConvertDuctToFlexAction : IConvertDuctToFlexAction
     {
         public List<Element> GetElementsByFittingToDistanceExactly(
-            FamilyInstance fittingStart, 
+            FamilyInstance fittingStart,
+            Duct ductDirection,
             double lengthMm, 
             out Duct ductLast, 
             out double lengthConvertMm)

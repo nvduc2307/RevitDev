@@ -1,17 +1,7 @@
 ﻿using Autodesk.Revit.Attributes;
-using Autodesk.Revit.DB.Mechanical;
-using Microsoft.Extensions.DependencyInjection;
 using Nice3point.Revit.Toolkit.External;
 using RevitDevelop.Tools.ConvertDuctToFlex.action;
 using RevitDevelop.Utils.Messages;
-using RevitDevelop.Utils.RevCategories;
-using RevitDevelop.Utils.RevDuct;
-using RevitDevelop.Utils.SelectFilters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RevitDevelop.Tools.ConvertDuctToFlex
 {

@@ -6,7 +6,7 @@ using RevitDevelop.Utils.SelectFilters;
 
 namespace RevitDevelop.Tools.ConvertDuctToFlex.action
 {
-    public partial class ConvertDuctToFlexAction : IConvertDuctToFlexAction
+    public partial class ConvertDuctToFlexAction
     {
         private bool _filterElementEnd(Element element)
         {
@@ -42,6 +42,13 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
                 return result;
             });
             return connectorValid;
+        }
+        private bool _filterRoundDuct(Element element)
+        {
+            //validate type
+            if (!(element is Duct duct)) return false;
+            if (duct.DuctType.Shape != ConnectorProfileType.Round) return false;
+            return true;
         }
     }
 }

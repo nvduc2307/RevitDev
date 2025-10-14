@@ -1,4 +1,5 @@
-﻿using RevitDevelop.Utils.SelectFilters;
+﻿using RevitDevelop.Utils.Messages;
+using RevitDevelop.Utils.SelectFilters;
 
 namespace RevitDevelop.Tools.ConvertDuctToFlex.action
 {
@@ -8,8 +9,19 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
         {
             var fitting1 = _uiDocument.Selection.PickElement(_document, null, _filterElementEnd) as FamilyInstance;
             var fitting2 = _uiDocument.Selection.PickElement(_document, null, _filterElementEnd) as FamilyInstance;
-            var eles = GetElementsByFittingToFitting(fitting1, fitting2);
-            _uiDocument.Selection.SetElementIds(eles.Select(x=>x.Id).ToList());
+            var elements = GetElementsByFittingToFitting(fitting1, fitting2);
+            _validateElement(elements, out List<Element> elementsInvalid);
+            var elementsTarget = new List<Element>();
+            if (elementsInvalid.Any())
+            {
+                var elementsValids = elementsInvalid
+                    .Select(x => GetElementsByFittingToFitting(fitting1, x as FamilyInstance))
+                    .OrderBy(x => x.Count);
+                elementsTarget = elementsValids.FirstOrDefault();
+            }
+            else
+                elementsTarget = elements;
+            _uiDocument.Selection.SetElementIds(elementsTarget.Select(x => x.Id).ToList());
         }
     }
 }
