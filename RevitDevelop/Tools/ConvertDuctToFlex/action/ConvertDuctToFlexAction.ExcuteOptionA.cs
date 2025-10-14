@@ -1,5 +1,10 @@
-﻿using RevitDevelop.Utils.Messages;
+﻿using Autodesk.Revit.DB.Mechanical;
+using RevitDevelop.Utils.FilterElementsInRevit;
+using RevitDevelop.Utils.Messages;
+using RevitDevelop.Utils.RevDuct;
 using RevitDevelop.Utils.SelectFilters;
+using RevitDevelop.Utils.SkipWarning;
+using RevitDevelop.Utils.Solids;
 
 namespace RevitDevelop.Tools.ConvertDuctToFlex.action
 {
@@ -7,6 +12,8 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
     {
         public void ExcuteOptionA()
         {
+            var mechanicalSystemTypes = _document.GetElementsFromClass<MechanicalSystemType>(true);
+            var flexDuctTypes = _document.GetElementsFromClass<FlexDuctType>(true);
             var fitting1 = _uiDocument.Selection.PickElement(_document, null, _filterElementEnd) as FamilyInstance;
             var fitting2 = _uiDocument.Selection.PickElement(_document, null, _filterElementEnd) as FamilyInstance;
             var elements = GetElementsByFittingToFitting(fitting1, fitting2);
@@ -21,7 +28,35 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
             }
             else
                 elementsTarget = elements;
-            _uiDocument.Selection.SetElementIds(elementsTarget.Select(x => x.Id).ToList());
+            var ductTarget = elementsTarget.FirstOrDefault(x=> x is Duct);
+            if(ductTarget != null)
+            {
+
+                using (var ts = new Transaction(_document, "new transaction"))
+                {
+                    ts.SkipAllWarnings();
+                    ts.Start();
+                    var connectors = elementsTarget.SortConnector();
+                    var flexPoints = connectors.ConvertConnectorToPoint(2, 50);
+                    var flex = (ductTarget as Duct).DuctToFlexDuct(
+                        flexPoints, 
+                        mechanicalSystemTypes.FirstOrDefault(),
+                        flexDuctTypes);
+                    var solids = flex.GetSolids();
+                    if (!solids.Any())
+                    {
+                        _document.Delete(flex.Id);
+                        flexPoints.Reverse();
+                        flex = (ductTarget as Duct).DuctToFlexDuct(
+                        flexPoints,
+                        mechanicalSystemTypes.FirstOrDefault(),
+                        flexDuctTypes);
+                    }
+                    _document.Delete(elementsTarget.Select(x=>x.Id).ToList());
+                    ts.Commit();
+                }
+
+            }
         }
     }
 }

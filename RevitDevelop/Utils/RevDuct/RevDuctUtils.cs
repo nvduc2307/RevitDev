@@ -16,7 +16,50 @@ namespace RevitDevelop.Utils.RevDuct
 {
     public static class RevDuctUtils
     {
-        public static List<XYZ> ConvertConnectorToPoint(this List<Connector> connectors, int numDot, double spacingMm)
+        public static FlexDuct DuctToFlexDuct(
+            this Duct duct,
+            List<XYZ> ps,
+            MechanicalSystemType systemType,
+            List<FlexDuctType> flexDucTypes)
+        {
+            if (!flexDucTypes.Any()) return null;
+            if (systemType == null) return null;
+            var extent = 50.0.MmToFoot();
+            var document = duct.Document;
+            var location = duct.Location as LocationCurve;
+            if (location == null) return null;
+            var ductType = duct.DuctType.Shape;
+            var flexDucType = flexDucTypes.FirstOrDefault(x => x.Shape == ductType);
+            if (flexDucType == null) return null;
+            var level = duct.LevelId;
+            var qPs = ps.Count;
+            var pStart = ps.FirstOrDefault();
+            var pEnd = ps.LastOrDefault();
+            var vtStart = (ps[1] - ps[0]).Normalize();
+            var vtEnd = (ps[qPs - 1] - ps[qPs - 2]).Normalize();
+            var fd = FlexDuct.Create(document, systemType.Id, flexDucType.Id, level, ps);
+            fd.StartTangent = vtStart * extent * 2;
+            fd.EndTangent = vtEnd * extent * 2;
+            switch (ductType)
+            {
+                case ConnectorProfileType.Invalid:
+                    break;
+                case ConnectorProfileType.Round:
+                    fd.get_Parameter(BuiltInParameter.RBS_CURVE_DIAMETER_PARAM).Set(duct.Diameter);
+                    break;
+                case ConnectorProfileType.Rectangular:
+                    fd.get_Parameter(BuiltInParameter.RBS_CURVE_HEIGHT_PARAM).Set(duct.Height);
+                    fd.get_Parameter(BuiltInParameter.RBS_CURVE_WIDTH_PARAM).Set(duct.Width);
+                    break;
+                case ConnectorProfileType.Oval:
+                    break;
+            }
+            return fd;
+        }
+        public static List<XYZ> ConvertConnectorToPoint(
+            this List<Connector> connectors, 
+            int numDot, 
+            double spacingMm)
         {
             var result = new List<XYZ>();
             if (connectors.Count % 2 != 0)
@@ -37,11 +80,11 @@ namespace RevitDevelop.Utils.RevDuct
                     {
                         for (int j = 0; j < numDot; j++)
                         {
-                            result.Add(connectors[i].Origin + (j + 1) * vt * spacingMm.FootToMm());
+                            result.Add(connectors[i].Origin + (j + 1) * vt * spacingMm.MmToFoot());
                         }
                         for (int j = numDot - 1; j >= 0; j--)
                         {
-                            result.Add(connectors[i + 1].Origin - (j + 1) * vt * spacingMm.FootToMm());
+                            result.Add(connectors[i + 1].Origin - (j + 1) * vt * spacingMm.MmToFoot());
                         }
                     }
                 }
