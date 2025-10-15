@@ -150,48 +150,24 @@ namespace RevitDevelop.Utils.RevDuct
             } while (isDo);
             return results;
         }
-        public static List<Element> SortElement(this List<Element> elements)
+        public static List<Element> SortElement(this List<Element> elements, Element elementstart)
         {
-            var connectors =
-                elements.Select(x => x.GetConnectors())
-                .Aggregate((a, b) => a.Concat(b).ToList())
+            var connectorsCheck = elementstart.GetConnectors();
+            var connectors = elements.SortConnector();
+            var results = connectors
+                .Select(x => x.Owner)
+                .GroupBy(x => x.Id.ToString())
+                .Select(x => x.FirstOrDefault())
                 .ToList();
-            var qConnector = connectors.Count;
-            Connector connectorStart = null;
-            for (int i = 0; i < qConnector; i++)
+            if (connectorsCheck.Any())
             {
-                var connect = connectors.Where(x => x.Owner.Id.ToString() != connectors[i].Owner.Id.ToString())
-                    .FirstOrDefault(x => x.Origin.IsSame(connectors[i].Origin));
-                if (connect == null)
-                {
-                    connectorStart = connectors[i];
-                    break;
-                }
+                var connectorStart = connectors.FirstOrDefault();
+                var connectorEnd = connectors.LastOrDefault();
+                var distanceStart = connectorsCheck.Min(x => x.Origin.DistanceTo(connectorStart.Origin));
+                var distanceEnd = connectorsCheck.Min(x => x.Origin.DistanceTo(connectorEnd.Origin));
+                if (distanceEnd < distanceStart)
+                    results.Reverse();
             }
-            if (connectorStart == null)
-                return new List<Element>();
-            var results = new List<Element>();
-            var elementStart = connectorStart.Owner;
-            results.Add(elementStart);
-            var isDo = true;
-            do
-            {
-                try
-                {
-                    var connectorStarts = elementStart.GetConnectors();
-                    var elementNext = elements
-                        .Where(x => !results.Any(y => y.Id.ToString() == x.Id.ToString()))
-                        .FirstOrDefault(x => x.GetConnectors().Any(y => connectorStarts.Any(z => z.Origin.IsSame(y.Origin))));
-                    if (elementNext == null)
-                        throw new Exception();
-                    results.Add(elementNext);
-                    elementStart = elementNext;
-                }
-                catch (Exception)
-                {
-                    isDo = false;
-                }
-            } while (isDo);
             return results;
         }
         public static List<Element> GetElementsBySolid(
@@ -295,8 +271,11 @@ namespace RevitDevelop.Utils.RevDuct
         public static List<Connector> GetConnectors(this Element element)
         {
             var result = new List<Connector>();
+            if (element == null) return result;
             var cate = element.Category.ToBuiltinCategory();
-            if (cate == BuiltInCategory.OST_DuctCurves)
+            if (cate == BuiltInCategory.OST_FlexDuctCurves)
+                result = GetConnectorsByFlexDuct(element as FlexDuct);
+            else if (cate == BuiltInCategory.OST_DuctCurves)
                 result = GetConnectorsByDuct(element as Duct);
             else if (cate == BuiltInCategory.OST_DuctFitting)
                 result = GetConnectorsByDuctFitting(element as FamilyInstance);
@@ -304,6 +283,17 @@ namespace RevitDevelop.Utils.RevDuct
                 result = GetConnectorsByDuctAccessories(element as FamilyInstance);
             else if (cate == BuiltInCategory.OST_MechanicalEquipment)
                 result = GetConnectorsByEquipment(element as FamilyInstance);
+            return result;
+        }
+        public static List<Connector> GetConnectorsByFlexDuct(this FlexDuct flexDuct)
+        {
+            var result = new List<Connector>();
+            var connectorManager = flexDuct.ConnectorManager.Connectors;
+            foreach (var item in flexDuct.ConnectorManager.Connectors)
+            {
+                if (item is Connector connector)
+                    result.Add(connector);
+            }
             return result;
         }
         public static List<Connector> GetConnectorsByDuct(this Duct duct)
@@ -357,6 +347,94 @@ namespace RevitDevelop.Utils.RevDuct
                     result.Add(connector);
             }
             return result;
+        }
+        public static List<XYZ> GetMepGeometry(this Element element, out XYZ midPoint)
+        {
+            midPoint = null;
+            var result = new List<XYZ>();
+            var connectors = element.GetConnectors();
+            if (connectors.Count != 2)
+                return result;
+            var cate = element.Category.BuiltInCategory;
+            if (cate == BuiltInCategory.OST_DuctCurves)
+            {
+                var ps = connectors.Select(x => x.Origin).ToList();
+                midPoint = ps.CenterPoint();
+                return ps;
+            }
+            if (cate == BuiltInCategory.OST_DuctAccessory)
+            {
+                var ps = connectors.Select(x => x.Origin).ToList();
+                midPoint = ps.CenterPoint();
+                return ps;
+            }
+            if (cate == BuiltInCategory.OST_DuctFitting)
+            {
+                if (!(element is FamilyInstance fa))
+                    return result;
+                var mep = fa.MEPModel;
+                if (mep == null) return result;
+                if (!(mep is MechanicalFitting mechanical))
+                    return result;
+                if (mechanical.PartType == PartType.Elbow)
+                {
+                    var con1 = connectors.FirstOrDefault();
+                    var con2 = connectors.LastOrDefault();
+                    var f = new FaceCustom(con1.CoordinateSystem.BasisX, con1.Origin);
+                    var pInterSect = con2.Origin.RayPointToFace(con2.CoordinateSystem.BasisZ, f);
+                    if (pInterSect == null)
+                        return result;
+                    result.Add(con1.Origin);
+                    result.Add(pInterSect);
+                    result.Add(con2.Origin);
+                    midPoint = pInterSect;
+                }
+                else if (mechanical.PartType == PartType.Offset)
+                {
+                    var ps = connectors.Select(x => x.Origin).ToList();
+                    midPoint = ps.CenterPoint();
+                    return ps;
+                }
+            }
+            return result;
+        }
+        public static void ConnectAction(this FlexDuct flexDuct)
+        {
+            var document = flexDuct.Document;
+            var flexConnectors = GetConnectors(flexDuct);
+            foreach (var flexConnector in flexConnectors)
+            {
+                try
+                {
+                    if (flexConnector.IsConnected)
+                        continue;
+                    var extent = (40.0).MmToFoot();
+                    var pMin = flexConnector.Origin
+                            - XYZ.BasisX * extent / 2
+                            - XYZ.BasisY * extent / 2
+                            - XYZ.BasisZ * extent / 2;
+                    var pMax = flexConnector.Origin
+                        + XYZ.BasisX * extent / 2
+                        + XYZ.BasisY * extent / 2
+                        + XYZ.BasisZ * extent / 2;
+                    var outLine = new Outline(pMin, pMax);
+                    var bbFilter = new BoundingBoxIntersectsFilter(outLine);
+                    var elementConnect = new FilteredElementCollector(document)
+                    .WhereElementIsNotElementType()
+                    .WherePasses(bbFilter)
+                    .FirstOrDefault(x => x.GetConnectors().Any(y => y.Origin.IsSame(flexConnector.Origin)));
+                    if (elementConnect == null)
+                        continue;
+                    var connector = elementConnect
+                        .GetConnectors()
+                        .FirstOrDefault(x => x.Origin.IsSame(flexConnector.Origin));
+                    if (connector == null) continue;
+                    flexConnector.ConnectTo(connector);
+                }
+                catch (System.Exception)
+                {
+                }
+            }
         }
     }
 }

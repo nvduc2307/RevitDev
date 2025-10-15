@@ -1,6 +1,5 @@
 ﻿using Autodesk.Revit.DB.Mechanical;
 using RevitDevelop.Utils.FilterElementsInRevit;
-using RevitDevelop.Utils.Messages;
 using RevitDevelop.Utils.RevDuct;
 using RevitDevelop.Utils.SelectFilters;
 using RevitDevelop.Utils.SkipWarning;
@@ -28,10 +27,9 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
             }
             else
                 elementsTarget = elements;
-            var ductTarget = elementsTarget.FirstOrDefault(x=> x is Duct);
-            if(ductTarget != null)
+            var ductTarget = elementsTarget.FirstOrDefault(x => x is Duct);
+            if (ductTarget != null)
             {
-
                 using (var ts = new Transaction(_document, "new transaction"))
                 {
                     ts.SkipAllWarnings();
@@ -39,7 +37,7 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
                     var connectors = elementsTarget.SortConnector();
                     var flexPoints = connectors.ConvertConnectorToPoint(2, 50);
                     var flex = (ductTarget as Duct).DuctToFlexDuct(
-                        flexPoints, 
+                        flexPoints,
                         mechanicalSystemTypes.FirstOrDefault(),
                         flexDuctTypes);
                     var solids = flex.GetSolids();
@@ -52,7 +50,8 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
                         mechanicalSystemTypes.FirstOrDefault(),
                         flexDuctTypes);
                     }
-                    _document.Delete(elementsTarget.Select(x=>x.Id).ToList());
+                    flex.ConnectAction();
+                    _document.Delete(elementsTarget.Select(x => x.Id).ToList());
                     ts.Commit();
                 }
 

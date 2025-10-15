@@ -1,5 +1,11 @@
 ﻿using Autodesk.Revit.DB.Mechanical;
+using RevitDevelop.Utils.Compares;
+using RevitDevelop.Utils.FilterElementsInRevit;
+using RevitDevelop.Utils.NumberUtils;
+using RevitDevelop.Utils.RevDuct;
 using RevitDevelop.Utils.SelectFilters;
+using RevitDevelop.Utils.SkipWarning;
+using RevitDevelop.Utils.Solids;
 
 namespace RevitDevelop.Tools.ConvertDuctToFlex.action
 {
@@ -7,9 +13,11 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
     {
         public void ExcuteOptionC()
         {
+            var mechanicalSystemTypes = _document.GetElementsFromClass<MechanicalSystemType>(true);
+            var flexDuctTypes = _document.GetElementsFromClass<FlexDuctType>(true);
             var fitting1 = _uiDocument.Selection.PickElement(_document, null, _filterElementEnd) as FamilyInstance;
             var duct = _uiDocument.Selection.PickElement(_document, null, _filterRoundDuct) as Duct;
-            var elements = GetElementsByFittingToDistance(fitting1, duct, 0);
+            var elements = duct.GetElementsByConnector(null, fitting1);
             _validateElement(elements, out List<Element> elementsInvalid);
             var elementsTarget = new List<Element>();
             if (elementsInvalid.Any())
@@ -21,7 +29,80 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
             }
             else
                 elementsTarget = elements;
-            _uiDocument.Selection.SetElementIds(elementsTarget.Select(x => x.Id).ToList());
+            elementsTarget = elementsTarget
+                .SortElement(fitting1)
+                .ToList();
+            var elementsConvert = GetElementsByFittingToDistance(
+                fitting1,
+                elementsTarget,
+                3000,
+                out Duct ductlast,
+                out XYZ ductLastPointStart,
+                out XYZ ductLastPointIntersect,
+                out XYZ ductLastPointEnd);
+            var ductTarget = elementsConvert.FirstOrDefault(x => x is Duct);
+            if (ductTarget != null)
+            {
+                using (var ts = new Transaction(_document, "new transaction"))
+                {
+                    ts.SkipAllWarnings();
+                    ts.Start();
+                    if (!elementsConvert.Any()) return;
+                    if (!(elementsConvert.FirstOrDefault() is Duct))
+                        elementsConvert.Remove(elementsConvert.FirstOrDefault());
+                    if (!elementsConvert.Any()) return;
+                    if (ductlast == null)
+                    {
+                        if (!(elementsConvert.LastOrDefault() is Duct))
+                            elementsConvert.Remove(elementsConvert.LastOrDefault());
+                        if (!elementsConvert.Any()) return;
+                    }
+                    var connectors = elementsConvert.SortConnector();
+                    var flexPoints = connectors
+                        .ConvertConnectorToPoint(2, _spacingMm);
+                    if (ductlast != null)
+                    {
+                        var vt = (ductLastPointIntersect - ductLastPointStart).Normalize();
+                        var distanceMm = ductLastPointIntersect.DistanceTo(ductLastPointStart).FootToMm();
+                        if (distanceMm > _spacingMm * 5)
+                        {
+                            flexPoints.Add(ductLastPointStart);
+                            flexPoints.Add(ductLastPointStart + vt * _spacingMm.MmToFoot());
+                            flexPoints.Add(ductLastPointStart + vt * 2 * _spacingMm.MmToFoot());
+                            flexPoints.Add(ductLastPointIntersect - vt * 2 *_spacingMm.MmToFoot());
+                            flexPoints.Add(ductLastPointIntersect - vt * _spacingMm.MmToFoot());
+                            flexPoints.Add(ductLastPointIntersect);
+                        }
+                        else
+                        {
+                            flexPoints.Add(ductLastPointStart);
+                            flexPoints.Add(ductLastPointIntersect);
+                        }
+                        flexPoints = flexPoints
+                            .Distinct(new ComparePoint())
+                            .ToList();
+                        var cl = ductlast.Location as LocationCurve;
+                        cl.Curve = Line.CreateBound(ductLastPointIntersect, ductLastPointEnd);
+                    }
+                    var flex = (ductTarget as Duct).DuctToFlexDuct(
+                        flexPoints,
+                        mechanicalSystemTypes.FirstOrDefault(),
+                        flexDuctTypes);
+                    var solids = flex.GetSolids();
+                    if (!solids.Any())
+                    {
+                        _document.Delete(flex.Id);
+                        flexPoints.Reverse();
+                        flex = (ductTarget as Duct).DuctToFlexDuct(
+                        flexPoints,
+                        mechanicalSystemTypes.FirstOrDefault(),
+                        flexDuctTypes);
+                    }
+                    flex.ConnectAction();
+                    _document.Delete(elementsConvert.Select(x => x.Id).ToList());
+                    ts.Commit();
+                }
+            }
         }
     }
 }

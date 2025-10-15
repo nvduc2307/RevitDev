@@ -7,6 +7,7 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
     {
         private UIDocument _uiDocument;
         private Document _document;
+        private double _spacingMm = 50;
         public ConvertDuctToFlexAction(UIDocument uiDocument)
         {
             _uiDocument = uiDocument;

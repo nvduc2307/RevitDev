@@ -9,17 +9,15 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex.action
             FamilyInstance fittingStart, 
             FamilyInstance fittingEnd);
         //elements of option B
-        public List<Element> GetElementsByFittingToDistance(
-            FamilyInstance fittingStart, 
-            Duct ductDirection, 
-            double lengthMm);
         //elements of option C
-        public List<Element> GetElementsByFittingToDistanceExactly(
+        public List<Element> GetElementsByFittingToDistance(
             FamilyInstance fittingStart,
-            Duct ductDirection,
+            List<Element> elementAlreadySort,
             double lengthMm,
             out Duct ductLast,
-            out double lengthConvertMm);
+            out XYZ ductLastPointStart,
+            out XYZ ductLastPointIntersect,
+            out XYZ ductLastPointEnd);
         public void ExcuteOptionA();
         public void ExcuteOptionB();
         public void ExcuteOptionC();

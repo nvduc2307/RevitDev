@@ -16,7 +16,7 @@ namespace RevitDevelop.Tools.ConvertDuctToFlex
                 try
                 {
                     var action = new ConvertDuctToFlexAction(UiDocument);
-                    action.ExcuteOptionA();
+                    action.ExcuteOptionC();
                     tsg.Assimilate();
                 }
                 catch (Autodesk.Revit.Exceptions.OperationCanceledException) { }
