@@ -2,21 +2,19 @@
 
 namespace RevitDevelop.Updaters
 {
-    public class WallCreationUpdater : IUpdater
+    public class WallEditByUpdater : IUpdater
     {
         private readonly AddInId _addInId;
         private readonly UpdaterId _updaterId;
-        public WallCreationUpdater(AddInId id)
+        public WallEditByUpdater(AddInId id)
         {
             _addInId = id;
-            _updaterId = new UpdaterId(_addInId, new Guid("fe1312b3-a765-4ccd-bbab-4f1aed5b4a61"));
+            _updaterId = new UpdaterId(_addInId, new Guid("eb5c2750-f5f2-41d2-b0c6-1d3eb662d964"));
         }
-
         public void Execute(UpdaterData data)
         {
-            var doc = data.GetDocument();
-            ICollection<ElementId> addedElementIds = data.GetAddedElementIds();
-
+            Document doc = data.GetDocument();
+            ICollection<ElementId> addedElementIds = data.GetModifiedElementIds();
             foreach (ElementId id in addedElementIds)
             {
                 Element element = doc.GetElement(id);
@@ -26,22 +24,21 @@ namespace RevitDevelop.Updaters
                 }
             }
         }
-
-        public string GetAdditionalInformation() => "Wall creation monitor.";
+        public string GetAdditionalInformation() => "WallEditByUpdater";
         public ChangePriority GetChangePriority() => ChangePriority.InteriorWalls;
         public UpdaterId GetUpdaterId() => _updaterId;
-        public string GetUpdaterName() => "Wall Creation Updater";
+        public string GetUpdaterName() => "WallEditByUpdater";
         public static void Init(UIControlledApplication application)
         {
-            var updater = new WallCreationUpdater(application.ActiveAddInId);
+            var updater = new WallEditByUpdater(application.ActiveAddInId);
             UpdaterRegistry.RegisterUpdater(updater);
             ElementClassFilter wallFilter = new ElementClassFilter(typeof(Wall));
             UpdaterRegistry.AddTrigger(updater.GetUpdaterId(), wallFilter,
-                                   Element.GetChangeTypeAny());
+                                   Element.GetChangeTypeParameter(new ElementId(BuiltInParameter.EDITED_BY)));
         }
         public static void Dispose(UIControlledApplication application)
         {
-            var updater = new WallCreationUpdater(application.ActiveAddInId);
+            var updater = new WallEditByUpdater(application.ActiveAddInId);
             UpdaterRegistry.UnregisterUpdater(updater.GetUpdaterId());
         }
     }

@@ -25,12 +25,12 @@ namespace RevitDevelop
             _initPannelRebar();
             _initPannelDrawing();
             _initPannelSchedule();
-            //_registerUpdater();
+            _registerUpdater();
         }
 
         public override void OnShutdown()
         {
-            //_disposeUpdater();
+            _disposeUpdater();
         }
         private void _initPannelGeneral()
         {
@@ -54,6 +54,9 @@ namespace RevitDevelop
             PANEL_REBAR.AddPushButton<Tools.SettingRebars.SettingDiameters.SettingDiametersCmd>(Properties.Langs.ApplicationLangs.CMD_REBAR_SETTING_DIAMETER)
                 .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
                 .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
+            PANEL_REBAR.AddPushButton<Test.TestCmd>("Edit By")
+                .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
+                .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
         }
         private void _initPannelDrawing()
         {
@@ -66,13 +69,17 @@ namespace RevitDevelop
 
         private void _registerUpdater()
         {
-            RebarModifyUpdater.Init(Application);
-            LapElementDeleteUpdater.Init(Application);
+            WallEditByUpdater.Init(Application);
+            //RebarModifyUpdater.Init(Application);
+            //LapElementDeleteUpdater.Init(Application);
         }
+
         private void _disposeUpdater()
         {
-            RebarModifyUpdater.Dispose(Application);
-            LapElementDeleteUpdater.Dispose(Application);
+            WallEditByUpdater.Init(Application);
+            //WallEditByUpdater.Dispose(Application);
+            //RebarModifyUpdater.Dispose(Application);
+            //LapElementDeleteUpdater.Dispose(Application);
         }
 
     }
