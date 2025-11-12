@@ -69,14 +69,14 @@ namespace RevitDevelop
 
         private void _registerUpdater()
         {
-            WallEditByUpdater.Init(Application);
+            //WallEditByUpdater.Init(Application);
             //RebarModifyUpdater.Init(Application);
             //LapElementDeleteUpdater.Init(Application);
         }
 
         private void _disposeUpdater()
         {
-            WallEditByUpdater.Init(Application);
+            //WallEditByUpdater.Init(Application);
             //WallEditByUpdater.Dispose(Application);
             //RebarModifyUpdater.Dispose(Application);
             //LapElementDeleteUpdater.Dispose(Application);

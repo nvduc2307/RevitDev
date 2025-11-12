@@ -1,0 +1,55 @@
+﻿<Window x:Class="RevitDevelop.Tools.TestEdittorStatus.Views.TestEdittorStatusView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RevitDevelop.Tools.TestEdittorStatus.Views"
+        mc:Ignorable="d"
+        Title="TestEdittorStatusView" 
+        SizeToContent="Height"
+        MinHeight="100" 
+        Width="500">
+    <StackPanel Margin="15">
+        <DataGrid 
+            ItemsSource="{Binding Objects}"
+            ColumnWidth="*"
+            AutoGenerateColumns="False"
+            Height="300">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn 
+                    Header="Index">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Text="{Binding Index}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn 
+                    Header="IdObj">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Text="{Binding Id}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn 
+                    Header="Editor">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                Text="{Binding Editor}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Window>

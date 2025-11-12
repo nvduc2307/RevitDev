@@ -1,0 +1,40 @@
+﻿using Autodesk.Revit.Attributes;
+using Microsoft.Extensions.DependencyInjection;
+using Nice3point.Revit.Toolkit.External;
+using RevitDevelop.Tools.TestEdittorStatus.Actions;
+using RevitDevelop.Tools.TestEdittorStatus.ViewModels;
+using RevitDevelop.Utils.Messages;
+
+namespace RevitDevelop.Tools.TestEdittorStatus
+{
+    [Transaction(TransactionMode.Manual)]
+    public class TestEdittorStatusCommand : ExternalCommand
+    {
+        public override void Execute()
+        {
+
+            using (var tsg = new TransactionGroup(Document, "new Command"))
+            {
+                tsg.Start();
+                try
+                {
+                    var service = new ServiceCollection();
+                    service.AddSingleton<TestEdittorStatusCommand>();
+                    service.AddSingleton<TestEdittorStatusAction>();
+                    service.AddSingleton<TestEdittorStatuViewModel>();
+                    var provider = service.BuildServiceProvider();
+                    var vm = provider.GetService<TestEdittorStatuViewModel>();
+                    vm.MainView.Show();
+                    tsg.Assimilate();
+                }
+                catch (Autodesk.Revit.Exceptions.OperationCanceledException) { }
+                catch (Exception ex)
+                {
+                    IO.ShowWarning(ex.Message);
+                    tsg.RollBack();
+                }
+            }
+
+        }
+    }
+}
