@@ -1,6 +1,8 @@
 ﻿using Autodesk.Revit.UI;
+using Firebase.Database;
 using Nice3point.Revit.Toolkit.External;
 using RevitDevelop.Updaters;
+using RevitDevelop.Utils.FireBaseListeners;
 using RevitDevelop.Utils.Messages;
 
 namespace RevitDevelop
@@ -11,6 +13,8 @@ namespace RevitDevelop
     [UsedImplicitly]
     public class Application : ExternalApplication
     {
+        private string firebaseUrl = "https://revitsyncnotifier-default-rtdb.asia-southeast1.firebasedatabase.app/";
+        public static FirebaseClient Client;
         public RibbonPanel PANEL_GENERAL { get; private set; }
         public RibbonPanel PANEL_CONCRETE { get; private set; }
         public RibbonPanel PANEL_STEEL { get; private set; }
@@ -19,6 +23,10 @@ namespace RevitDevelop
         public RibbonPanel PANEL_SCHEDULE { get; private set; }
         public override void OnStartup()
         {
+            Client = new FirebaseClient(firebaseUrl);
+            FireBaseListener.ListenRequest(Client);
+            Application.ControlledApplication.DocumentSynchronizedWithCentral 
+                += ControlledApplication_DocumentSynchronizedWithCentralAsync;
             _initPannelGeneral();
             _initPannelConcrete();
             _initPannelSteel();
@@ -26,6 +34,11 @@ namespace RevitDevelop
             _initPannelDrawing();
             _initPannelSchedule();
             _registerUpdater();
+        }
+
+        private void ControlledApplication_DocumentSynchronizedWithCentralAsync(object sender, Autodesk.Revit.DB.Events.DocumentSynchronizedWithCentralEventArgs e)
+        {
+            FireBaseListener.SendRequest("abc", Client);
         }
 
         public override void OnShutdown()

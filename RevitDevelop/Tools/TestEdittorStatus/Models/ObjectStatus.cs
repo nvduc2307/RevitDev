@@ -7,6 +7,8 @@
         public string Name { get; set; }
         public string Creator { get; set; }
         [ObservableProperty]
-        public string _editor;
+        private string _editor;
+        [ObservableProperty]
+        private string _comment;
     }
 }

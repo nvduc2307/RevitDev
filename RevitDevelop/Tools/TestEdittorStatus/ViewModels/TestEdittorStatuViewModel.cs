@@ -24,7 +24,6 @@ namespace RevitDevelop.Tools.TestEdittorStatus.ViewModels
         private void MainView_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             _action?.UpdateObjectStatus(Objects);
-            //_action?.Reload();
         }
     }
 }

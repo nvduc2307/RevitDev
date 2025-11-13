@@ -1,11 +1,13 @@
-﻿using Autodesk.Revit.DB;
+﻿using Firebase.Database;
 using RevitDevelop.Tools.TestEdittorStatus.Models;
 using RevitDevelop.Utils.FilterElementsInRevit;
+using RevitDevelop.Utils.Messages;
 
 namespace RevitDevelop.Tools.TestEdittorStatus.Actions
 {
     public partial class TestEdittorStatusAction
     {
+        
         private TestEdittorStatusCommand _cmd;
         public TestEdittorStatusAction(TestEdittorStatusCommand cmd)
         {
@@ -23,9 +25,10 @@ namespace RevitDevelop.Tools.TestEdittorStatus.Actions
                     var tip = WorksharingUtils.GetWorksharingTooltipInfo(_cmd.Document, wall.Id);
                     var obj = new ObjectStatus();
                     obj.Id = long.Parse(wall.Id.ToString());
-                    obj.Name= wall.Name;
+                    obj.Name = wall.Name;
                     obj.Creator = tip.Creator;
                     obj.Editor = tip.Owner;
+                    obj.Comment = wall.get_Parameter(BuiltInParameter.ALL_MODEL_INSTANCE_COMMENTS).AsString();
                     results.Add(obj);
                 }
             }
@@ -37,37 +40,19 @@ namespace RevitDevelop.Tools.TestEdittorStatus.Actions
         }
         public void UpdateObjectStatus(List<ObjectStatus> objectStatuses)
         {
+            var idReloads = new List<ElementId>();
             foreach (var objectStatus in objectStatuses)
             {
-                if (objectStatus.Editor != string.Empty) continue;
                 var id = new ElementId(objectStatus.Id);
                 var tip = WorksharingUtils.GetWorksharingTooltipInfo(_cmd.Document, id);
+                if (objectStatus.Editor == tip.Owner)
+                    continue;
                 objectStatus.Editor = tip.Owner;
+                if (tip.Owner == string.Empty)
+                {
+                    idReloads.Add(id);
+                }
             }
-        }
-        public void Syn()
-        {
-            var tso = new TransactWithCentralOptions();
-            var rql = new RelinquishOptions(true)
-            {
-                StandardWorksets = true,
-                ViewWorksets = true,
-                FamilyWorksets = true,
-                UserWorksets = true,
-                CheckedOutElements = true
-            };
-            var sco = new SynchronizeWithCentralOptions()
-            {
-                Comment = "Auto-sync via API",
-                Compact = false,
-            };
-            _cmd.Document.SynchronizeWithCentral(tso, sco);
-
-        }
-        public void Reload()
-        {
-            var options = new ReloadLatestOptions();
-            _cmd.Document.ReloadLatest(options);
         }
     }
 }
