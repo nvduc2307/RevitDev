@@ -432,11 +432,13 @@ namespace RevitDevelop.Utils.WindowEvent.EventMouses
         private static HookProc MouseHookProcedure;
         private int hMouseHook = 0;
         public event MouseEventHandler OnMouseLClick;
+        public event MouseEventHandler OnMouseLDown;
         public event MouseEventHandler OnMouseRClick;
         public event MouseEventHandler OnMouseLDbClick;
         public event MouseEventHandler OnMouseRDbClick;
         public event MouseEventHandler OnMouseMidClick;
         public event MouseEventHandler OnMouseMove;
+        public event MouseEventHandler OnMouseWheel;
         public EventMouseHook()
         {
             
@@ -461,7 +463,7 @@ namespace RevitDevelop.Utils.WindowEvent.EventMouses
                     case MouseButtons.XButton1:
                     case MouseButtons.XButton2:
                     case MouseButtons.None:
-                        MouseHookProcedure = new HookProc(MouseWheelHookProc);
+                        MouseHookProcedure = new HookProc(MouseMoveProc);
                         break;
                 }
                 //install hook
@@ -521,7 +523,8 @@ namespace RevitDevelop.Utils.WindowEvent.EventMouses
                             mouseHookStruct.pt.y,
                             mouseDelta);
                         //raise it
-                        OnMouseLClick(this, e);
+                        if (OnMouseLClick != null)
+                            OnMouseLClick(this, e);
                     }
                 }
             }
@@ -550,7 +553,8 @@ namespace RevitDevelop.Utils.WindowEvent.EventMouses
                         mouseHookStruct.pt.y,
                         mouseDelta);
                     //raise it
-                    OnMouseRClick(this, e);
+                    if (OnMouseRClick != null)
+                        OnMouseRClick(this, e);
                 }
             }
             //call next hook
@@ -578,14 +582,15 @@ namespace RevitDevelop.Utils.WindowEvent.EventMouses
                         mouseHookStruct.pt.y,
                         mouseDelta);
                     //raise it
-                    OnMouseMidClick(this, e);
+                    if (OnMouseMidClick != null)
+                        OnMouseMidClick(this, e);
                 }
             }
             //call next hook
             //return CallNextHookEx(hMouseHook, nCode, wParam, lParam);
             return 0;
         }
-        private int MouseWheelHookProc(int nCode, int wParam, IntPtr lParam)
+        private int MouseMoveProc(int nCode, int wParam, IntPtr lParam)
         {
             // if ok and someone listens to our events
             if ((nCode >= 0) && (OnMouseMove != null))
@@ -596,53 +601,17 @@ namespace RevitDevelop.Utils.WindowEvent.EventMouses
                 var mouseDelta = 0;
                 int clickCount = 1;
                 var button = MouseButtons.None;
-                switch (wParam)
-                {
-                    case WM_LBUTTONUP:
-                        button = MouseButtons.Left;
-                        mouseDelta = 0;
-                        clickCount = 1;
-                        //generate event 
-                        var e = new MouseEventArgs(
-                            button,
-                            clickCount,
-                            mouseHookStruct.pt.x,
-                            mouseHookStruct.pt.y,
-                            mouseDelta);
-                        //raise it
-                        if (OnMouseLClick != null)
-                            OnMouseLClick(this, e);
-                        break;
-                    case WM_RBUTTONUP:
-                        button = MouseButtons.Right;
-                        mouseDelta = 0;
-                        clickCount = 1;
-                        //generate event 
-                        e = new MouseEventArgs(
-                            button,
-                            clickCount,
-                            mouseHookStruct.pt.x,
-                            mouseHookStruct.pt.y,
-                            mouseDelta);
-                        //raise it
-                        if (OnMouseRClick != null)
-                            OnMouseRClick(this, e);
-                        break;
-                    case WM_MBUTTONUP:
-                        break;
-                    default:
-                        mouseDelta = (short)((mouseHookStruct.mouseData >> 16) & 0xffff);
-                        //generate event 
-                        e = new MouseEventArgs(
-                            button,
-                            clickCount,
-                            mouseHookStruct.pt.x,
-                            mouseHookStruct.pt.y,
-                            mouseDelta);
-                        //raise it
-                        OnMouseMove(this, e);
-                        break;
-                }
+                mouseDelta = 0;
+                //generate event 
+                var e = new MouseEventArgs(
+                    button,
+                    clickCount,
+                    mouseHookStruct.pt.x,
+                    mouseHookStruct.pt.y,
+                    mouseDelta);
+                //raise it
+                if (OnMouseMove != null)
+                    OnMouseMove(this, e);
             }
             //call next hook
             return 0;

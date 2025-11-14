@@ -23,10 +23,10 @@ namespace RevitDevelop
         public RibbonPanel PANEL_SCHEDULE { get; private set; }
         public override void OnStartup()
         {
-            Client = new FirebaseClient(firebaseUrl);
-            FireBaseListener.ListenRequest(Client);
-            Application.ControlledApplication.DocumentSynchronizedWithCentral 
-                += ControlledApplication_DocumentSynchronizedWithCentralAsync;
+            //Client = new FirebaseClient(firebaseUrl);
+            //FireBaseListener.ListenRequest(Client);
+            //Application.ControlledApplication.DocumentSynchronizedWithCentral 
+            //    += ControlledApplication_DocumentSynchronizedWithCentralAsync;
             _initPannelGeneral();
             _initPannelConcrete();
             _initPannelSteel();
@@ -38,7 +38,7 @@ namespace RevitDevelop
 
         private void ControlledApplication_DocumentSynchronizedWithCentralAsync(object sender, Autodesk.Revit.DB.Events.DocumentSynchronizedWithCentralEventArgs e)
         {
-            FireBaseListener.SendRequest("abc", Client);
+            Task.Run(async () => { await FireBaseListener.SendRequest("abc", Client); });
         }
 
         public override void OnShutdown()
