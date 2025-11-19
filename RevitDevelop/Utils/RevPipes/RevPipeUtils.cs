@@ -8,6 +8,24 @@ namespace RevitDevelop.Utils.RevPipes
 {
     public static class RevPipeUtils
     {
+        public static Pipe CreateNew(this Pipe pipeBase, XYZ sp, XYZ ep)
+        {
+            Pipe result = null;
+            try
+            {
+                var id = pipeBase.Copy(XYZ.BasisX * 1).FirstOrDefault();
+                if (id == null)
+                    return result;
+                var document = pipeBase.Document;
+                var pNew = document.GetElement(id) as Pipe;
+                var location = pNew.Location as LocationCurve;
+                location.Curve = Line.CreateBound(sp, ep);
+            }
+            catch (Exception)
+            {
+            }
+            return result;
+        }
         public static void CreateConnect(this Pipe p1, Pipe p2)
         {
             try

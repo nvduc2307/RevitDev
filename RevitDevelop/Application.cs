@@ -48,7 +48,7 @@ namespace RevitDevelop
         private void _initPannelGeneral()
         {
             PANEL_GENERAL = Application.CreatePanel(Properties.Langs.ApplicationLangs.PANEL_GENERAL, Properties.Langs.ApplicationLangs.TAB);
-            PANEL_GENERAL.AddPushButton<Test.TestCmd>("test")
+            PANEL_GENERAL.AddPushButton<Test.EditFlexPipeCommand>("test")
                     .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
                     .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
         }
@@ -67,7 +67,7 @@ namespace RevitDevelop
             PANEL_REBAR.AddPushButton<Tools.SettingRebars.SettingDiameters.SettingDiametersCmd>(Properties.Langs.ApplicationLangs.CMD_REBAR_SETTING_DIAMETER)
                 .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
                 .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
-            PANEL_REBAR.AddPushButton<Test.TestCmd>("Edit By")
+            PANEL_REBAR.AddPushButton<Test.EditFlexPipeCommand>("Edit By")
                 .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
                 .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
         }

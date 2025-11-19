@@ -14,7 +14,7 @@ using RevitDevelop.Utils.WindowEvent.EventMouses;
 namespace RevitDevelop.Test
 {
     [Transaction(TransactionMode.Manual)]
-    public class TestCmd : ExternalCommand
+    public class EditFlexPipeCommand : ExternalCommand
     {
         private EventMouseHook _mev;
         private List<XYZ> _ps;
