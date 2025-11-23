@@ -33,6 +33,7 @@ namespace RevitDevelop.Test
         }
         private Direction _checkDirectionDoor(FamilyInstance fe)
         {
+            var distanceCheck = 300;
             var result = Direction.None;
             var trans = fe.GetTransform();
             var vtx = trans.OfVector(XYZ.BasisX);
@@ -48,12 +49,12 @@ namespace RevitDevelop.Test
                 if (facing.IsSameDirection(vty))
                 {
                     // cung chieu voi vty
-                    result = h <= 300 ? Direction.Bottom : Direction.Left;
+                    result = h <= distanceCheck ? Direction.Bottom : Direction.Left;
                 }
                 else
                 {
                     // nguoc chieu voi vty
-                    result = h <= 300 ? Direction.Top : Direction.Right;
+                    result = h <= distanceCheck ? Direction.Top : Direction.Right;
                 }
             }
             //song song voi truc z
@@ -62,12 +63,12 @@ namespace RevitDevelop.Test
                 if (facing.IsSameDirection(vtz))
                 {
                     // cung chieu voi vtz
-                    result = h <= 300 ? Direction.Left : Direction.Top;
+                    result = h <= distanceCheck ? Direction.Left : Direction.Top;
                 }
                 else
                 {
                     // nguoc chieu voi vtz
-                    result = h <= 300 ? Direction.Right : Direction.Bottom;
+                    result = h <= distanceCheck ? Direction.Right : Direction.Bottom;
                 }
             }
             IO.ShowInfo(result.ToString());
