@@ -51,6 +51,9 @@ namespace RevitDevelop
             PANEL_GENERAL.AddPushButton<Test.EditFlexPipeCommand>("test")
                     .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
                     .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
+            PANEL_GENERAL.AddPushButton<Tools.Syns.SynCommand>("SynCommand")
+                    .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
+                    .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
         }
         private void _initPannelConcrete()
         {

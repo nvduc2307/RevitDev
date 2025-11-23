@@ -43,7 +43,7 @@ namespace RevitDevelop.Test
                 tsg.Start();
                 try
                 {
-                    _validateView();
+                    //_validateView();
                     var isRepeat = true;
                     do
                     {
@@ -103,7 +103,7 @@ namespace RevitDevelop.Test
                                     em.OnMouseMove -= Em_OnMouseMove;
                                     _curveShost?.UnAllRegister();
                                     _controlPoints.Insert(_indexInsert,
-                                        _pFlexControl.RayPointToFace(_fPipePlan.Normal, _fPipePlan));
+                                        _pFlexControl.RayPointToFace(_fPipeAlong.Normal, _fPipeAlong));
                                     using (var ts = new Transaction(Document, "new transaction"))
                                     {
                                         ts.SkipAllWarnings();
@@ -139,8 +139,9 @@ namespace RevitDevelop.Test
         {
             if (!_controlPoints.Any())
                 return;
-            var p = UiDocument.GetModelCoordinatesAtCursor()
-                .RayPointToFace(_fPipePlan.Normal, _fPipePlan);
+            UiDocument.TryGetRayUnderMouse(out XYZ origin, out XYZ direction);
+            var p = origin
+                .RayPointToFace(_fPipeAlong.Normal, _fPipeAlong);
             var controlPoints = _controlPoints.ToList();
             controlPoints.Insert(_indexInsert, p);
             controlPoints = controlPoints
@@ -189,10 +190,11 @@ namespace RevitDevelop.Test
             _vtzPipe = _vtxPipe.CrossProduct(_vtyPipe);
             _fPipePlan = new FaceCustom(_vtzPipe, mid);
             _fPipeAlong = new FaceCustom(_vtyPipe, mid);
+            _setSketchPlan(Document, Plane.CreateByNormalAndOrigin(_vtyPipe, mid));
             var p = UiDocument
                 .Selection
                 .PickPoint()
-                .RayPointToFace(XYZ.BasisZ, _fPipePlan);
+                .RayPointToFace(_fPipeAlong.Normal, _fPipeAlong);
             var pOnPipe = p.RayPointToFace(_vtyPipe, _fPipeAlong);
             var d1Mm = Math.Round(pOnPipe.DistanceTo(_pipeStart).FootToMm(), 0);
             if (d1Mm == 0) return null;
@@ -205,6 +207,23 @@ namespace RevitDevelop.Test
             if (pOnPipe.DistanceTo(p).FootToMm() > 500)
                 return null;
             return pOnPipe;
+        }
+        private void _setSketchPlan(Document document, Plane plane)
+        {
+            try
+            {
+                using (var ts = new Transaction(document, "new transaction"))
+                {
+                    ts.SkipAllWarnings();
+                    ts.Start();
+                    var sketchPlane = SketchPlane.Create(document, plane);
+                    document.ActiveView.SketchPlane = sketchPlane;
+                    ts.Commit();
+                }
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

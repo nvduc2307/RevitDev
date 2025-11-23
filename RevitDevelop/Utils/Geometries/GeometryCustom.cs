@@ -327,17 +327,51 @@ namespace RevitDevelop.Utils.Geometries
             XYZ diag = b - a;
             double w = diag.DotProduct(R), hgt = diag.DotProduct(U);
             XYZ B = a + (u * w) * R + ((1 - v) * hgt) * U;
-
-
-
-            //XYZ v = b - a;
-
-            //XYZ q = a
-            //  + dx * v.X * XYZ.BasisX
-            //  + dy * v.Y * XYZ.BasisY;
-
             return B;
         }
+        public static bool TryGetRayUnderMouse(this UIDocument uidoc, out XYZ origin, out XYZ direction)
+        {
+            origin = null; direction = null;
 
+            var view = uidoc.ActiveView as View3D;
+            if (view == null) return false;
+            var uiview = uidoc.GetOpenUIViews().FirstOrDefault(v => v.ViewId == view.Id);
+            if (uiview == null) return false;
+            var p = System.Windows.Forms.Cursor.Position;
+            var rect = uiview.GetWindowRectangle();
+            double u = (p.X - rect.Left) / (double)(rect.Right - rect.Left);
+            double v = (p.Y - rect.Top) / (double)(rect.Bottom - rect.Top);
+            XYZ R = view.RightDirection, U = view.UpDirection;
+            double dx = (double)(p.X - rect.Left)
+              / (rect.Right - rect.Left);
+
+            double dy = (double)(p.Y - rect.Bottom)
+              / (rect.Top - rect.Bottom);
+            IList<XYZ> corners = uiview.GetZoomCorners();
+            XYZ pMin = corners[0];
+            XYZ pMax = corners[1];
+
+            XYZ diag = pMax - pMin;
+            double w = diag.DotProduct(R);
+            double h = diag.DotProduct(U);
+
+            // 4) Điểm “pNear” ứng với pixel trên mặt phẳng vuông góc ViewDirection
+            XYZ pNear = pMin + (u * w) * R + ((1 - v) * h) * U;
+
+            if (view.IsPerspective)
+            {
+                // Tạo ray từ mắt → pNear
+                var cam = view.GetOrientation();
+                origin = cam.EyePosition;
+                direction = (pNear - origin).Normalize();
+            }
+            else
+            {
+                // Ray song song ViewDirection, gốc đặt ngay tại pNear
+                origin = pNear;
+                direction = view.ViewDirection.Normalize();
+            }
+            return true;
+        }
     }
 }
