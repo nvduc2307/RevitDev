@@ -33,6 +33,7 @@ namespace RevitDevelop.Test
         }
         private Direction _checkDirectionDoor(FamilyInstance fe)
         {
+            var paramHieght = "Height";
             var distanceCheck = 300;
             var result = Direction.None;
             var trans = fe.GetTransform();
@@ -41,8 +42,7 @@ namespace RevitDevelop.Test
             var vtz = vtx.CrossProduct(vty);
             vty = vtx.CrossProduct(vtz).Normalize();
             var facing = fe.FacingOrientation;
-            var h = Math.Round(fe.LookupParameter("Height").AsDouble().FootToMm(), 0);
-            var w = Math.Round(fe.LookupParameter("Width").AsDouble().FootToMm(), 0);
+            var h = Math.Round(fe.LookupParameter(paramHieght).AsDouble().FootToMm(), 0);
             //song song voi truc y
             if (facing.IsParallel(vty))
             {
