@@ -1,9 +1,13 @@
 ﻿using Autodesk.Revit.Attributes;
+using Autodesk.Revit.DB.Structure;
+using Autodesk.Revit.UI;
 using Nice3point.Revit.Toolkit.External;
 using RevitDevelop.Utils.Geometries;
 using RevitDevelop.Utils.Messages;
 using RevitDevelop.Utils.NumberUtils;
+using RevitDevelop.Utils.RevCurves;
 using RevitDevelop.Utils.SelectFilters;
+using RevitDevelop.Utils.SkipWarning;
 
 namespace RevitDevelop.Test
 {
@@ -20,7 +24,17 @@ namespace RevitDevelop.Test
                 {
                     var e = UiDocument.Selection.PickElement(Document) as FamilyInstance;
                     if (e == null) return;
-                    _checkDirectionDoor(e);
+                    var vtz = _getVector(e);
+                    var origin = e.GetTransform().Origin;
+                    var l = Line.CreateBound(origin, origin + vtz * 1000.MmToFoot());
+                    using (var ts = new Transaction(Document, "new transaction"))
+                    {
+                        ts.SkipAllWarnings();
+                        ts.Start();
+                        Document.CreateCurves(new List<Curve>() { l });
+                        ts.Commit();
+                    }
+                    //_checkDirectionDoor(e);
                     tsg.Assimilate();
                 }
                 catch (Autodesk.Revit.Exceptions.OperationCanceledException) { }
@@ -38,40 +52,94 @@ namespace RevitDevelop.Test
             var result = Direction.None;
             var trans = fe.GetTransform();
             var vtx = trans.OfVector(XYZ.BasisX);
-            var vty = vtx.CrossProduct(XYZ.BasisZ);
-            var vtz = vtx.CrossProduct(vty);
-            vty = vtx.CrossProduct(vtz).Normalize();
+            var vtz = _getVectorTop(fe);
+            var vty = vtx.CrossProduct(vtz).Normalize();
             var facing = fe.FacingOrientation;
+            var handVt = -fe.FacingOrientation;
             var h = Math.Round(fe.LookupParameter(paramHieght).AsDouble().FootToMm(), 0);
             //song song voi truc y
-            if (facing.IsParallel(vty))
+            if (handVt.IsParallel(vty))
             {
-                if (facing.IsSameDirection(vty))
+                if (handVt.IsSameDirection(vty))
                 {
                     // cung chieu voi vty
-                    result = h <= distanceCheck ? Direction.Bottom : Direction.Left;
+                    result = Direction.Left;
                 }
                 else
                 {
                     // nguoc chieu voi vty
-                    result = h <= distanceCheck ? Direction.Top : Direction.Right;
+                    result = Direction.Right;
                 }
             }
             //song song voi truc z
-            if (facing.IsParallel(vtz))
+            if (handVt.IsParallel(vtz))
             {
-                if (facing.IsSameDirection(vtz))
+                if (handVt.IsSameDirection(vtz))
                 {
                     // cung chieu voi vtz
-                    result = h <= distanceCheck ? Direction.Left : Direction.Top;
+                    result = Direction.Top;
                 }
                 else
                 {
                     // nguoc chieu voi vtz
-                    result = h <= distanceCheck ? Direction.Right : Direction.Bottom;
+                    result = Direction.Bottom;
                 }
             }
             IO.ShowInfo(result.ToString());
+            return result;
+        }
+        private XYZ _getVectorTop(FamilyInstance fe)
+        {
+            var paramHieght = "Height";
+            var paramWidth = "Width";
+            var trans = fe.GetTransform();
+            var origin = trans.Origin;
+            var vtfx = trans.OfVector(XYZ.BasisX);
+            var vtfy = trans.OfVector(XYZ.BasisY);
+            var vtfz = trans.OfVector(XYZ.BasisZ);
+            var h = fe.LookupParameter(paramHieght).AsDouble().FootToMm();
+            var w = fe.LookupParameter(paramWidth).AsDouble().FootToMm();
+            var p1 = origin + vtfz * h / 2;
+            var p2 = origin - vtfz * h / 2;
+            var p3 = origin + vtfy * w / 2;
+            var p4 = origin - vtfy * w / 2;
+            var ps = new List<XYZ>() { p1, p2, p3, p4 };
+            ps = ps.OrderByDescending(x => x.DotProduct(XYZ.BasisZ)).ToList();
+            var pmax = ps.FirstOrDefault();
+            var vtz = (pmax - origin).Normalize();
+            return vtz;
+        }
+
+        private XYZ _getVector(FamilyInstance fe)
+        {
+            XYZ result = null;
+            var trans = fe.GetTransform();
+            var origin = trans.Origin;
+            var vtfx = trans.OfVector(XYZ.BasisX);
+            var facing = fe.FacingOrientation;
+            var hand = vtfx.CrossProduct(facing);
+            var angle = 0.0;
+            if (facing.DotProduct(XYZ.BasisZ) == 1)
+                return facing;
+            if (facing.DotProduct(XYZ.BasisZ) == -1)
+                return -facing;
+            if (hand.DotProduct(XYZ.BasisZ) == 1)
+                return hand;
+            if (hand.DotProduct(XYZ.BasisZ) == -1)
+                return -hand;
+            var yVector = vtfx.CrossProduct(XYZ.BasisZ);
+            var zVector = vtfx.CrossProduct(yVector);
+            zVector = zVector.DotProduct(XYZ.BasisZ) <=0 ? -zVector: zVector;
+            angle = Math.Round(zVector.AngleTo(facing) * 180 / Math.PI, 0);
+            angle = angle > 90 ? 180 - angle : angle;
+            if (angle <= 45)
+                result = facing;
+            else
+            {
+                var vt = vtfx.CrossProduct(facing);
+                angle = Math.Round(zVector.AngleTo(vt) * 180 / Math.PI, 0);
+                result = angle > 90 ? - vt : vt;
+            }
             return result;
         }
     }
