@@ -52,7 +52,7 @@ namespace RevitDevelop.Test
             var result = Direction.None;
             var trans = fe.GetTransform();
             var vtx = trans.OfVector(XYZ.BasisX);
-            var vtz = _getVectorTop(fe);
+            var vtz = _getVector(fe);
             var vty = vtx.CrossProduct(vtz).Normalize();
             var facing = fe.FacingOrientation;
             var handVt = -fe.FacingOrientation;
@@ -88,27 +88,6 @@ namespace RevitDevelop.Test
             IO.ShowInfo(result.ToString());
             return result;
         }
-        private XYZ _getVectorTop(FamilyInstance fe)
-        {
-            var paramHieght = "Height";
-            var paramWidth = "Width";
-            var trans = fe.GetTransform();
-            var origin = trans.Origin;
-            var vtfx = trans.OfVector(XYZ.BasisX);
-            var vtfy = trans.OfVector(XYZ.BasisY);
-            var vtfz = trans.OfVector(XYZ.BasisZ);
-            var h = fe.LookupParameter(paramHieght).AsDouble().FootToMm();
-            var w = fe.LookupParameter(paramWidth).AsDouble().FootToMm();
-            var p1 = origin + vtfz * h / 2;
-            var p2 = origin - vtfz * h / 2;
-            var p3 = origin + vtfy * w / 2;
-            var p4 = origin - vtfy * w / 2;
-            var ps = new List<XYZ>() { p1, p2, p3, p4 };
-            ps = ps.OrderByDescending(x => x.DotProduct(XYZ.BasisZ)).ToList();
-            var pmax = ps.FirstOrDefault();
-            var vtz = (pmax - origin).Normalize();
-            return vtz;
-        }
 
         private XYZ _getVector(FamilyInstance fe)
         {
@@ -131,14 +110,16 @@ namespace RevitDevelop.Test
             var zVector = vtfx.CrossProduct(yVector);
             zVector = zVector.DotProduct(XYZ.BasisZ) <=0 ? -zVector: zVector;
             angle = Math.Round(zVector.AngleTo(facing) * 180 / Math.PI, 0);
-            angle = angle > 90 ? 180 - angle : angle;
+            //angle = angle > 90 ? 180 - angle : angle;
             if (angle <= 45)
                 result = facing;
+            else if (180 - angle <= 45)
+                result = -facing;
             else
             {
                 var vt = vtfx.CrossProduct(facing);
                 angle = Math.Round(zVector.AngleTo(vt) * 180 / Math.PI, 0);
-                result = angle > 90 ? - vt : vt;
+                result = angle <= 45 ? vt : -vt;
             }
             return result;
         }
