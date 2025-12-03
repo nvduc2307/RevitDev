@@ -28,6 +28,8 @@ namespace RevitDevelop.DemoST.Command3.viewModels
             var typeRules = TreeViewModels
                 .Select(x=>x.Childrent)
                 .Aggregate((a,b) => a.Concat(b).ToList())
+                .Select(x=>x.Childrent)
+                .Aggregate((a,b) => a.Concat(b).ToList())
                 .Where(x=>x.IsType)
                 .Where(x=>x.IsSelected)
                 .ToList();
@@ -38,7 +40,7 @@ namespace RevitDevelop.DemoST.Command3.viewModels
             var eles = new FilteredElementCollector(_cmd.Document)
                 .WhereElementIsNotElementType()
                 .Where(x=> x.Category != null)
-                .Where(x=> typeRules.Any(y=>y.Parent.Id.ToString() == x.Category.Id.ToString()))
+                .Where(x=> typeRules.Any(y=>y.Parent.Parent.Id.ToString() == x.Category.Id.ToString()))
                 .Where(x=>typeRules.Any(y=>y.Id.ToString() == x.GetTypeId().ToString()))
                 .Where(x =>
                 {
@@ -70,6 +72,15 @@ namespace RevitDevelop.DemoST.Command3.viewModels
                 {
                     if (!child.IsSelected)
                         child.IsSelected = true;
+                    if (child.Childrent == null)
+                        continue;
+                    if (!child.Childrent.Any())
+                        continue;
+                    foreach (var child2 in child.Childrent)
+                    {
+                        if (!child2.IsSelected)
+                            child2.IsSelected = true;
+                    }
                 }
             }
         }
@@ -88,6 +99,15 @@ namespace RevitDevelop.DemoST.Command3.viewModels
                 {
                     if (child.IsSelected)
                         child.IsSelected = false;
+                    if (child.Childrent == null)
+                        continue;
+                    if (!child.Childrent.Any())
+                        continue;
+                    foreach (var child2 in child.Childrent)
+                    {
+                        if (child2.IsSelected)
+                            child2.IsSelected = false;
+                    }
                 }
             }
         }

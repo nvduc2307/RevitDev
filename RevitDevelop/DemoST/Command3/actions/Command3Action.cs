@@ -115,6 +115,12 @@ namespace RevitDevelop.DemoST.Command3.actions
                         child.SelectedAction -= _selectedAction;
                         child.IsSelected = treeViewModel.IsSelected;
                         child.SelectedAction += _selectedAction;
+                        foreach (var item in child.Childrent)
+                        {
+                            item.SelectedAction -= _selectedAction;
+                            item.IsSelected = treeViewModel.IsSelected;
+                            item.SelectedAction += _selectedAction;
+                        }
                     }
                 }
                 if (treeViewModel.IsFamily)
