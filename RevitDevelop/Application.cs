@@ -27,13 +27,14 @@ namespace RevitDevelop
             //FireBaseListener.ListenRequest(Client);
             //Application.ControlledApplication.DocumentSynchronizedWithCentral 
             //    += ControlledApplication_DocumentSynchronizedWithCentralAsync;
-            _initPannelGeneral();
-            _initPannelConcrete();
-            _initPannelSteel();
-            _initPannelRebar();
-            _initPannelDrawing();
-            _initPannelSchedule();
-            _registerUpdater();
+            //_initPannelGeneral();
+            //_initPannelConcrete();
+            //_initPannelSteel();
+            //_initPannelRebar();
+            //_initPannelDrawing();
+            //_initPannelSchedule();
+            //_registerUpdater();
+            _initPannelPrimaDemo();
         }
 
         private void ControlledApplication_DocumentSynchronizedWithCentralAsync(object sender, Autodesk.Revit.DB.Events.DocumentSynchronizedWithCentralEventArgs e)
@@ -44,6 +45,17 @@ namespace RevitDevelop
         public override void OnShutdown()
         {
             _disposeUpdater();
+        }
+        private void _initPannelPrimaDemo()
+        {
+            var panel = Application.CreatePanel("Tools", "Prima Demo");
+            panel.AddPushButton<DemoST.Command1.Command1Cmd>("Command1")
+            .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
+            .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
+
+            panel.AddPushButton<DemoST.Command3.Command3Cmd>("Command3")
+            .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
+            .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
         }
         private void _initPannelGeneral()
         {
@@ -73,6 +85,8 @@ namespace RevitDevelop
             PANEL_REBAR.AddPushButton<Test.EditFlexPipeCommand>("Edit By")
                 .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
                 .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
+
+
         }
         private void _initPannelDrawing()
         {

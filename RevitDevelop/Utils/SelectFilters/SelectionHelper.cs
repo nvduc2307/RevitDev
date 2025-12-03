@@ -31,6 +31,23 @@ namespace RevitDevelop.Utils.SelectFilters
             return reference?.GetElement(doc);
         }
 
+        public static List<Element> PickElements(
+            this Selection sel,
+            Document doc,
+            BuiltInCategory? bic = null,
+            Func<Element, bool> elementFilter = null,
+            string statusPrompt = "Pick an Element...")
+        {
+            var combinedFilter = CreateElementFilter(bic, elementFilter);
+
+            var references = sel.PickObjects(
+                ObjectType.Element,
+                new ElementSelectionFilter(combinedFilter),
+                statusPrompt);
+
+            return references.Select(x => doc.GetElement(x)).ToList();
+        }
+
         /// <summary>
         /// Picks a reference to a single element with optional category and custom filter.
         /// </summary>

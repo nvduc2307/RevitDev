@@ -70,6 +70,60 @@ namespace RevitDevelop.Properties.Langs {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string DEMOST_COMMAND3_BTN_CANCEL {
+            get {
+                return ResourceManager.GetString("DEMOST_COMMAND3_BTN_CANCEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choice.
+        /// </summary>
+        public static string DEMOST_COMMAND3_BTN_CHOICE {
+            get {
+                return ResourceManager.GetString("DEMOST_COMMAND3_BTN_CHOICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exhibition.
+        /// </summary>
+        public static string DEMOST_COMMAND3_BTN_EXHIBITION_GROUP {
+            get {
+                return ResourceManager.GetString("DEMOST_COMMAND3_BTN_EXHIBITION_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revenue.
+        /// </summary>
+        public static string DEMOST_COMMAND3_BTN_REVENUE_GROUP {
+            get {
+                return ResourceManager.GetString("DEMOST_COMMAND3_BTN_REVENUE_GROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select All.
+        /// </summary>
+        public static string DEMOST_COMMAND3_BTN_SELECT_ALL {
+            get {
+                return ResourceManager.GetString("DEMOST_COMMAND3_BTN_SELECT_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Un Select All.
+        /// </summary>
+        public static string DEMOST_COMMAND3_BTN_UN_SELECT_ALL {
+            get {
+                return ResourceManager.GetString("DEMOST_COMMAND3_BTN_UN_SELECT_ALL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Drawing.
         /// </summary>
         public static string DRAWING {
@@ -124,7 +178,7 @@ namespace RevitDevelop.Properties.Langs {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nvd.
+        ///   Looks up a localized string similar to Prima Demo.
         /// </summary>
         public static string TAB {
             get {

@@ -121,22 +121,22 @@
     <value>Diameter</value>
   </data>
   <data name="DEMOST_COMMAND3_BTN_CANCEL" xml:space="preserve">
-    <value>Cancel</value>
+    <value>取消</value>
   </data>
   <data name="DEMOST_COMMAND3_BTN_CHOICE" xml:space="preserve">
-    <value>Choice</value>
+    <value>選択</value>
   </data>
   <data name="DEMOST_COMMAND3_BTN_EXHIBITION_GROUP" xml:space="preserve">
-    <value>Exhibition</value>
+    <value>全展</value>
   </data>
   <data name="DEMOST_COMMAND3_BTN_SELECT_ALL" xml:space="preserve">
-    <value>Select All</value>
+    <value>全選</value>
   </data>
   <data name="DEMOST_COMMAND3_BTN_REVENUE_GROUP" xml:space="preserve">
-    <value>Revenue</value>
+    <value>全収</value>
   </data>
   <data name="DEMOST_COMMAND3_BTN_UN_SELECT_ALL" xml:space="preserve">
-    <value>Un Select All</value>
+    <value>全不選</value>
   </data>
   <data name="DRAWING" xml:space="preserve">
     <value>Drawing</value>

@@ -1,4 +1,5 @@
-﻿using RevitDevelop.Utils.FilterElementsInRevit;
+﻿using Nice3point.Revit.Extensions;
+using RevitDevelop.Utils.FilterElementsInRevit;
 using RevitDevelop.Utils.Messages;
 using System.IO;
 
@@ -77,6 +78,7 @@ namespace RevitDevelop.Utils.RevParameters
             {
                 var result = string.Empty;
                 var para = element.get_Parameter(paraName);
+                if (para == null) return result;
                 var storageType = para.StorageType;
                 switch (storageType)
                 {
