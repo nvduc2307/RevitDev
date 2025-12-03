@@ -57,22 +57,47 @@ namespace RevitDevelop.DemoST.Command3.actions
                     .Where(x=>x.Category.Id.ToString() == category.Id.ToString())
                     .Select(x=>x.GetTypeId())
                     .GroupBy(x=>x.ToString())
-                    .Select(x=>_cmd.Document.GetElement(x.FirstOrDefault()))
+                    .Select(x=>_cmd.Document.GetElement(x.FirstOrDefault()) as ElementType)
+                    .Where(x=>x != null)
                     .ToList();
-                foreach (var eleType in eleTypes)
+                var families = eleTypes
+                    .Select(x=>x.FamilyName)
+                    .GroupBy(x=>x)
+                    .Select(x=>x.FirstOrDefault())
+                    .ToList();
+                foreach (var family in families)
                 {
-                    var child = new TreeViewModel
+                    var childF = new TreeViewModel()
                     {
                         IsCategory = false,
-                        IsType = true,
-                        Id = long.Parse(eleType.Id.ToString()),
-                        Name = eleType.Name,
+                        IsType = false,
+                        IsFamily = true,
+                        Id = -1,
+                        Name = family,
                         IsSelected = true,
                         IsOpen = true,
                         Parent = treeViewModel,
+                        Childrent = new List<TreeViewModel>()
                     };
-                    child.SelectedAction += _selectedAction;
-                    treeViewModel.Childrent.Add(child);
+                    var types = eleTypes.Where(x=>x.FamilyName == family).ToList();
+                    foreach (var eleType in types)
+                    {
+                        var child = new TreeViewModel
+                        {
+                            IsCategory = false,
+                            IsFamily = false,
+                            IsType = true,
+                            Id = long.Parse(eleType.Id.ToString()),
+                            Name = eleType.Name,
+                            IsSelected = true,
+                            IsOpen = true,
+                            Parent = childF,
+                        };
+                        child.SelectedAction += _selectedAction;
+                        childF.Childrent.Add(child);
+                    }
+                    childF.SelectedAction += _selectedAction;
+                    treeViewModel.Childrent.Add(childF);
                 }
                 results.Add(treeViewModel);
             }
@@ -92,13 +117,34 @@ namespace RevitDevelop.DemoST.Command3.actions
                         child.SelectedAction += _selectedAction;
                     }
                 }
-                if (treeViewModel.IsType)
+                if (treeViewModel.IsFamily)
                 {
                     var parent = treeViewModel.Parent;
                     var childrent = parent.Childrent;
                     parent.SelectedAction -= _selectedAction;
                     parent.IsSelected = childrent.Any(x => !x.IsSelected) ? false : true;
                     parent.SelectedAction += _selectedAction;
+
+                    foreach (var item in treeViewModel.Childrent)
+                    {
+                        item.SelectedAction -= _selectedAction;
+                        item.IsSelected = treeViewModel.IsSelected;
+                        item.SelectedAction += _selectedAction;
+                    }
+
+                }
+                if (treeViewModel.IsType)
+                {
+                    var family = treeViewModel.Parent;
+                    var cate = family.Parent;
+                    var childrent = family.Childrent;
+                    cate.SelectedAction -= _selectedAction;
+                    cate.IsSelected = childrent.Any(x => !x.IsSelected) ? false : true;
+                    cate.SelectedAction += _selectedAction;
+
+                    family.SelectedAction -= _selectedAction;
+                    family.IsSelected = childrent.Any(x => !x.IsSelected) ? false : true;
+                    family.SelectedAction += _selectedAction;
                 }
             }
         }

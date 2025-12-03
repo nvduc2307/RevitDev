@@ -16,8 +16,9 @@
             }
         }
         public EventHandler SelectedAction { get; set; }
-        public bool IsType {  get; set; }
         public bool IsCategory { get; set; }
+        public bool IsFamily { get; set; }
+        public bool IsType {  get; set; }
         [ObservableProperty]
         private bool _isOpen;
         public List<TreeViewModel> Childrent { get; set; }

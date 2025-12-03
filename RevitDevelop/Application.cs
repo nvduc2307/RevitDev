@@ -4,6 +4,7 @@ using Nice3point.Revit.Toolkit.External;
 using RevitDevelop.Updaters;
 using RevitDevelop.Utils.FireBaseListeners;
 using RevitDevelop.Utils.Messages;
+using System.IO;
 
 namespace RevitDevelop
 {
@@ -34,6 +35,7 @@ namespace RevitDevelop
             //_initPannelDrawing();
             //_initPannelSchedule();
             //_registerUpdater();
+            _actionRemoveFileBak();
             _initPannelPrimaDemo();
         }
 
@@ -95,6 +97,49 @@ namespace RevitDevelop
         private void _initPannelSchedule()
         {
             PANEL_SCHEDULE = Application.CreatePanel(Properties.Langs.ApplicationLangs.PANEL_SCHEDULE, Properties.Langs.ApplicationLangs.TAB);
+        }
+        private void _actionRemoveFileBak()
+        {
+            Application.ControlledApplication.DocumentSaved += ControlledApplication_DocumentSaved;
+        }
+
+        private void ControlledApplication_DocumentSaved(object sender, Autodesk.Revit.DB.Events.DocumentSavedEventArgs e)
+        {
+            if (sender is Autodesk.Revit.ApplicationServices.Application app)
+            {
+                var document = e.Document;
+                var path = document.PathName;
+                if (path == string.Empty)
+                    return;
+                var pathFolders = path.Split('\\').ToList();
+                var fileName = pathFolders
+                    .LastOrDefault().Split('.')
+                    .FirstOrDefault();
+                pathFolders.RemoveAt(pathFolders.Count - 1);
+                var dir = pathFolders
+                    .Aggregate((a, b) => $"{a}\\{b}");
+                if (!System.IO.Directory.Exists(dir))
+                    return;
+                var files = System.IO.Directory.GetFiles(dir)
+                    .Where(x=>x.Contains(fileName))
+                    .Where(x =>
+                    {
+                        var names = x.Split('\\').LastOrDefault().Split('.').ToList();
+                        return names.Count > 2;
+                    })
+                    .ToList();
+                foreach (var item in files)
+                {
+                    try
+                    {
+                        if (File.Exists(item))
+                            File.Delete(item);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }
         }
 
         private void _registerUpdater()
