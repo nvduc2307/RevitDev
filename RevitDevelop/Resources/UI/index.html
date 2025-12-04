@@ -1,0 +1,26 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>HTML UI</title>
+</head>
+<body style="font-family:sans-serif">
+    <h3>Revit + WebView2</h3>
+    <button id="count">Count Walls</button>
+    <input id="el" type="number" placeholder="ElementId" />
+    <button id="zoom">Zoom To Id</button>
+    <pre id="log"></pre>
+
+    <script>
+        const log = (x) => document.getElementById('log').textContent += x + "\n";
+        document.getElementById('count').onclick = () => post({ type: 'countWalls' });
+        document.getElementById('zoom').onclick = () => post({ type: 'zoomTo', elementId: parseInt(document.getElementById('el').value || '0', 10) });
+        function post(obj) {
+            window.chrome?.webview?.postMessage(obj);
+            //alert(JSON.stringify(obj));
+        }
+        window.chrome?.webview?.addEventListener('message', e => log("From .NET: " + JSON.stringify(e.data)));
+        log("HTML ready");
+    </script>
+</body>
+</html>

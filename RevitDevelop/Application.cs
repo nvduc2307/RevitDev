@@ -37,6 +37,15 @@ namespace RevitDevelop
             //_registerUpdater();
             _actionRemoveFileBak();
             _initPannelPrimaDemo();
+            _intHtml();
+        }
+
+        private void _intHtml()
+        {
+            var panel = Application.CreatePanel("Tools", "html Demo");
+            panel.AddPushButton<testHtml.testHtmlCommand>("Html dm")
+            .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
+            .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
         }
 
         private void ControlledApplication_DocumentSynchronizedWithCentralAsync(object sender, Autodesk.Revit.DB.Events.DocumentSynchronizedWithCentralEventArgs e)
@@ -158,4 +167,5 @@ namespace RevitDevelop
         }
 
     }
+    public static class AppEntry { public static UIApplication UiApp; }
 }
