@@ -12,7 +12,7 @@
     <pre id="log"></pre>
 
     <script>
-        const log = (x) => document.getElementById('log').textContent += x + "\n";
+        const l og = (x) => document.getElementById('log').textContent += x + "\n";
         document.getElementById('count').onclick = () => post({ type: 'countWalls' });
         document.getElementById('zoom').onclick = () => post({ type: 'zoomTo', elementId: parseInt(document.getElementById('el').value || '0', 10) });
         function post(obj) {
