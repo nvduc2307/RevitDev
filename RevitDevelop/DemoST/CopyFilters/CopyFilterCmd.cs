@@ -1,14 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Autodesk.Revit.Attributes;
+using Microsoft.Extensions.DependencyInjection;
 using Nice3point.Revit.Toolkit.External;
+using RevitDevelop.DemoST.CopyFilters.actions;
+using RevitDevelop.DemoST.CopyFilters.viewModels;
 using RevitDevelop.Utils.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RevitDevelop.DemoST.CopyFilters
 {
+    [Transaction(TransactionMode.Manual)]
     public class CopyFilterCmd : ExternalCommand
     {
         public override void Execute()
@@ -21,6 +20,8 @@ namespace RevitDevelop.DemoST.CopyFilters
                 {
                     var service = new ServiceCollection();
                     service.AddSingleton<CopyFilterCmd>();
+                    service.AddSingleton<CopyFilterVm>();
+                    service.AddSingleton<CopyFilterAction>();
                     var provider = service.BuildServiceProvider();
                     tsg.Assimilate();
                 }

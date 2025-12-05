@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RevitDevelop.DemoST.CopyViewTemplates.views"
         mc:Ignorable="d"
-        Title="CopyViewTemplateView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Copy View Template"
+        SizeToContent="Height"
+        MinHeight="100" 
+        Width="400">
+    <Window.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="15">
+        <StackPanel>
+            <TextBlock Text="Select Project"/>
+            <ComboBox 
+                ItemsSource="{Binding Projects}"
+                SelectedItem="{Binding project}"
+                DisplayMemberPath="Name"
+                Margin="0,5,0,0"/>
+        </StackPanel>
+        <StackPanel Margin="0,5,0,0">
+            <TextBlock Text="View Template"/>
+            <ListView 
+                ItemsSource="{Binding ViewTemplates}"
+                Height="200">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox 
+                            Content="{Binding Name}"
+                            IsChecked="{Binding IsSelected}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        <StackPanel Margin="0,5,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Button 
+                        Command="{Binding SelectAllCommand}"
+                        Margin="0,0,5,0"
+                        Content="Select All"/>
+                    <Button 
+                        Command="{Binding UnSelectCommand}"
+                        Content="UnSelect"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right"
+                    Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Button 
+                            Command="{Binding OkCommand}"
+                            Content="Ok"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </StackPanel>
 </Window>
