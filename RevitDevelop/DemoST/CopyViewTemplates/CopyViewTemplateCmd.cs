@@ -4,6 +4,7 @@ using Nice3point.Revit.Toolkit.External;
 using RevitDevelop.DemoST.CopyViewTemplates.actions;
 using RevitDevelop.DemoST.CopyViewTemplates.viewModels;
 using RevitDevelop.Utils.Messages;
+using RevitDevelop.Utils.Messages.UI;
 
 namespace RevitDevelop.DemoST.CopyViewTemplates
 {
@@ -18,13 +19,15 @@ namespace RevitDevelop.DemoST.CopyViewTemplates
                 tsg.Start();
                 try
                 {
-                    var service = new ServiceCollection();
-                    service.AddSingleton<CopyViewTemplateCmd>();
-                    service.AddSingleton<CopyViewTemplateAction>();
-                    service.AddSingleton<CopyViewTemplateVm>();
-                    var provider = service.BuildServiceProvider();
-                    var vm = provider.GetService<CopyViewTemplateVm>();
-                    vm.MainView.ShowDialog();
+                    MessageCustom.ShowInfo();
+                    IO.ShowInfo("発注専用のダンパファミリのみが処理対象です。ダンパファミリの変数に手動で入力した情報は削除されることがありま す。");
+                    //var service = new ServiceCollection();
+                    //service.AddSingleton<CopyViewTemplateCmd>();
+                    //service.AddSingleton<CopyViewTemplateAction>();
+                    //service.AddSingleton<CopyViewTemplateVm>();
+                    //var provider = service.BuildServiceProvider();
+                    //var vm = provider.GetService<CopyViewTemplateVm>();
+                    //vm.MainView.ShowDialog();
                     tsg.Assimilate();
                 }
                 catch (Autodesk.Revit.Exceptions.OperationCanceledException) { }

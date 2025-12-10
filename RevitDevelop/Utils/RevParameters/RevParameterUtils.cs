@@ -263,7 +263,7 @@ namespace RevitDevelop.Utils.RevParameters
             }
         }
         public static void CreateSharedParameters(
-            Document doc,
+            this Document doc,
             Autodesk.Revit.ApplicationServices.Application app,
             string pathShareParameter,
             BuiltInCategory cateToAdd)
@@ -275,6 +275,8 @@ namespace RevitDevelop.Utils.RevParameters
                 CategorySet categorySet = app.Create.NewCategorySet();
                 categorySet.Insert(category);
                 if (!File.Exists(pathShareParameter)) return;
+                var paraElements = doc.GetElementsFromClass<ParameterElement>()
+                    .ToList();
                 app.SharedParametersFilename = pathShareParameter;
                 DefinitionFile sharedParameterFile = app.OpenSharedParameterFile();
                 foreach (DefinitionGroup dg in sharedParameterFile.Groups)
@@ -284,6 +286,8 @@ namespace RevitDevelop.Utils.RevParameters
                     {
                         try
                         {
+                            if (paraElements.Any(x => x.Name == definition.Name))
+                                continue;
                             ExternalDefinition externalDefinition_With = definition as ExternalDefinition;
                             //parameter binding 
                             InstanceBinding newIB = app.Create.NewInstanceBinding(categorySet);

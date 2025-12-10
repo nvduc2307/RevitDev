@@ -5,7 +5,7 @@
         <LangVersion>latest</LangVersion>
         <PlatformTarget>x64</PlatformTarget>
         <ImplicitUsings>true</ImplicitUsings>
-        <PublishAddinFiles>false</PublishAddinFiles>
+        <PublishAddinFiles>true</PublishAddinFiles>
         <Configurations>Debug R20;Debug R21;Debug R22;Debug R23;Debug R24;Debug R25</Configurations>
         <Configurations>$(Configurations);Release R20;Release R21;Release R22;Release R23;Release R24;Release R25</Configurations>
     </PropertyGroup>
@@ -54,9 +54,14 @@
       <None Remove="Resources\FamiliesBases\RebarDetailBase.rfa" />
       <None Remove="Resources\Icons\PluginIcon16.png" />
       <None Remove="Resources\Icons\PluginIcon32.png" />
+      <None Remove="Resources\imgs\checking16x16.png" />
+      <None Remove="Resources\imgs\checking32x32.png" />
+      <None Remove="Resources\imgs\cross16x16.png" />
+      <None Remove="Resources\imgs\cross32x32.png" />
       <None Remove="Resources\RebarDatas\RebarDataDiameters.json" />
       <None Remove="Resources\RebarDatas\RebarDataWeights.json" />
       <None Remove="Resources\UI\index.html" />
+      <None Remove="Utils\Messages\Imgs\Info.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -64,6 +69,18 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="Resources\FamiliesBases\RebarDetailBase.rfa">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\imgs\checking16x16.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\imgs\checking32x32.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\imgs\cross16x16.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <Content Include="Resources\imgs\cross32x32.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="Resources\RebarDatas\RebarDataDiameters.json">
@@ -103,10 +120,12 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Utilities" Version="17.14.40264" />
         <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3595.46" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
+        <PackageReference Include="Nice3point.Revit.Api.AdWindows" Version="2024.3.30" />
         <PackageReference Include="Nice3point.Revit.Build.Tasks" Version="1.*">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
@@ -132,6 +151,9 @@
 
     <ItemGroup>
       <Reference Include="System.Windows.Forms" />
+      <Reference Include="Xceed.Wpf.AvalonDock">
+        <HintPath>Libs\Xceed.Wpf.AvalonDock.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
     <ItemGroup>
@@ -139,10 +161,12 @@
         <Resource Include="Resources\Icons\PluginIcon32.png" />
         <Resource Include="Resources\Icons\RibbonIcon16.png" />
         <Resource Include="Resources\Icons\RibbonIcon32.png" />
+        <Resource Include="Utils\Messages\Imgs\Info.png" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Resources\ShareParameters\" />
+      <Folder Include="TestDamper\models\" />
       <Folder Include="Tools\CreateScheduleRebar\" />
       <Folder Include="Tools\CreateStructuralRebars\" />
       <Folder Include="Tools\SettingRebars\SettingParameter\" />

@@ -12,6 +12,10 @@ namespace RevitDevelop.Utils.Paths
         {
             get => $"{AssemblyDirectory}\\Resources\\FamiliesBases";
         }
+        public static string Image
+        {
+            get => $"{AssemblyDirectory}\\Resources\\imgs";
+        }
         public static string AssemblyDirectory
         {
             get

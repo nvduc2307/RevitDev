@@ -35,9 +35,17 @@ namespace RevitDevelop
             //_initPannelDrawing();
             //_initPannelSchedule();
             //_registerUpdater();
-            _actionRemoveFileBak();
-            _initPannelPrimaDemo();
-            _intHtml();
+            //_actionRemoveFileBak();
+            //_initPannelPrimaDemo();
+            //_intHtml();
+            _Init();
+        }
+        public void _Init()
+        {
+            var panel = Application.CreatePanel("Tools", "Demo");
+            panel.AddPushButton<TestDamper.TestDamperCmd>("Demo")
+            .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
+            .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
         }
 
         private void _intHtml()
