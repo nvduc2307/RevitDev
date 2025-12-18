@@ -20,13 +20,13 @@ namespace RevitDevelop.TestDamper.viewModels
 
         private void MainView_Closed(object sender, EventArgs e)
         {
-            _action.RemoveTabCustomSettingProperties();
-            _action.IsEnalblePropertiesPanel(true);
+            //_action.RemoveTabCustomSettingProperties();
+            //_action.IsEnalblePropertiesPanel(true);
         }
 
         private void MainView_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            _action.CreateTabCustomSettingProperties();
+            //_action.CreateTabCustomSettingProperties();
             _action.GetItemOfProjectBrowser();
         }
 

@@ -19,15 +19,15 @@ namespace RevitDevelop.TestDamper
                 tsg.Start();
                 try
                 {
-                    //var service = new ServiceCollection();
-                    //service.AddSingleton<TestDamperCmd>();
-                    //service.AddSingleton<TestDamperAction>();
-                    //service.AddSingleton<TestDamperVM>();
-                    //var provider = service.BuildServiceProvider();
-                    //var vm = provider.GetService<TestDamperVM>();
-                    //vm.MainView.Show();
-                    var boViews = BrowserOrganization.GetCurrentBrowserOrganizationForViews(Document);
-                    tsg.Assimilate();
+                    var service = new ServiceCollection();
+                    service.AddSingleton<TestDamperCmd>();
+                    service.AddSingleton<TestDamperAction>();
+                    service.AddSingleton<TestDamperVM>();
+                    var provider = service.BuildServiceProvider();
+                    var vm = provider.GetService<TestDamperVM>();
+                    vm.MainView.Show();
+                    //var boViews = BrowserOrganization.GetCurrentBrowserOrganizationForViews(Document);
+                    //tsg.Assimilate();
                 }
                 catch (Autodesk.Revit.Exceptions.OperationCanceledException) { }
                 catch (Exception ex)
