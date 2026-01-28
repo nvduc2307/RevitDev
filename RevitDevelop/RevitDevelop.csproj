@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
+      <TargetFramework>net48</TargetFramework>
+    </PropertyGroup>
+  <PropertyGroup>
         <UseWPF>true</UseWPF>
         <LangVersion>latest</LangVersion>
         <PlatformTarget>x64</PlatformTarget>
@@ -165,6 +167,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="DaitoTest\compares\" />
       <Folder Include="Resources\ShareParameters\" />
       <Folder Include="SnoopTabs\views\" />
       <Folder Include="TestDamper\models\" />

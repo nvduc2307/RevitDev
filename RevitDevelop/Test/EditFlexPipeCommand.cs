@@ -77,7 +77,6 @@ namespace RevitDevelop.Test
                                 Document.Delete(ele.Id);
                                 ts.Commit();
                             }
-
                         }
                     } while (isDo);
                     //--------

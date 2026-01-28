@@ -1,33 +1,28 @@
 ﻿using Autodesk.Revit.Attributes;
-using Autodesk.Revit.DB.Structure;
-using Autodesk.Revit.UI;
 using Nice3point.Revit.Toolkit.External;
-using RevitDevelop.Utils.FilterElementsInRevit;
-using RevitDevelop.Utils.Geometries;
+using RevitDevelop.DaitoTest.actions;
+using RevitDevelop.DaitoTest.Utils;
 using RevitDevelop.Utils.Messages;
-using RevitDevelop.Utils.NumberUtils;
-using RevitDevelop.Utils.RevCurves;
 using RevitDevelop.Utils.SelectFilters;
-using RevitDevelop.Utils.SkipWarning;
-using System;
 
-namespace RevitDevelop.Test
+namespace RevitDevelop.DaitoTest
 {
     [Transaction(TransactionMode.Manual)]
-    public class TestCommand : ExternalCommand
+    public class DaitoTestCmd : ExternalCommand
     {
         public override void Execute()
         {
+
             using (var tsg = new TransactionGroup(Document, "new Command"))
             {
                 tsg.Start();
                 try
                 {
-                    var id = RevitCommandId.LookupPostableCommandId(PostableCommand.Undo);
-                    var id1 = RevitCommandId.LookupPostableCommandId(PostableCommand.Save);
-                    if (!UiApplication.CanPostCommand(id)) return;
-                    UiApplication.PostCommand(id);
-                    UiApplication.PostCommand(id1);
+                    var ac = Application.LoginUserId;
+                    var us = Application.Username;
+                    //var action = new DaitoTestAction(UiDocument);
+                    //var eles = UiDocument.Selection.PickElements(Document);
+                    //action.Execute(eles);
                     tsg.Assimilate();
                 }
                 catch (Autodesk.Revit.Exceptions.OperationCanceledException) { }
@@ -37,6 +32,7 @@ namespace RevitDevelop.Test
                     tsg.RollBack();
                 }
             }
+
         }
     }
 }
