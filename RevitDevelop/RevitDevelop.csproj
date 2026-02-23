@@ -143,6 +143,7 @@
         <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
+        <PackageReference Include="RestSharp" Version="113.1.0" />
         <PackageReference Include="Revit_All_Main_Versions_IFC_x64" Version="$(RevitVersion).*">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
