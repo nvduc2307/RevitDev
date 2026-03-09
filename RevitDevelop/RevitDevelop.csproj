@@ -119,6 +119,7 @@
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
         <PackageReference Include="Firebase.Database" Version="1.0.0" />
+        <PackageReference Include="log4net" Version="3.3.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
