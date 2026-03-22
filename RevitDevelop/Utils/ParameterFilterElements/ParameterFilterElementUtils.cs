@@ -1,6 +1,4 @@
-﻿using RevitDevelop.Utils.FilterElementsInRevit;
-
-namespace RevitDevelop.Utils.ParameterFilterElements
+﻿namespace RevitDevelop.Utils.ParameterFilterElements
 {
     public static class ParameterFilterElementUtils
     {
@@ -11,7 +9,11 @@ namespace RevitDevelop.Utils.ParameterFilterElements
             FilterRule filterRule)
         {
             var elementParaFilter = new ElementParameterFilter(filterRule, false);
-            var parameterFilterElements = document.GetElementsFromClass<ParameterFilterElement>(false);
+            var parameterFilterElements = new FilteredElementCollector(document)
+                .WhereElementIsNotElementType()
+                .OfClass(typeof(ParameterFilterElement))
+                .Cast<ParameterFilterElement>()
+                .ToList();
             var filterExisted = parameterFilterElements.FirstOrDefault(x => x.Name == filterName);
             if (filterExisted != null)
             {

@@ -1,5 +1,4 @@
 ﻿using RevitDevelop.Utils.Geometries;
-using RevitDevelop.Utils.RevCurves;
 
 namespace RevitDevelop.Utils.Compares
 {

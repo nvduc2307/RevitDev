@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
+      <TargetFramework>net48</TargetFramework>
+    </PropertyGroup>
+  <PropertyGroup>
         <UseWPF>true</UseWPF>
         <LangVersion>latest</LangVersion>
         <PlatformTarget>x64</PlatformTarget>
@@ -38,36 +40,30 @@
     <PropertyGroup>
         <StartAction>Program</StartAction>
         <StartProgram>C:\Program Files\Autodesk\Revit $(RevitVersion)\Revit.exe</StartProgram>
-        <StartArguments>/language ENG</StartArguments>
+        <StartArguments>/language JPN</StartArguments>
+        <!--<StartArguments>/language ENG</StartArguments>-->
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Tools\SettingRebars\SettingRebarTags\**" />
-      <EmbeddedResource Remove="Tools\SettingRebars\SettingRebarTags\**" />
-      <None Remove="Tools\SettingRebars\SettingRebarTags\**" />
-      <Page Remove="Tools\SettingRebars\SettingRebarTags\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Resources\FamiliesBases\Metric Detail Item.rft" />
-      <None Remove="Resources\FamiliesBases\RebarDetailBase.rfa" />
       <None Remove="Resources\Icons\PluginIcon16.png" />
       <None Remove="Resources\Icons\PluginIcon32.png" />
-      <None Remove="Resources\RebarDatas\RebarDataDiameters.json" />
-      <None Remove="Resources\RebarDatas\RebarDataWeights.json" />
+      <None Remove="Resources\imgs\checking16x16.png" />
+      <None Remove="Resources\imgs\checking32x32.png" />
+      <None Remove="Resources\imgs\cross16x16.png" />
+      <None Remove="Resources\imgs\cross32x32.png" />
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Resources\FamiliesBases\Metric Detail Item.rft">
+      <Content Include="Resources\imgs\checking16x16.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Resources\FamiliesBases\RebarDetailBase.rfa">
+      <Content Include="Resources\imgs\checking32x32.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Resources\RebarDatas\RebarDataDiameters.json">
+      <Content Include="Resources\imgs\cross16x16.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
-      <Content Include="Resources\RebarDatas\RebarDataWeights.json">
+      <Content Include="Resources\imgs\cross32x32.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
@@ -95,15 +91,16 @@
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
         <PackageReference Include="Firebase.Database" Version="1.0.0" />
+        <PackageReference Include="log4net" Version="3.3.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
-        <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3485.44">
-          <GeneratePathProperty>False</GeneratePathProperty>
-        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Utilities" Version="17.14.40264" />
+        <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3595.46" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
+        <PackageReference Include="Nice3point.Revit.Api.AdWindows" Version="2024.3.30" />
         <PackageReference Include="Nice3point.Revit.Build.Tasks" Version="1.*">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
@@ -119,6 +116,7 @@
         <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
+        <PackageReference Include="RestSharp" Version="113.1.0" />
         <PackageReference Include="Revit_All_Main_Versions_IFC_x64" Version="$(RevitVersion).*">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
@@ -139,13 +137,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Resources\ShareParameters\" />
       <Folder Include="Tools\CreateScheduleRebar\" />
       <Folder Include="Tools\CreateStructuralRebars\" />
-      <Folder Include="Tools\SettingRebars\SettingParameter\" />
       <Folder Include="Tools\ShopDrawingRebars\CreateTagRebars\" />
       <Folder Include="Tools\ShopDrawingRebars\CreatePullOutRebars\" />
-      <Folder Include="Utils\WindowEvent\EventKeys\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -154,30 +149,15 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>ApplicationLangs.resx</DependentUpon>
       </Compile>
-      <Compile Update="Properties\ParameterRebarLap.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>ParameterRebarLap.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Properties\PropertySchemalInfo.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>PropertySchemalInfo.resx</DependentUpon>
-      </Compile>
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Update="Properties\Langs\ApplicationLangs.ja-JP.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="Properties\Langs\ApplicationLangs.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>ApplicationLangs.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Properties\ParameterRebarLap.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>ParameterRebarLap.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Properties\PropertySchemalInfo.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>PropertySchemalInfo.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 

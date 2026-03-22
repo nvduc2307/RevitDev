@@ -1,5 +1,4 @@
 ﻿using RevitDevelop.Utils.Compares;
-using RevitDevelop.Utils.NumberUtils;
 
 namespace RevitDevelop.Utils.Geometries
 {
@@ -26,7 +25,7 @@ namespace RevitDevelop.Utils.Geometries
         }
         public static bool IsParallel(this XYZ vt1, XYZ vt2)
         {
-            return CompareInstances.IsAlmostEqual(Math.Abs(vt1.DotProduct(vt2)), 1);
+            return Math.Abs(vt1.DotProduct(vt2)).IsAlmostEqual(1);
         }
         public static XYZ RayIntersectPlane(this XYZ point, XYZ vecRay, PlanarFace planarFace)
         {
@@ -101,97 +100,6 @@ namespace RevitDevelop.Utils.Geometries
             {
                 return null;
             }
-        }
-        public static Line TrimLineToLine2D(Line lineBeTrim, Line lineReference)
-        {
-            var planeRefer = Plane.CreateByNormalAndOrigin(lineReference.Direction.CrossProduct(XYZ.BasisZ), lineReference.GetEndPoint(0));
-            var p1 = lineBeTrim.GetEndPoint(0);
-            var p2 = lineBeTrim.GetEndPoint(1);
-            var p1OnPlane = p1.RayIntersectPlane(lineBeTrim.Direction.Normalize(), planeRefer);
-            var p2OnPlane = p2.RayIntersectPlane(lineBeTrim.Direction.Normalize(), planeRefer);
-            return p1.DistanceTo(p1OnPlane) < p2.DistanceTo(p2OnPlane) ? Line.CreateBound(p1OnPlane, p2) : Line.CreateBound(p1, p2OnPlane);
-        }
-        public static bool IsIntersectWithLineSegmentOnPlane(this Line lineSegment1, Line lineSegment2)
-        {
-            bool r;
-
-            //Line 1
-            var u1 = lineSegment1.Direction.Normalize();
-            var n1 = u1.CrossProduct(XYZ.BasisZ).Normalize();
-            var start1 = lineSegment1.GetEndPoint(0);
-            var end1 = lineSegment1.GetEndPoint(1);
-
-            //Line 2
-            var u2 = lineSegment2.Direction.Normalize();
-            var n2 = u2.CrossProduct(XYZ.BasisZ).Normalize();
-            var start2 = lineSegment2.GetEndPoint(0);
-            var end2 = lineSegment2.GetEndPoint(1);
-
-            //If # parallel
-            if (!u1.IsParallel(u2))
-            {
-                bool conditon1;
-                bool conditon2;
-
-                var dot11 = CompareInstances.Round((start2 - start1).DotProduct(n1), EPS_DIGITS);
-                var dot12 = CompareInstances.Round((end2 - start1).DotProduct(n1), EPS_DIGITS);
-                conditon1 = dot11 * dot12 <= 0;
-
-                var dot21 = CompareInstances.Round((start1 - start2).DotProduct(n2), EPS_DIGITS);
-                var dot22 = CompareInstances.Round((end1 - start2).DotProduct(n2), EPS_DIGITS);
-                conditon2 = dot21 * dot22 <= 0;
-
-                r = conditon1 && conditon2;
-            }
-            else //If parallel
-            {
-                //Linesegment lie same Line
-                if (CompareInstances.IsAlmostEqual(start1.DotProduct(n1), start2.DotProduct(n1), EPS_DECIMAL))
-                {
-                    bool cond1;
-                    bool cond2;
-                    bool cond3;
-
-                    var dot1 = CompareInstances.Round((start2 - start1).DotProduct(n1), EPS_DIGITS);
-                    var dot2 = CompareInstances.Round((end2 - start1).DotProduct(n1), EPS_DIGITS);
-                    cond1 = dot1 * dot2 <= 0;
-
-                    var dot3 = CompareInstances.Round((start2 - end1).DotProduct(n1), EPS_DIGITS);
-                    var dot4 = CompareInstances.Round((end2 - end1).DotProduct(n1), EPS_DIGITS);
-                    cond2 = dot3 * dot4 <= 0;
-
-                    var dot5 = CompareInstances.Round((start2 - start1).DotProduct(n1), EPS_DIGITS);
-                    var dot6 = CompareInstances.Round((end2 - start1).DotProduct(n1), EPS_DIGITS);
-                    var dot7 = CompareInstances.Round((end1 - start1).DotProduct(n1), EPS_DIGITS);
-                    cond3 = (dot5 <= dot7) && (dot6 <= dot7);
-
-                    r = cond1 || cond2 || cond3;
-                }
-                else
-                {
-                    r = false;
-                }
-            }
-
-            return r;
-        }
-        public static List<XYZ> FixZ(this List<XYZ> xyzs, double z = 0)
-        {
-            return xyzs.Select(p => new XYZ(p.X, p.Y, z)).ToList();
-        }
-        public static XYZ FixZ(this XYZ xyz, double z = 0)
-        {
-            return new XYZ(xyz.X, xyz.Y, z);
-        }
-        public static Line FixZ(this Line line, double z = 0)
-        {
-            Line r = null;
-            try
-            {
-                r = Line.CreateBound(line.GetEndPoint(0).FixZ(z), line.GetEndPoint(1).FixZ(z));
-            }
-            catch { }
-            return r;
         }
         public static bool IsCounterClockWise(this List<XYZ> polygons)
         {
