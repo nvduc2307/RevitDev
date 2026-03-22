@@ -1,9 +1,6 @@
 ﻿using Autodesk.Revit.UI;
 using Firebase.Database;
 using Nice3point.Revit.Toolkit.External;
-using RevitDevelop.Updaters;
-using RevitDevelop.Utils.FireBaseListeners;
-using RevitDevelop.Utils.Messages;
 using System.IO;
 
 namespace RevitDevelop
@@ -43,49 +40,13 @@ namespace RevitDevelop
         public void _Init()
         {
             var panel = Application.CreatePanel("Tools", "Demo");
-            panel.AddPushButton<TestDamper.TestDamperCmd>("Demo")
-            .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
-            .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
+            
         }
-
-        private void _intHtml()
-        {
-            var panel = Application.CreatePanel("Tools", "html Demo");
-            panel.AddPushButton<testHtml.testHtmlCommand>("Html dm")
-            .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
-            .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
-        }
-
-        private void ControlledApplication_DocumentSynchronizedWithCentralAsync(object sender, Autodesk.Revit.DB.Events.DocumentSynchronizedWithCentralEventArgs e)
-        {
-            Task.Run(async () => { await FireBaseListener.SendRequest("abc", Client); });
-        }
-
         public override void OnShutdown()
         {
             _disposeUpdater();
         }
-        private void _initPannelPrimaDemo()
-        {
-            var panel = Application.CreatePanel("Tools", "Prima Demo");
-            panel.AddPushButton<DemoST.Command1.Command1Cmd>("Command1")
-            .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
-            .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
-
-            panel.AddPushButton<DemoST.Command3.Command3Cmd>("Command3")
-            .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
-            .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
-        }
-        private void _initPannelGeneral()
-        {
-            PANEL_GENERAL = Application.CreatePanel(Properties.Langs.ApplicationLangs.PANEL_GENERAL, Properties.Langs.ApplicationLangs.TAB);
-            PANEL_GENERAL.AddPushButton<Test.EditFlexPipeCommand>("test")
-                    .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
-                    .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
-            PANEL_GENERAL.AddPushButton<Tools.Syns.SynCommand>("SynCommand")
-                    .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
-                    .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
-        }
+        
         private void _initPannelConcrete()
         {
             PANEL_CONCRETE = Application.CreatePanel(Properties.Langs.ApplicationLangs.PANEL_CONCRETE, Properties.Langs.ApplicationLangs.TAB);
@@ -97,14 +58,6 @@ namespace RevitDevelop
         private void _initPannelRebar()
         {
             PANEL_REBAR = Application.CreatePanel(Properties.Langs.ApplicationLangs.PANEL_REBAR, Properties.Langs.ApplicationLangs.TAB);
-
-            PANEL_REBAR.AddPushButton<Tools.SettingRebars.SettingDiameters.SettingDiametersCmd>(Properties.Langs.ApplicationLangs.CMD_REBAR_SETTING_DIAMETER)
-                .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
-                .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
-            PANEL_REBAR.AddPushButton<Test.EditFlexPipeCommand>("Edit By")
-                .SetImage("/DPtools;component/Resources/Icons/RibbonIcon16.png")
-                .SetLargeImage("/DPtools;component/Resources/Icons/RibbonIcon32.png");
-
 
         }
         private void _initPannelDrawing()
@@ -138,7 +91,7 @@ namespace RevitDevelop
                 if (!System.IO.Directory.Exists(dir))
                     return;
                 var files = System.IO.Directory.GetFiles(dir)
-                    .Where(x=>x.Contains(fileName))
+                    .Where(x => x.Contains(fileName))
                     .Where(x =>
                     {
                         var names = x.Split('\\').LastOrDefault().Split('.').ToList();

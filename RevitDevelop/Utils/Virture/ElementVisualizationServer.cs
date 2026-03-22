@@ -1,7 +1,6 @@
 ﻿using Autodesk.Revit.DB.DirectContext3D;
 using Autodesk.Revit.DB.ExternalService;
 using Autodesk.Revit.UI;
-using RevitDevelop.Utils.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;

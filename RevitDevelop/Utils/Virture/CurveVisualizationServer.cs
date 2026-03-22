@@ -1,12 +1,10 @@
-﻿using Autodesk.Revit.DB.ExternalService;
-using Autodesk.Revit.UI;
-using RevitDevelop.Utils.Messages;
+﻿using Autodesk.Revit.UI;
 
 namespace RevitDevelop.Utils.Virture
 {
     public class CurveVisualizationServer : ElementVisualizationServer
     {
-        public List<Line> Lines {  get; set; }
+        public List<Line> Lines { get; set; }
         public CurveVisualizationServer(UIDocument uiDocument, List<Line> lines) : base(uiDocument)
         {
             Lines = lines;

@@ -45,34 +45,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="Tools\SettingRebars\SettingRebarTags\**" />
-      <EmbeddedResource Remove="Tools\SettingRebars\SettingRebarTags\**" />
-      <None Remove="Tools\SettingRebars\SettingRebarTags\**" />
-      <Page Remove="Tools\SettingRebars\SettingRebarTags\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Resources\FamiliesBases\Metric Detail Item.rft" />
-      <None Remove="Resources\FamiliesBases\RebarDetailBase.rfa" />
       <None Remove="Resources\Icons\PluginIcon16.png" />
       <None Remove="Resources\Icons\PluginIcon32.png" />
       <None Remove="Resources\imgs\checking16x16.png" />
       <None Remove="Resources\imgs\checking32x32.png" />
       <None Remove="Resources\imgs\cross16x16.png" />
       <None Remove="Resources\imgs\cross32x32.png" />
-      <None Remove="Resources\RebarDatas\RebarDataDiameters.json" />
-      <None Remove="Resources\RebarDatas\RebarDataWeights.json" />
-      <None Remove="Resources\UI\index.html" />
-      <None Remove="Utils\Messages\Imgs\Info.png" />
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="Resources\FamiliesBases\Metric Detail Item.rft">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Resources\FamiliesBases\RebarDetailBase.rfa">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <Content Include="Resources\imgs\checking16x16.png">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
@@ -83,15 +64,6 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <Content Include="Resources\imgs\cross32x32.png">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Resources\RebarDatas\RebarDataDiameters.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Resources\RebarDatas\RebarDataWeights.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-      <Content Include="Resources\UI\index.html">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
@@ -155,9 +127,6 @@
 
     <ItemGroup>
       <Reference Include="System.Windows.Forms" />
-      <Reference Include="Xceed.Wpf.AvalonDock">
-        <HintPath>Libs\Xceed.Wpf.AvalonDock.dll</HintPath>
-      </Reference>
     </ItemGroup>
 
     <ItemGroup>
@@ -165,20 +134,13 @@
         <Resource Include="Resources\Icons\PluginIcon32.png" />
         <Resource Include="Resources\Icons\RibbonIcon16.png" />
         <Resource Include="Resources\Icons\RibbonIcon32.png" />
-        <Resource Include="Utils\Messages\Imgs\Info.png" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DaitoTest\compares\" />
-      <Folder Include="Resources\ShareParameters\" />
-      <Folder Include="SnoopTabs\views\" />
-      <Folder Include="TestDamper\models\" />
       <Folder Include="Tools\CreateScheduleRebar\" />
       <Folder Include="Tools\CreateStructuralRebars\" />
-      <Folder Include="Tools\SettingRebars\SettingParameter\" />
       <Folder Include="Tools\ShopDrawingRebars\CreateTagRebars\" />
       <Folder Include="Tools\ShopDrawingRebars\CreatePullOutRebars\" />
-      <Folder Include="Utils\WindowEvent\EventKeys\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -186,16 +148,6 @@
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
         <DependentUpon>ApplicationLangs.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Properties\ParameterRebarLap.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>ParameterRebarLap.resx</DependentUpon>
-      </Compile>
-      <Compile Update="Properties\PropertySchemalInfo.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>PropertySchemalInfo.resx</DependentUpon>
       </Compile>
     </ItemGroup>
 
@@ -206,14 +158,6 @@
       <EmbeddedResource Update="Properties\Langs\ApplicationLangs.resx">
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>ApplicationLangs.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Properties\ParameterRebarLap.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>ParameterRebarLap.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Properties\PropertySchemalInfo.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>PropertySchemalInfo.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 
