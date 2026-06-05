@@ -1,0 +1,16 @@
+﻿using RevitDevelop.Tools.Schedules.model;
+using System.Collections.ObjectModel;
+
+namespace RevitDevelop.Tools.Schedules.utils
+{
+    public class ScheduleDocumentUtils
+    {
+        public static ObservableCollection<MepQuantityExportDocument> GetDefault(Document document)
+        {
+            var result = new List<MepQuantityExportDocument>();
+            if (document == null) return new ObservableCollection<MepQuantityExportDocument>(result);
+            result.Add(new MepQuantityExportDocument() { Document = document, Name = document.Title, Path = document.PathName });
+            return new ObservableCollection<MepQuantityExportDocument>(result);
+        }
+    }
+}

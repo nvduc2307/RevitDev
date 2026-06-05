@@ -1,0 +1,508 @@
+[
+  {
+    "Id": "14396",
+    "SheetName": "排水",
+    "FamilyName": "硬質塩化ﾋﾞﾆﾙ管",
+    "TypeName": "VU40A_屋内隠蔽_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 14,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 14,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 14,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 14,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 14,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "14399",
+    "SheetName": "排水",
+    "FamilyName": "硬質塩化ﾋﾞﾆﾙ管",
+    "TypeName": "VU50A_屋内隠蔽_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 15,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 15,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 15,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 15,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 15,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "14409",
+    "SheetName": "排水",
+    "FamilyName": "硬質塩化ﾋﾞﾆﾙ管",
+    "TypeName": "VU75A_屋内隠蔽_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 16,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 16,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 16,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 16,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 16,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "14414",
+    "SheetName": "排水",
+    "FamilyName": "硬質塩化ﾋﾞﾆﾙ管",
+    "TypeName": "VU100A_屋内隠蔽_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 17,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 17,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 17,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 17,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 17,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "14400",
+    "SheetName": "排水",
+    "FamilyName": "硬質塩化ﾋﾞﾆﾙ管",
+    "TypeName": "VU50A_地中埋設_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 18,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 18,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 18,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 18,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 18,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "14410",
+    "SheetName": "排水",
+    "FamilyName": "硬質塩化ﾋﾞﾆﾙ管",
+    "TypeName": "VU75A_地中埋設_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 19,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 19,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 19,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 19,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 19,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "14415",
+    "SheetName": "排水",
+    "FamilyName": "硬質塩化ﾋﾞﾆﾙ管",
+    "TypeName": "VU100A_地中埋設_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 20,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 20,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 20,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 20,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 20,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30529",
+    "SheetName": "排水",
+    "FamilyName": "防音配水管おとなし君 VP50×2800",
+    "TypeName": "日本管材ｾﾝﾀｰ(株)_屋内隠蔽",
+    "UnitScheduleType": 0,
+    "IndexRow": 21,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 21,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 21,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 21,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 21,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30530",
+    "SheetName": "排水",
+    "FamilyName": "防音配水管おとなし君 VP75×2800",
+    "TypeName": "日本管材ｾﾝﾀｰ(株)_屋内隠蔽",
+    "UnitScheduleType": 0,
+    "IndexRow": 22,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 22,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 22,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 22,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 22,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "16825",
+    "SheetName": "排水",
+    "FamilyName": "根切り",
+    "TypeName": "人力1m以内_共通_L",
+    "UnitScheduleType": 2,
+    "IndexRow": 23,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 23,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 23,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 23,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 23,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "16831",
+    "SheetName": "排水",
+    "FamilyName": "埋戻し",
+    "TypeName": "人力_共通_L",
+    "UnitScheduleType": 2,
+    "IndexRow": 24,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流北",
+        "IndexRow": 24,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "合流南",
+        "IndexRow": 24,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流北",
+        "IndexRow": 24,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "分流南",
+        "IndexRow": 24,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  }
+]

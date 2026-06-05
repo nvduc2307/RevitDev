@@ -1,0 +1,198 @@
+[
+  {
+    "Id": "30598",
+    "SheetName": "衛生",
+    "FamilyName": "洋風便器 取付費",
+    "TypeName": "_共通_L",
+    "UnitScheduleType": 0,
+    "IndexRow": 14,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "Model1",
+        "IndexRow": 14,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "Model2",
+        "IndexRow": 14,
+        "IndexColQuantity": "M",
+        "IndexColTotal": "N",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "15340",
+    "SheetName": "衛生",
+    "FamilyName": "ﾍﾟｰﾊﾟｰﾎﾙﾀﾞｰ取付費",
+    "TypeName": "_共通_L",
+    "UnitScheduleType": 0,
+    "IndexRow": 15,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "Model1",
+        "IndexRow": 15,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "Model2",
+        "IndexRow": 15,
+        "IndexColQuantity": "M",
+        "IndexColTotal": "N",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30599",
+    "SheetName": "衛生",
+    "FamilyName": "ﾀｵﾙ掛け 取付費",
+    "TypeName": "_共通_L",
+    "UnitScheduleType": 0,
+    "IndexRow": 16,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "Model1",
+        "IndexRow": 16,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "Model2",
+        "IndexRow": 16,
+        "IndexColQuantity": "M",
+        "IndexColTotal": "N",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30600",
+    "SheetName": "衛生",
+    "FamilyName": "台所水栓 取付費",
+    "TypeName": "_共通_L",
+    "UnitScheduleType": 0,
+    "IndexRow": 17,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "Model1",
+        "IndexRow": 17,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "Model2",
+        "IndexRow": 17,
+        "IndexColQuantity": "M",
+        "IndexColTotal": "N",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30601",
+    "SheetName": "衛生",
+    "FamilyName": "洗濯水栓 取付費",
+    "TypeName": "_共通_L",
+    "UnitScheduleType": 0,
+    "IndexRow": 18,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "Model1",
+        "IndexRow": 18,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "Model2",
+        "IndexRow": 18,
+        "IndexColQuantity": "M",
+        "IndexColTotal": "N",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "16946",
+    "SheetName": "衛生",
+    "FamilyName": "止水栓 取付費",
+    "TypeName": "DKTW-1Nｽﾄﾚｰﾄ_共通_L",
+    "UnitScheduleType": 0,
+    "IndexRow": 19,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "Model1",
+        "IndexRow": 19,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "Model2",
+        "IndexRow": 19,
+        "IndexColQuantity": "M",
+        "IndexColTotal": "N",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "15416",
+    "SheetName": "衛生",
+    "FamilyName": "洗濯防水ﾊﾟﾝ取付費",
+    "TypeName": "_共通_L",
+    "UnitScheduleType": 0,
+    "IndexRow": 20,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "Model1",
+        "IndexRow": 20,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "Model2",
+        "IndexRow": 20,
+        "IndexColQuantity": "M",
+        "IndexColTotal": "N",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  }
+]

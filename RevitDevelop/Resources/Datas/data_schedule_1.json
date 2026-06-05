@@ -1,0 +1,705 @@
+[
+  {
+    "Id": "30732",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 保温付樹脂管 13φ",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 1,
+    "IndexRow": 11,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 11,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 11,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 11,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30733",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 保温付樹脂管 16φ",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 1,
+    "IndexRow": 12,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 12,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 12,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 12,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30733",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 保温付樹脂管 20φ",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 1,
+    "IndexRow": 13,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 13,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 13,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 13,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30734",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ｴﾙﾎﾞ 16",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 14,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 14,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 14,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 14,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30735",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾁｰｽﾞ 16",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 15,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 15,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 15,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 15,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾁｰｽﾞ 20×20×16",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 16,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 16,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 16,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 16,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾁｰｽﾞ 20×20×13",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 17,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 17,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 17,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 17,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾁｰｽﾞ 20×16×20",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 18,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 18,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 18,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 18,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾁｰｽﾞ 16×16×13",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 19,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 19,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 19,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 19,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾁｰｽﾞ 16×13×16",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 20,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 20,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 20,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 20,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾁｰｽﾞ 16×13×13",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 21,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 21,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 21,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 21,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30738",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾒｽｱﾀﾞﾌﾟﾀｰ 13",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 22,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 22,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 22,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 22,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30739",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ｵｽｱﾀﾞﾌﾟﾀｰ 13",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 23,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 23,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 23,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 23,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30740",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ｵｽｱﾀﾞﾌﾟﾀｰ 16",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 24,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 24,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 24,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 24,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30741",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 床上用ｱﾀﾞﾌﾟﾀｰ 13",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 25,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 25,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 25,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 25,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30742",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 座付水栓ｴﾙﾎﾞ 13",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 26,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 26,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 26,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 26,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30743",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾍｯﾀﾞｰ 16φ×13φ 2回路",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 27,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 27,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 27,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 27,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30744",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾍｯﾀﾞｰ 16φ×13φ 3回路",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 28,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 28,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 28,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 28,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30745",
+    "SheetName": "給水・給湯",
+    "FamilyName": "DKﾕﾆｯﾄ配管 ﾍｯﾀﾞｰ 16φ×13φ 4回路",
+    "TypeName": "ﾒｰｶｰ見積より",
+    "UnitScheduleType": 0,
+    "IndexRow": 29,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水北",
+        "IndexRow": 29,
+        "IndexColQuantity": "Q",
+        "IndexColTotal": "R",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給水南バル",
+        "IndexRow": 29,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "給湯",
+        "IndexRow": 29,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  }
+]

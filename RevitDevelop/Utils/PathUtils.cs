@@ -4,6 +4,10 @@ namespace RevitDevelop.Utils
 {
     public static class PathUtils
     {
+        public static string FolderTemplate
+        {
+            get => $"{AssemblyDirectory}\\Resources\\Templates";
+        }
         public static string AssemblyDirectory
         {
             get
