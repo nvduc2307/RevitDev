@@ -1,6 +1,6 @@
 ﻿namespace RevitDevelop.Tools.Schedules.model
 {
-    public class MepQuantityExportDocument
+    public class ScheduleDocument
     {
         public Document Document { get; set; }
         public string Path { get; set; }

@@ -40,7 +40,7 @@ namespace RevitDevelop.Tools.Schedules.action
             var item = _view.dataModelProjects;
             if (item == null) return;
             if (item.SelectedIndex < 0) return;
-            if (!(item.SelectedItem is MepQuantityExportDocument doc)) return;
+            if (!(item.SelectedItem is ScheduleDocument doc)) return;
             var elementIndex = _viewModel.ModelProjects.FirstOrDefault(x => x.Path == doc.Path && x.Name == doc.Name);
             if (elementIndex == null) return;
             _viewModel.ModelProjects.Remove(elementIndex);
@@ -74,7 +74,7 @@ namespace RevitDevelop.Tools.Schedules.action
                 }
                 if (_viewModel.ModelProjects.Any(x => x.Path == pathFile)) return;
                 var doc = existingDoc ?? _uiApp.Application.OpenDocumentFile(pathFile);
-                _viewModel.ModelProjects.Add(new MepQuantityExportDocument() { Document = doc, Name = doc.Title, Path = doc.PathName });
+                _viewModel.ModelProjects.Add(new ScheduleDocument() { Document = doc, Name = doc.Title, Path = doc.PathName });
             }
         }
 

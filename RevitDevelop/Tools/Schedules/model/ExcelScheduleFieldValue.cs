@@ -1,6 +1,6 @@
 ﻿namespace RevitDevelop.Tools.Schedules.model
 {
-    public class DTScheduleFieldValue
+    public class ExcelScheduleFieldValue
     {
         public string LevelName { get; set; }
         public string ProjectName { get; set; }
@@ -9,5 +9,6 @@
         public string IndexColTotal { get; set; }
         public double QuantityValue { get; set; }//数量
         public double TotalValue { get; set; }//合計
+        public Action<ExcelScheduleFieldValue> ActionInvoke { get; set; }
     }
 }

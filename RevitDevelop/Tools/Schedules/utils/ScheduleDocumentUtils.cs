@@ -5,12 +5,12 @@ namespace RevitDevelop.Tools.Schedules.utils
 {
     public class ScheduleDocumentUtils
     {
-        public static ObservableCollection<MepQuantityExportDocument> GetDefault(Document document)
+        public static ObservableCollection<ScheduleDocument> GetDefault(Document document)
         {
-            var result = new List<MepQuantityExportDocument>();
-            if (document == null) return new ObservableCollection<MepQuantityExportDocument>(result);
-            result.Add(new MepQuantityExportDocument() { Document = document, Name = document.Title, Path = document.PathName });
-            return new ObservableCollection<MepQuantityExportDocument>(result);
+            var result = new List<ScheduleDocument>();
+            if (document == null) return new ObservableCollection<ScheduleDocument>(result);
+            result.Add(new ScheduleDocument() { Document = document, Name = document.Title, Path = document.PathName });
+            return new ObservableCollection<ScheduleDocument>(result);
         }
     }
 }

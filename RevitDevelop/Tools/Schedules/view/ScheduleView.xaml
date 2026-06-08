@@ -57,18 +57,18 @@
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Center">
                         <Button
                             Command="{Binding OnAddModelCmd}"
                             Content="+"
-                            Height="40"
-                            Width="40"/>
+                            Height="30"
+                            Width="30"/>
                         <Button
                             Command="{Binding OnRemoveModelCmd}"
                             Margin="0,10,0,0"
                             Content="-"
-                            Height="40"
-                            Width="40"/>
+                            Height="30"
+                            Width="30"/>
                     </StackPanel>
                     <ListView 
                         x:Name="dataModelProjects"

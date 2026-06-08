@@ -78,5 +78,24 @@ namespace RevitDevelop.Tools.Schedules.utils
             {
             }
         }
+        public static List<IXLCell> GetCellMappings(IXLWorksheet sheet, MappingRecord map, string col)
+        {
+            var results = new List<IXLCell>();
+            var lastCell = sheet.LastCellUsed();
+            var lastRowIndex = lastCell.Address.RowNumber;
+            for (int i = 0; i < lastRowIndex; i++)
+            {
+                try
+                {
+                    var cell = sheet.Cell(i + 1, col);
+                    if (!cell.Value.ToString().Contains(map.WorkItem)) continue;
+                    results.Add(cell);
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return results;
+        }
     }
 }

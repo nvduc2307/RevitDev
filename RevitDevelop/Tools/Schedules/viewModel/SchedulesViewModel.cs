@@ -15,8 +15,8 @@ namespace RevitDevelop.Tools.Schedules.viewModel
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<MepQuantityExportDocument> _modelProjects;
-        public ObservableCollection<MepQuantityExportDocument> ModelProjects
+        private ObservableCollection<ScheduleDocument> _modelProjects;
+        public ObservableCollection<ScheduleDocument> ModelProjects
         {
             get => _modelProjects;
             set

@@ -1,6 +1,6 @@
 ﻿namespace RevitDevelop.Tools.Schedules.model
 {
-    public class DTScheduleField
+    public class ExcelScheduleField
     {
         public string Id { set; get; }
         public string SheetName { get; set; }
@@ -8,6 +8,6 @@
         public string TypeName { get; set; } //備考
         public int UnitScheduleType { get; set; }
         public int IndexRow { get; set; }
-        public List<DTScheduleFieldValue> ScheduleFieldValues { get; set; }
+        public List<ExcelScheduleFieldValue> ScheduleFieldValues { get; set; }
     }
 }

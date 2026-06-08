@@ -17,7 +17,7 @@ namespace RevitDevelop.Tools.Schedules.action
             void _solve(string path)
             {
                 if (!File.Exists(path)) return;
-                var datas = JsonConvert.DeserializeObject<List<DTScheduleField>>(File.ReadAllText(path));
+                var datas = JsonConvert.DeserializeObject<List<ExcelScheduleField>>(File.ReadAllText(path));
                 if (datas == null) return;
                 if (!datas.Any()) return;
                 var modelValueFrs = datas.First().ScheduleFieldValues;
@@ -103,9 +103,9 @@ namespace RevitDevelop.Tools.Schedules.action
                 @"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_5.json",
                 JsonConvert.SerializeObject(sheet5));
         }
-        private static List<DTScheduleField> GetDataSheduleFieldSheet(int minR, int maxR, List<string> models, List<string> levels, string sheetName)
+        private static List<ExcelScheduleField> GetDataSheduleFieldSheet(int minR, int maxR, List<string> models, List<string> levels, string sheetName)
         {
-            var results = new List<DTScheduleField>();
+            var results = new List<ExcelScheduleField>();
             var path = @"D:\proj\prima\DaitoKentaku_Phase2\template\20260508\Revit版 ファビオネストF1S設備積算内訳書.xlsx";
             if (!File.Exists(path)) throw new Exception("OutputFilePath is not existed");
             using (var wb = new XLWorkbook(path))
@@ -116,7 +116,7 @@ namespace RevitDevelop.Tools.Schedules.action
                 var index = 1;
                 for (int i = minR; i < maxR; i++)
                 {
-                    var field = new DTScheduleField
+                    var field = new ExcelScheduleField
                     {
                         Id = ws.Cell(i, "A").Value.ToString(),
                         SheetName = sheetName,
@@ -124,11 +124,11 @@ namespace RevitDevelop.Tools.Schedules.action
                         TypeName = ws.Cell(i, "F").Value.ToString(),
                         IndexRow = i,
                         UnitScheduleType = 0,
-                        ScheduleFieldValues = new List<DTScheduleFieldValue>()
+                        ScheduleFieldValues = new List<ExcelScheduleFieldValue>()
                     };
                     for (int j = 0; j < models.Count; j++)
                     {
-                        var scheduleFieldValue = new DTScheduleFieldValue
+                        var scheduleFieldValue = new ExcelScheduleFieldValue
                         {
                             LevelName = levels[j],
                             ProjectName = models[j],

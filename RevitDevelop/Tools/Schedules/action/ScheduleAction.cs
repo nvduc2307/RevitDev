@@ -15,6 +15,8 @@ namespace RevitDevelop.Tools.Schedules.action
         private ScheduleView _view;
         private SchedulesViewModel _viewModel;
         private List<MappingRecord> _mappingRecords;
+        private ExcelScheduleField _scheduleWaterAndHotWateSupply;
+        private WriteScheduleWaterAndHotWateSupplyAction _scheduleWaterAndHotWateSupplyAction;
         public ScheduleAction(UIApplication uiApp)
         {
             _uiApp = uiApp;
@@ -33,6 +35,8 @@ namespace RevitDevelop.Tools.Schedules.action
                 OnCancelCmd = new RelayCommand(_OnCancelCmd),
             };
             _mappingRecords = ScheduleMappingUtils.GetMappingRecords();
+            _scheduleWaterAndHotWateSupplyAction = 
+                new WriteScheduleWaterAndHotWateSupplyAction(_mappingRecords, _scheduleWaterAndHotWateSupply);
             _view = new ScheduleView() { DataContext = _viewModel};
         }
         public void Execute()
