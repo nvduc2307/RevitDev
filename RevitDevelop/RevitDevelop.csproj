@@ -44,14 +44,14 @@
     <PropertyGroup>
         <StartAction>Program</StartAction>
         <StartProgram>C:\Program Files\Autodesk\Revit $(RevitVersion)\Revit.exe</StartProgram>
-        <!--<StartArguments>/language JPN</StartArguments>-->
-        <StartArguments>/language ENG</StartArguments>
+        <StartArguments>/language JPN</StartArguments>
+        <!--<StartArguments>/language ENG</StartArguments>-->
     </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="ClosedXML" Version="0.105.0" />
+      <PackageReference Include="ClosedXML" Version="0.95.4" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>

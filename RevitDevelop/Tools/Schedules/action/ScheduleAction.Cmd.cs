@@ -1,4 +1,5 @@
-﻿using RevitDevelop.Tools.Schedules.model;
+﻿using ClosedXML.Excel;
+using RevitDevelop.Tools.Schedules.model;
 using RevitDevelop.Tools.Schedules.utils;
 using System.IO;
 using System.Windows.Forms;
@@ -14,6 +15,9 @@ namespace RevitDevelop.Tools.Schedules.action
 
         private void _OnOkCmd()
         {
+            _scheduleWaterAndHotWateSupplyAction
+                .Execute(_viewModel.PathFileOutput, _viewModel.SheetNameWaterAndHotWateSupply,
+                _viewModel.ModelProjects.ToList(), _viewModel.ScheduleNameWaterAndHotWateSupply.Split(',').ToList());
         }
 
         private void _OnSettingMappingCmd()

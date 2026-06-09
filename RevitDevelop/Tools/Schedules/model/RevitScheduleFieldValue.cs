@@ -2,6 +2,7 @@
 {
     public class RevitScheduleFieldValue
     {
+        public string documentName {  get; set; }
         public string ScheduleName { get; set; }
         public string FamilyName { get; set; }
         public string TypeName { get; set; }

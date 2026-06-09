@@ -1,9 +1,102 @@
 ﻿using RevitDevelop.Tools.Schedules.model;
+using RevitDevelop.Utils.Numbers;
 
 namespace RevitDevelop.Tools.Schedules.utils
 {
     public class RevitScheduleFieldUtils
     {
+        public static List<RevitScheduleFieldValue> GetDataSchedule(Document document, List<string> scheduleNames)
+        {
+            var result = new List<RevitScheduleFieldValue>();
+            var scheduleAlls = new FilteredElementCollector(document)
+                .WhereElementIsNotElementType()
+                .OfClass(typeof(ViewSchedule))
+                .Cast<ViewSchedule>()
+                .Where(x => !x.IsTemplate)
+                .ToList();
+            if (!scheduleAlls.Any()) return result;
+            var schedules = scheduleAlls
+                .Where(x => scheduleNames.Any(y => y == x.Name))
+                .ToList();
+            if (!schedules.Any()) return result;
+            foreach (var schedule in schedules)
+            {
+                var data = GetDataSchedule(schedule);
+                if (!data.Any()) continue;
+                result.AddRange(data);
+            }
+            return result;
+        }
+        private static List<RevitScheduleFieldValue> GetDataSchedule(ViewSchedule schedule)
+        {
+            var result = new List<RevitScheduleFieldValue>();
+            if (schedule == null) return result;
+            TableData tableData = schedule.GetTableData();
+            TableSectionData body = tableData.GetSectionData(SectionType.Body);
+            int nRows = body.NumberOfRows;
+            int nCols = body.NumberOfColumns;
+            var datas = new List<string>();
+
+            for (int r = 0; r < nRows; r++)
+            {
+                var item = new RevitScheduleFieldValue();
+                item.documentName = schedule.Document.Title;
+                item.ScheduleName = schedule.Name;
+                for (int c = 0; c < nCols; c++)
+                {
+                    try
+                    {
+                        string text = schedule.GetCellText(SectionType.Body, r, c);
+                        if (string.IsNullOrEmpty(text)) break;
+                        var colType = GetScheduleDeviceFieldType(schedule, c);
+                        switch (colType)
+                        {
+                            case RevitScheduleFieldValueType.Unknown:
+                                break;
+                            case RevitScheduleFieldValueType.Family:
+                                item.FamilyName = text;
+                                break;
+                            case RevitScheduleFieldValueType.Type:
+                                item.TypeName = text;
+                                break;
+                            case RevitScheduleFieldValueType.SystemType:
+                                item.SystemName = text;
+                                break;
+                            case RevitScheduleFieldValueType.Count:
+                                item.Quantity = text.GetIntegerFromText();
+                                if (item.Quantity == 0) break;
+                                break;
+                            case RevitScheduleFieldValueType.Length:
+                                item.Length = text.GetDoubleFromText();
+                                if (item.Length == 0) break;
+                                break;
+                            case RevitScheduleFieldValueType.Size:
+                                item.Size = text;
+                                break;
+                            case RevitScheduleFieldValueType.KyusuiCheck:
+                                item.IsKyusuiChecked = text.ToUpper() == "YES" || text.ToUpper() == "はい" ? true : false;
+                                if (!item.IsKyusuiChecked) break;
+                                break;
+                            case RevitScheduleFieldValueType.KyutouCheck:
+                                item.IsDrainageSystemChecked = text.ToUpper() == "YES" ? true : false;
+                                break;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+                if (string.IsNullOrEmpty(item.FamilyName)) continue;
+                if (string.IsNullOrEmpty(item.TypeName)) continue;
+                if (string.IsNullOrEmpty(item.SystemName)) continue;
+                if (item.Quantity == 0) continue;
+                if (item.Length == 0) continue;
+                if (!item.IsKyusuiChecked) continue;
+                if (string.IsNullOrEmpty(item.Size)) continue;
+                result.Add(item);
+            }
+            return result;
+        }
         public static RevitScheduleFieldValueType GetScheduleDeviceFieldType(
             ViewSchedule schedule,
             int bodyColCount)
@@ -59,7 +152,7 @@ namespace RevitDevelop.Tools.Schedules.utils
             }
             return result;
         }
-        public static RevitScheduleFieldValueType GetScheduleDeviceFieldType(
+        private static RevitScheduleFieldValueType GetScheduleDeviceFieldType(
             ScheduleField field,
             HashSet<ElementId> familyIds,
             HashSet<ElementId> typeIds,

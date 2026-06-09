@@ -9,6 +9,5 @@
         public string IndexColTotal { get; set; }
         public double QuantityValue { get; set; }//数量
         public double TotalValue { get; set; }//合計
-        public Action<ExcelScheduleFieldValue> ActionInvoke { get; set; }
     }
 }

@@ -7,13 +7,13 @@ namespace RevitDevelop.Tools.Schedules.action
 {
     public class DataAction
     {
-        public static void ModifyData()
+        public static void ModifyData(string dir)
         {
-            _solve(@"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_1.json");
-            _solve(@"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_2.json");
-            _solve(@"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_3.json");
-            _solve(@"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_4.json");
-            _solve(@"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_5.json");
+            _solve($"{dir}\\data_schedule_1.json");
+            _solve($"{dir}\\data_schedule_2.json");
+            _solve($"{dir}\\data_schedule_3.json");
+            _solve($"{dir}\\data_schedule_4.json");
+            _solve($"{dir}\\data_schedule_5.json");
             void _solve(string path)
             {
                 if (!File.Exists(path)) return;
@@ -34,7 +34,7 @@ namespace RevitDevelop.Tools.Schedules.action
                 File.WriteAllText(path, JsonConvert.SerializeObject(datas));
             }
         }
-        public static void ExecuteData()
+        public static void ExecuteData(string dir, string path)
         {
             var levelSheet1 = new List<string>()
             {
@@ -81,32 +81,33 @@ namespace RevitDevelop.Tools.Schedules.action
                 "1階中住戸　LHパック",
                 "2階端部住戸　LHパック",
                 "2階中住戸　LHパック" };
-            var sheet1 = GetDataSheduleFieldSheet(11, 29, modelSheet1, levelSheet1, "給水・給湯");
-            var sheet2 = GetDataSheduleFieldSheet(14, 24, modelSheet2, levelSheet2, "排水");
-            var sheet3 = GetDataSheduleFieldSheet(14, 20, modelSheet3, levelSheet3, "衛生");
-            var sheet4 = GetDataSheduleFieldSheet(11, 42, modelSheet4, levelSheet4, "換気・LS");
-            var sheet5 = GetDataSheduleFieldSheet(11, 42, modelSheet5, levelSheet5, "換気・LH");
+            var sheet1 = GetDataSheduleFieldSheet(path, 11, 29, modelSheet1, levelSheet1, "給水・給湯");
+            var sheet2 = GetDataSheduleFieldSheet(path, 14, 24, modelSheet2, levelSheet2, "排水");
+            var sheet3 = GetDataSheduleFieldSheet(path, 14, 20, modelSheet3, levelSheet3, "衛生");
+            var sheet4 = GetDataSheduleFieldSheet(path, 11, 42, modelSheet4, levelSheet4, "換気・LS");
+            var sheet5 = GetDataSheduleFieldSheet(path, 11, 42, modelSheet5, levelSheet5, "換気・LH");
 
             File.WriteAllText(
-                @"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_1.json",
+                $"{dir}\\data_schedule_1.json",
                 JsonConvert.SerializeObject(sheet1));
             File.WriteAllText(
-                @"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_2.json",
+                $"{dir}\\data_schedule_2.json",
                 JsonConvert.SerializeObject(sheet2));
             File.WriteAllText(
-                @"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_3.json",
+                $"{dir}\\data_schedule_3.json",
                 JsonConvert.SerializeObject(sheet3));
             File.WriteAllText(
-                @"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_4.json",
+                $"{dir}\\data_schedule_4.json",
                 JsonConvert.SerializeObject(sheet4));
             File.WriteAllText(
-                @"D:\proj\me\RevitDev\RevitDevelop\Resources\Datas\data_schedule_5.json",
+                $"{dir}\\data_schedule_5.json",
                 JsonConvert.SerializeObject(sheet5));
         }
-        private static List<ExcelScheduleField> GetDataSheduleFieldSheet(int minR, int maxR, List<string> models, List<string> levels, string sheetName)
+        private static List<ExcelScheduleField> GetDataSheduleFieldSheet(
+            string path,
+            int minR, int maxR, List<string> models, List<string> levels, string sheetName)
         {
             var results = new List<ExcelScheduleField>();
-            var path = @"D:\proj\prima\DaitoKentaku_Phase2\template\20260508\Revit版 ファビオネストF1S設備積算内訳書.xlsx";
             if (!File.Exists(path)) throw new Exception("OutputFilePath is not existed");
             using (var wb = new XLWorkbook(path))
             {
