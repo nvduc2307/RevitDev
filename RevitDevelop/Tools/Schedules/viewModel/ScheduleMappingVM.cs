@@ -4,7 +4,16 @@ namespace RevitDevelop.Tools.Schedules.viewModel
 {
     public class ScheduleMappingVM : ObservableObject
     {
-        public List<MappingRecord> MappingRecordSettings { get; set; }
+        private List<MappingRecord> _mappingRecordSettings;
+        public List<MappingRecord> MappingRecordSettings
+        {
+            get => _mappingRecordSettings;
+            set
+            {
+                _mappingRecordSettings = value;
+                OnPropertyChanged();
+            }
+        }
         public RelayCommand AddCommand { get; set; }
         public RelayCommand RemoveCommand { get; set; }
         public RelayCommand ExportCommand { get; set; }

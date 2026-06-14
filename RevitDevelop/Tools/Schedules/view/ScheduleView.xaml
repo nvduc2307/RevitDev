@@ -143,7 +143,12 @@
             <StackPanel 
                 Orientation="Horizontal">
                 <Button
+                    Command="{Binding OnSettingModelsCmd}"
+                    Content="Models"
+                    Width="70"/>
+                <Button
                     Command="{Binding OnSettingMappingCmd}"
+                    Margin="10,0,0,0"
                     Content="Mapping"
                     Width="70"/>
                 <Button

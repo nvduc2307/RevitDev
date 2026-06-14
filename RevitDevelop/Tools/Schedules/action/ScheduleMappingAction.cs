@@ -62,7 +62,7 @@ namespace RevitDevelop.Tools.Schedules.action
                 {
                     var path = fileOpen.FileName;
                     _viewModel.MappingRecordSettings = ScheduleMappingUtils.GetMappingRecords(path);
-                    IO.ShowInfo("", "Complete");
+                    IO.ShowInfo("Complete");
                 }
             }
             catch (Exception)
@@ -82,13 +82,18 @@ namespace RevitDevelop.Tools.Schedules.action
                 var path = fileSave.FileName;
                 if (File.Exists(path))
                 {
-                    IO.ShowWarning("", "File is existed");
+                    IO.ShowWarning("File is existed");
                     return;
                 }
                 var pathTemplate = $"{PathUtils.FolderTemplate}\\daito_schedule_mapping_record.xlsx";
+                if(!File.Exists(pathTemplate))
+                {
+                    IO.ShowWarning("Not Complete");
+                    return;
+                }
                 File.Copy(pathTemplate, path, true);
                 ScheduleMappingUtils.ExportFileMappingRecord(path, _viewModel.MappingRecordSettings);
-                IO.ShowInfo("", "Complete");
+                IO.ShowInfo("Complete");
             }
         }
 

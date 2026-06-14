@@ -34,7 +34,7 @@ namespace RevitDevelop.Tools.Schedules.action
             };
             _mappingRecords = ScheduleMappingUtils.GetMappingRecords();
             _scheduleWaterAndHotWateSupplyAction =
-                new WriteScheduleWaterAndHotWateSupplyAction(_mappingRecords);
+                new WriteScheduleWaterAndHotWateSupplyAction();
             _view = new ScheduleView() { DataContext = _viewModel };
         }
         public void Execute()
