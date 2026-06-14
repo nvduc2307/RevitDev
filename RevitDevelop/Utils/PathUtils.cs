@@ -18,6 +18,14 @@ namespace RevitDevelop.Utils
                 return System.IO.Path.GetDirectoryName(path);
             }
         }
+        public static string DesktopFolder
+        {
+            get
+            {
+                var folder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                return folder;
+            }
+        }
         public static string AppDataDirectory
         {
             get

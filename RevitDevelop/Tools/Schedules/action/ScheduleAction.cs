@@ -12,7 +12,7 @@ namespace RevitDevelop.Tools.Schedules.action
         private UIDocument _uidocument;
         private Document _document;
         private ScheduleView _view;
-        private SchedulesViewModel _viewModel;
+        private SchedulesVM _viewModel;
         private List<MappingRecord> _mappingRecords;
         private WriteScheduleWaterAndHotWateSupplyAction _scheduleWaterAndHotWateSupplyAction;
         public ScheduleAction(UIApplication uiApp)
@@ -20,7 +20,7 @@ namespace RevitDevelop.Tools.Schedules.action
             _uiApp = uiApp;
             _uidocument = _uiApp.ActiveUIDocument;
             _document = _uidocument == null ? null : _uidocument.Document;
-            _viewModel = new SchedulesViewModel()
+            _viewModel = new SchedulesVM()
             {
                 SheetNameWaterAndHotWateSupply = "給水・給湯",
                 ScheduleNameWaterAndHotWateSupply = "フレキシブル配管集計2,配管集計2,配管継手集計エルボ樹脂管用2,配管継手集計エルボ樹脂管以外2",
@@ -30,6 +30,7 @@ namespace RevitDevelop.Tools.Schedules.action
                 OnRemoveModelCmd = new RelayCommand(_OnRemoveModelCmd),
                 OnSettingMappingCmd = new RelayCommand(_OnSettingMappingCmd),
                 OnOkCmd = new RelayCommand(_OnOkCmd),
+                OnSettingModelsCmd = new RelayCommand(_OnSettingModelsCmd),
                 OnCancelCmd = new RelayCommand(_OnCancelCmd),
             };
             _mappingRecords = ScheduleMappingUtils.GetMappingRecords();
@@ -37,6 +38,7 @@ namespace RevitDevelop.Tools.Schedules.action
                 new WriteScheduleWaterAndHotWateSupplyAction();
             _view = new ScheduleView() { DataContext = _viewModel };
         }
+
         public void Execute()
         {
             _view.ShowDialog();

@@ -5,7 +5,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:RevitDevelop.Tools.Schedules.view"
     mc:Ignorable="d"
-    mc:Ignorable="d"
     Title="ScheduleView" 
     WindowStartupLocation="CenterScreen"
     MinHeight="400"
@@ -26,39 +25,82 @@
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <ListView 
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <TextBox 
+                IsReadOnly="True"
+                Text="{Binding SettingProjectInfomation.PathFolderModel, UpdateSourceTrigger=PropertyChanged}"
+                VerticalContentAlignment="Center"
+                VerticalAlignment="Top"/>
+            <Button
+                Command="{Binding SelectFolderModelsCmd}"
+                Content="..."
+                VerticalAlignment="Top"
+                Grid.Column="1"/>
+        </Grid>
+        <DataGrid 
             x:Name="dataModelProjects"
-            Grid.Column="1"
-            SelectionMode="Single"
-            ItemsSource="{Binding ModelProjects, UpdateSourceTrigger=PropertyChanged}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid IsEnabled="{Binding CanDelete}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.5*"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock 
-                            Margin="0,0,10,0"
-                            Grid.Column="0"
-                            VerticalAlignment="Center" 
-                            Text="{Binding Name}"/>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            ItemsSource="{Binding SettingProjectInfomation.ProjectInfomations, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            CanUserDeleteRows="False"
+            CanUserAddRows="False"
+            HeadersVisibility="None"
+            ColumnWidth="*">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn 
+                    Header="Name"
+                    CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox 
+                                Text="{Binding ProjectNameInExcel, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                VerticalContentAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn 
+                    Header="Name In Revit"
+                    CanUserResize="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox
+                                Grid.Column="1"
+                                DisplayMemberPath="Name"
+                                SelectedItem="{Binding ProjectNameInRevit, UpdateSourceTrigger=PropertyChanged}"
+                                ItemsSource="{Binding ProjectNameInRevits}"
+                                IsEditable="True"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <StackPanel
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
-            Grid.Row="1">
+            Grid.Row="2">
             <StackPanel 
             Orientation="Horizontal">
                 <Button
-                    Command="{Binding OnLoadModelsCmd}"
-                    Content="Select"
+                    Command="{Binding OnAddModelsCmd}"
+                    Content="Add"
+                    Width="70"/>
+                <Button
+                    Command="{Binding OnRemoveModelsCmd}"
+                    Margin="10,0,0,0"
+                    Content="Remove"
+                    Width="70"/>
+                <Button
+                    Command="{Binding OnResetCmd}"
+                    Margin="10,0,0,0"
+                    Content="Reset"
                     Width="70"/>
                 <Button
                     Command="{Binding OnOkCmd}"

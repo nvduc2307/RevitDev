@@ -8,6 +8,13 @@ namespace RevitDevelop.Tools.Schedules.action
 {
     public partial class ScheduleAction
     {
+        private void _OnSettingModelsCmd()
+        {
+            _view.Hide();
+            var action = new SettingProjectInfomationAction();
+            action.Execute();
+            _view.ShowDialog();
+        }
         private void _OnCancelCmd()
         {
             _view.Close();

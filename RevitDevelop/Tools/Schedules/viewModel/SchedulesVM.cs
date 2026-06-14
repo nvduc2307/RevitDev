@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace RevitDevelop.Tools.Schedules.viewModel
 {
-    public class SchedulesViewModel : ObservableObject
+    public class SchedulesVM : ObservableObject
     {
         private string _pathFileOutput;
         public string PathFileOutput
@@ -51,5 +51,6 @@ namespace RevitDevelop.Tools.Schedules.viewModel
         public RelayCommand OnSettingMappingCmd { get; set; }
         public RelayCommand OnOkCmd { get; set; }
         public RelayCommand OnCancelCmd { get; set; }
+        public RelayCommand OnSettingModelsCmd { get; set; }
     }
 }
