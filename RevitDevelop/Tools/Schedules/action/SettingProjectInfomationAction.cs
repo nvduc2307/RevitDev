@@ -110,6 +110,16 @@ namespace RevitDevelop.Tools.Schedules.action
                         .FirstOrDefault(x => string.IsNullOrEmpty(x.ProjectNameInExcel));
                     throw new Exception($"Setting At ${_viewModel.SettingProjectInfomation.ProjectInfomations.IndexOf(itemTarget)} is empty");
                 }
+                var projectNameInExcels = _viewModel.SettingProjectInfomation
+                    .ProjectInfomations.Select(x=>x.ProjectNameInExcel)
+                    .ToList();
+                if(projectNameInExcels.GroupBy(x=>x).Any(x=>x.Count() != 1))
+                {
+                    var itemOverLap = projectNameInExcels
+                        .GroupBy(x => x)
+                        .FirstOrDefault(x => x.Count() != 1);
+                    throw new Exception($"{itemOverLap.FirstOrDefault()} is overLap");
+                }
                 var data = new SettingProjectInfomationModel();
                 data.PathFolderModel = _viewModel.SettingProjectInfomation.PathFolderModel;
                 data.ProjectInfomations = new List<ProjectInfomationModel>();
@@ -118,7 +128,8 @@ namespace RevitDevelop.Tools.Schedules.action
                     var projectInfomationModel = new ProjectInfomationModel
                     {
                         ProjectNameInExcel = item.ProjectNameInExcel,
-                        ProjectNameInRevits = item.ProjectNameInRevits
+                        ProjectNameInRevits = item.ProjectNameInRevits,
+                        ProjectNameInExcels = [.. projectNameInExcels]
                     };
                     projectInfomationModel.ProjectNameInRevit =
                         projectInfomationModel.ProjectNameInRevits

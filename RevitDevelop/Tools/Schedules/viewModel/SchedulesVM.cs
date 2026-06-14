@@ -45,12 +45,23 @@ namespace RevitDevelop.Tools.Schedules.viewModel
                 OnPropertyChanged();
             }
         }
+
+        private ObservableCollection<ScheduleSheetInExcelModelUI> _scheduleSheets;
+        public ObservableCollection<ScheduleSheetInExcelModelUI> ScheduleSheets { 
+            get => _scheduleSheets;
+            set
+            {
+                _scheduleSheets = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand OnChooseFileOutputCmd { get; set; }
-        public RelayCommand OnAddModelCmd { get; set; }
-        public RelayCommand OnRemoveModelCmd { get; set; }
         public RelayCommand OnSettingMappingCmd { get; set; }
         public RelayCommand OnOkCmd { get; set; }
         public RelayCommand OnCancelCmd { get; set; }
         public RelayCommand OnSettingModelsCmd { get; set; }
+        public RelayCommand OnNewSheetCmd { get; set; }
+        public RelayCommand OnRemoveSheetCmd { get; set; }
     }
 }

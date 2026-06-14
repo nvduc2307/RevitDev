@@ -11,8 +11,11 @@
             {
                 _projectNameInExcel = value;
                 OnPropertyChanged();
+                ProjectNameInExcelAction?.Invoke(this);
             }
         }
+        public Action<ProjectInfomationModelUI> ProjectNameInExcelAction { get; set;  }
+        public List<string> ProjectNameInExcels { get; set; }
         public ProjectRevitInfomationModel ProjectNameInRevit
         {
             get => _projectNameInRevit;
@@ -36,6 +39,7 @@
     public class ProjectInfomationModel
     {
         public string ProjectNameInExcel { get; set; }
+        public List<string> ProjectNameInExcels { get; set; }
         public ProjectRevitInfomationModel ProjectNameInRevit { get; set; }
         public List<ProjectRevitInfomationModel> ProjectNameInRevits { get; set; }
     }

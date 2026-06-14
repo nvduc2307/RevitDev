@@ -8,8 +8,8 @@
         Title="ScheduleView" 
         WindowStartupLocation="CenterScreen"
         MinHeight="500"
-        Height="500" 
-        Width="600">
+        Height="600" 
+        Width="800">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -25,7 +25,6 @@
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="35"/>
@@ -48,102 +47,137 @@
                     Grid.Column="2"/>
             </Grid>
         </StackPanel>
-        <StackPanel Grid.Row="1">
-            <GroupBox 
-                Margin="0,10,0,0"
-                Header="models">
-                <Grid Margin="0,10,0,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel HorizontalAlignment="Center">
-                        <Button
-                            Command="{Binding OnAddModelCmd}"
-                            Content="+"
-                            Height="30"
-                            Width="30"/>
-                        <Button
-                            Command="{Binding OnRemoveModelCmd}"
-                            Margin="0,10,0,0"
-                            Content="-"
-                            Height="30"
-                            Width="30"/>
-                    </StackPanel>
-                    <ListView 
-                        x:Name="dataModelProjects"
-                        Grid.Column="1"
-                        SelectionMode="Single"
-                        ItemsSource="{Binding ModelProjects, UpdateSourceTrigger=PropertyChanged}"
-                        MaxHeight="300"
-                        MinHeight="100">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid IsEnabled="{Binding CanDelete}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1.5*"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock 
-                                        Margin="0,0,10,0"
-                                        Grid.Column="0"
-                                        VerticalAlignment="Center" 
-                                        Text="{Binding Name}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-            </GroupBox>
-        </StackPanel>
-        <TabControl 
+        <TabControl
+            x:Name="TabScheduleSheets"
+            ItemsSource="{Binding ScheduleSheets}"
             Margin="0,10,0,0"
-            Grid.Row="2">
-            <TabItem Header="給水・給湯">
-                <StackPanel>
-                    <Grid Margin="0,10,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Sheet Name"/>
-                        <TextBox
-                            Text="{Binding SheetNameWaterAndHotWateSupply}"
-                            HorizontalAlignment="Left"
-                            Grid.Column="1"
-                            Width="100"/>
+            Grid.Row="1">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding SheetName}" 
+                        VerticalAlignment="Center"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Sheet Name"/>
+                                <TextBox
+                                    Text="{Binding SheetName, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                    Grid.Column="1"/>
+                            </Grid>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Schedules Name"/>
+                                <TextBox
+                                    Text="{Binding ScheduleNameInRevit, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                    VerticalContentAlignment="Top"
+                                    Grid.Column="1"
+                                    TextWrapping="Wrap"
+                                    Height="50"/>
+                            </Grid>
+                        </StackPanel>
+                        <GroupBox 
+                            Grid.Row="1"
+                            Margin="0,10,0,0"
+                            Header="models">
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="94"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel HorizontalAlignment="Left">
+                                    <Button
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding OnAddModelCmd}"
+                                        Content="+"
+                                        Height="30"
+                                        Width="30"/>
+                                    <Button
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding OnRemoveModelCmd}"
+                                        Margin="0,10,0,0"
+                                        Content="-"
+                                        Height="30"
+                                        Width="30"/>
+                                </StackPanel>
+                                <DataGrid 
+                                    x:Name="dataModelProjects"
+                                    ItemsSource="{Binding ProjectInfomationModels, UpdateSourceTrigger=PropertyChanged}"
+                                    Grid.Column="1"
+                                    AutoGenerateColumns="False"
+                                    CanUserDeleteRows="False"
+                                    CanUserAddRows="False"
+                                    HeadersVisibility="None"
+                                    ColumnWidth="*">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn 
+                                            Header="Name"
+                                            CanUserResize="False">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <ComboBox
+                                                        IsEditable="True"
+                                                        SelectedItem="{Binding ProjectNameInExcel, UpdateSourceTrigger=PropertyChanged}"
+                                                        ItemsSource="{Binding ProjectNameInExcels}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn 
+                                            Header="Name In Revit"
+                                            CanUserResize="False">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox 
+                                                        IsReadOnly="True"
+                                                        Text="{Binding ProjectNameInRevit.Name, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                                        VerticalContentAlignment="Center"/>
+                                                    
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </GroupBox>
                     </Grid>
-                    <Grid Margin="0,10,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Schedules Name"/>
-                        <TextBox
-                            Text="{Binding ScheduleNameWaterAndHotWateSupply}"
-                            Grid.Column="1"
-                            TextWrapping="Wrap"
-                            Height="50"/>
-                    </Grid>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="排水">
-            </TabItem>
-            <TabItem Header="衛生">
-            </TabItem>
-            <TabItem Header="換気・LS">
-            </TabItem>
-            <TabItem Header="換気・LH">
-            </TabItem>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
         <StackPanel
             VerticalAlignment="Bottom"
             HorizontalAlignment="Right"
-            Grid.Row="3">
+            Grid.Row="2">
             <StackPanel 
                 Orientation="Horizontal">
                 <Button
+                    Command="{Binding OnRemoveSheetCmd}"
+                    Padding="10,0,10,0"
+                    Content="Remove Sheet"
+                    Width="auto"/>
+                <Button
+                    Command="{Binding OnNewSheetCmd}"
+                    Margin="10,0,0,0"
+                    Padding="10,0,10,0"
+                    Content="New Sheet"
+                    Width="auto"/>
+                <Button
                     Command="{Binding OnSettingModelsCmd}"
+                    Margin="10,0,0,0"
                     Content="Models"
                     Width="70"/>
                 <Button
