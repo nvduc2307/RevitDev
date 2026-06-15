@@ -87,7 +87,7 @@ namespace RevitDevelop.Utils
             {
                 if (e?.Category == null) return false;
 
-                var cat = (BuiltInCategory)e.Category.Id.Value;
+                var cat = (BuiltInCategory)(int.Parse(e.Category.Id.ToString()));
                 bool inCategoryList = categories?.Any(c => c == cat) ?? true;
                 return inCategoryList && (elementFilter?.Invoke(e) ?? true);
             };
@@ -126,7 +126,7 @@ namespace RevitDevelop.Utils
             {
                 if (element?.Category == null) return false;
 
-                var elementCategory = (BuiltInCategory)element.Category.Id.Value;
+                var elementCategory = (BuiltInCategory)(int.Parse(element.Category.Id.ToString()));
                 bool categoryMatch = !bic.HasValue || elementCategory == bic.Value;
                 bool customFilterMatch = elementFilter?.Invoke(element) ?? true;
 

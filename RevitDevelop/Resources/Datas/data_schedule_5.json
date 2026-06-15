@@ -1,0 +1,2626 @@
+[
+  {
+    "Id": "30711",
+    "SheetName": "換気・LH",
+    "FamilyName": "DK 深型ﾌｰﾄﾞ用L型ﾀﾞｸﾄ",
+    "TypeName": "(株)LIXIL",
+    "UnitScheduleType": 0,
+    "IndexRow": 11,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 11,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 11,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 11,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 11,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 11,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 11,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 11,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 11,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "ＤＫショートエルボ（断熱材付）",
+    "TypeName": "(株)フジモリ",
+    "UnitScheduleType": 0,
+    "IndexRow": 12,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 12,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 12,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 12,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 12,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 12,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 12,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 12,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 12,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "ＤＫ偏心用エルボ10°(断熱材付）",
+    "TypeName": "(株)フジモリ",
+    "UnitScheduleType": 0,
+    "IndexRow": 13,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 13,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 13,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 13,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 13,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 13,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 13,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 13,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 13,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "ＤＫ偏心用エルボ20°(断熱材付）",
+    "TypeName": "(株)フジモリ",
+    "UnitScheduleType": 0,
+    "IndexRow": 14,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 14,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 14,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 14,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 14,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 14,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 14,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 14,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 14,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "ＤＫ偏心用エルボ30°(断熱材付）",
+    "TypeName": "(株)フジモリ",
+    "UnitScheduleType": 0,
+    "IndexRow": 15,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 15,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 15,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 15,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 15,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 15,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 15,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 15,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 15,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "傾斜パイプ１００φ",
+    "TypeName": "",
+    "UnitScheduleType": 0,
+    "IndexRow": 16,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 16,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 16,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 16,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 16,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 16,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 16,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 16,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 16,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "ｷｯﾁﾝ用不燃ｽﾘｰﾌﾞ 150Φ",
+    "TypeName": "",
+    "UnitScheduleType": 0,
+    "IndexRow": 17,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 17,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 17,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 17,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 17,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 17,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 17,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 17,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 17,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "副吸込み口用エルボ",
+    "TypeName": "",
+    "UnitScheduleType": 0,
+    "IndexRow": 18,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 18,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 18,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 18,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 18,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 18,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 18,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 18,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 18,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "",
+    "TypeName": "",
+    "UnitScheduleType": 0,
+    "IndexRow": 19,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 19,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 19,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 19,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 19,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 19,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 19,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 19,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 19,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "",
+    "TypeName": "",
+    "UnitScheduleType": 0,
+    "IndexRow": 20,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 20,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 20,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 20,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 20,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 20,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 20,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 20,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 20,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "",
+    "SheetName": "換気・LH",
+    "FamilyName": "<購買部品以外>",
+    "TypeName": "",
+    "UnitScheduleType": 0,
+    "IndexRow": 21,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 21,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 21,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 21,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 21,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 21,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 21,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 21,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 21,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30630",
+    "SheetName": "換気・LH",
+    "FamilyName": "DK3室用24h換気浴室乾燥機取付費",
+    "TypeName": "",
+    "UnitScheduleType": 0,
+    "IndexRow": 22,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 22,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 22,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 22,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 22,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 22,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 22,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 22,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 22,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30631",
+    "SheetName": "換気・LH",
+    "FamilyName": "浴室乾燥機取付費",
+    "TypeName": "",
+    "UnitScheduleType": 0,
+    "IndexRow": 23,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 23,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 23,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 23,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 23,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 23,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 23,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 23,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 23,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "15834",
+    "SheetName": "換気・LH",
+    "FamilyName": "小型送風機 取付費",
+    "TypeName": "天井埋込換気扇_共通_L",
+    "UnitScheduleType": 0,
+    "IndexRow": 24,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 24,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 24,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 24,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 24,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 24,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 24,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 24,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 24,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "15836",
+    "SheetName": "換気・LH",
+    "FamilyName": "小型送風機 取付費",
+    "TypeName": "ﾊﾟｲﾌﾟ用ﾌｧﾝ_共通_L",
+    "UnitScheduleType": 0,
+    "IndexRow": 25,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 25,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 25,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 25,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 25,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 25,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 25,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 25,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 25,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30632",
+    "SheetName": "換気・LH",
+    "FamilyName": "給気口取付費",
+    "TypeName": "100φ(傾斜ﾊﾟｲﾌﾟ共)_共通",
+    "UnitScheduleType": 0,
+    "IndexRow": 26,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 26,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 26,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 26,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 26,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 26,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 26,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 26,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 26,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30633",
+    "SheetName": "換気・LH",
+    "FamilyName": "給気口取付費",
+    "TypeName": "150φ(傾斜ﾊﾟｲﾌﾟ共)_共通",
+    "UnitScheduleType": 0,
+    "IndexRow": 27,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 27,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 27,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 27,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 27,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 27,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 27,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 27,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 27,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "15608",
+    "SheetName": "換気・LH",
+    "FamilyName": "塩化ﾋﾞﾆﾙ管ﾀﾞｸﾄ",
+    "TypeName": "VU100mm_共通_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 28,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 28,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 28,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 28,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 28,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 28,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 28,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 28,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 28,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30725",
+    "SheetName": "換気・LH",
+    "FamilyName": "DKFXD100φ",
+    "TypeName": "ﾌｼﾞﾓﾘ産業(株)_修正",
+    "UnitScheduleType": 1,
+    "IndexRow": 29,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 29,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 29,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 29,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 29,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 29,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 29,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 29,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 29,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30726",
+    "SheetName": "換気・LH",
+    "FamilyName": "DKFXD締付ﾊﾞﾝﾄﾞ100φ",
+    "TypeName": "ﾌｼﾞﾓﾘ産業(株)_修正",
+    "UnitScheduleType": 0,
+    "IndexRow": 30,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 30,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 30,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 30,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 30,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 30,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 30,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 30,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 30,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30727",
+    "SheetName": "換気・LH",
+    "FamilyName": "DKFXD接続棟用短管(副吸込口)",
+    "TypeName": "ﾌｼﾞﾓﾘ産業(株)_修正",
+    "UnitScheduleType": 0,
+    "IndexRow": 31,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 31,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 31,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 31,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 31,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 31,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 31,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 31,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 31,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30728",
+    "SheetName": "換気・LH",
+    "FamilyName": "DKFXD傾斜ﾊﾟｲﾌﾟ100φ215L",
+    "TypeName": "ﾌｼﾞﾓﾘ産業(株)_修正",
+    "UnitScheduleType": 0,
+    "IndexRow": 32,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 32,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 32,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 32,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 32,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 32,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 32,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 32,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 32,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30747",
+    "SheetName": "換気・LH",
+    "FamilyName": "DKFXD傾斜ﾊﾟｲﾌﾟ 延長部材",
+    "TypeName": "ﾌｼﾞﾓﾘ産業(株)_修正",
+    "UnitScheduleType": 0,
+    "IndexRow": 33,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 33,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 33,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 33,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 33,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 33,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 33,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 33,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 33,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30674",
+    "SheetName": "換気・LH",
+    "FamilyName": "DKFXD保温材",
+    "TypeName": "ﾌｼﾞﾓﾘ産業(株)",
+    "UnitScheduleType": 0,
+    "IndexRow": 34,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 34,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 34,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 34,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 34,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 34,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 34,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 34,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 34,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30729",
+    "SheetName": "換気・LH",
+    "FamilyName": "DKFXDﾌﾚｷﾊﾞﾝﾄﾞ",
+    "TypeName": "ﾌｼﾞﾓﾘ産業(株)_修正",
+    "UnitScheduleType": 0,
+    "IndexRow": 35,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 35,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 35,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 35,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 35,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 35,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 35,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 35,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 35,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30730",
+    "SheetName": "換気・LH",
+    "FamilyName": "DKFXD不燃ﾊﾟｲﾌﾟ100φ214L",
+    "TypeName": "ﾌｼﾞﾓﾘ産業(株)_修正",
+    "UnitScheduleType": 0,
+    "IndexRow": 36,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 36,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 36,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 36,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 36,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 36,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 36,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 36,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 36,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30731",
+    "SheetName": "換気・LH",
+    "FamilyName": "DKFXD不燃ﾊﾟｲﾌﾟ100φ34×98",
+    "TypeName": "ﾌｼﾞﾓﾘ産業(株)_修正",
+    "UnitScheduleType": 0,
+    "IndexRow": 37,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 37,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 37,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 37,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 37,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 37,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 37,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 37,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 37,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "15642",
+    "SheetName": "換気・LH",
+    "FamilyName": "ｱﾙﾐﾌﾚｷｼﾌﾞﾙﾀﾞｸﾄ",
+    "TypeName": "AL-W100mm_共通_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 38,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 38,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 38,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 38,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 38,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 38,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 38,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 38,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 38,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "15528",
+    "SheetName": "換気・LH",
+    "FamilyName": "ｽﾊﾟｲﾗﾙﾀﾞｸﾄ",
+    "TypeName": "亜鉛鍍鉄板150mm管厚0.5mm_共通_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 39,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 39,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 39,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 39,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 39,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 39,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 39,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 39,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 39,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "16060",
+    "SheetName": "換気・LH",
+    "FamilyName": "保温工事",
+    "TypeName": "GW保温厚25 100A_屋内隠蔽_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 40,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 40,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 40,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 40,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 40,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 40,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 40,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 40,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 40,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "16122",
+    "SheetName": "換気・LH",
+    "FamilyName": "保温工事",
+    "TypeName": "RW保温厚50 150A_屋内隠蔽_L",
+    "UnitScheduleType": 1,
+    "IndexRow": 41,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 41,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 41,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 41,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 41,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 41,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 41,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 41,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 41,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  },
+  {
+    "Id": "30640",
+    "SheetName": "換気・LH",
+    "FamilyName": "保温工事",
+    "TypeName": "RW保温厚20 150A_屋内隠蔽",
+    "UnitScheduleType": 1,
+    "IndexRow": 42,
+    "ScheduleFieldValues": [
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 42,
+        "IndexColQuantity": "J",
+        "IndexColTotal": "K",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 42,
+        "IndexColQuantity": "L",
+        "IndexColTotal": "M",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 42,
+        "IndexColQuantity": "N",
+        "IndexColTotal": "O",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "B1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 42,
+        "IndexColQuantity": "P",
+        "IndexColTotal": "Q",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階端部住戸　LHパック",
+        "IndexRow": 42,
+        "IndexColQuantity": "S",
+        "IndexColTotal": "T",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "1階中住戸　LHパック",
+        "IndexRow": 42,
+        "IndexColQuantity": "U",
+        "IndexColTotal": "V",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階端部住戸　LHパック",
+        "IndexRow": 42,
+        "IndexColQuantity": "W",
+        "IndexColTotal": "X",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      },
+      {
+        "LevelName": "F1S",
+        "ProjectName": "2階中住戸　LHパック",
+        "IndexRow": 42,
+        "IndexColQuantity": "Y",
+        "IndexColTotal": "Z",
+        "QuantityValue": 0.0,
+        "TotalValue": 0.0
+      }
+    ]
+  }
+]

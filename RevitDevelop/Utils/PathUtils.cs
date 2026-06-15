@@ -4,6 +4,10 @@ namespace RevitDevelop.Utils
 {
     public static class PathUtils
     {
+        public static string FolderTemplate
+        {
+            get => $"{AssemblyDirectory}\\Resources\\Templates";
+        }
         public static string AssemblyDirectory
         {
             get
@@ -12,6 +16,14 @@ namespace RevitDevelop.Utils
                 UriBuilder uri = new UriBuilder(codeBase);
                 string path = Uri.UnescapeDataString(uri.Path);
                 return System.IO.Path.GetDirectoryName(path);
+            }
+        }
+        public static string DesktopFolder
+        {
+            get
+            {
+                var folder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                return folder;
             }
         }
         public static string AppDataDirectory

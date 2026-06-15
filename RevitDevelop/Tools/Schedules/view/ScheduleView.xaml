@@ -1,0 +1,207 @@
+﻿<Window x:Class="RevitDevelop.Tools.Schedules.view.ScheduleView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RevitDevelop.Tools.Schedules.view"
+        mc:Ignorable="d"
+        Title="ScheduleView" 
+        WindowStartupLocation="CenterScreen"
+        MinHeight="500"
+        Height="600" 
+        Width="800">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="File Output"/>
+                <TextBox
+                    Text="{Binding PathFileOutput}"
+                    Grid.Column="1"/>
+                <Button
+                    Command="{Binding OnChooseFileOutputCmd}"
+                    Margin="5,0,0,0"
+                    Content="..."
+                    Grid.Column="2"/>
+            </Grid>
+        </StackPanel>
+        <TabControl
+            x:Name="TabScheduleSheets"
+            ItemsSource="{Binding ScheduleSheets}"
+            Margin="0,10,0,0"
+            Grid.Row="1">
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding SheetName}" 
+                        VerticalAlignment="Center"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Sheet Name"/>
+                                <TextBox
+                                    Text="{Binding SheetName, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                    Grid.Column="1"/>
+                            </Grid>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Schedules Name"/>
+                                <TextBox
+                                    Text="{Binding ScheduleNameInRevit, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                    VerticalContentAlignment="Top"
+                                    Grid.Column="1"
+                                    TextWrapping="Wrap"
+                                    Height="50"/>
+                            </Grid>
+                        </StackPanel>
+                        <GroupBox 
+                            Grid.Row="1"
+                            Margin="0,10,0,0"
+                            Header="models">
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="94"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel HorizontalAlignment="Left">
+                                    <Button
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding OnAddModelCmd}"
+                                        Content="+"
+                                        Height="30"
+                                        Width="30"/>
+                                    <Button
+                                        CommandParameter="{Binding}"
+                                        Command="{Binding OnRemoveModelCmd}"
+                                        Margin="0,10,0,0"
+                                        Content="-"
+                                        Height="30"
+                                        Width="30"/>
+                                </StackPanel>
+                                <DataGrid 
+                                    x:Name="dataModelProjects"
+                                    ItemsSource="{Binding ProjectInfomationModels, UpdateSourceTrigger=PropertyChanged}"
+                                    Grid.Column="1"
+                                    AutoGenerateColumns="False"
+                                    CanUserDeleteRows="False"
+                                    CanUserAddRows="False"
+                                    HeadersVisibility="None"
+                                    ColumnWidth="*">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn 
+                                            Header="Name"
+                                            CanUserResize="False">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <ComboBox
+                                                        IsEditable="True"
+                                                        SelectedItem="{Binding ProjectNameInExcel, UpdateSourceTrigger=PropertyChanged}"
+                                                        ItemsSource="{Binding ProjectNameInExcels}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn 
+                                            Header="Name In Revit"
+                                            CanUserResize="False">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox 
+                                                        IsReadOnly="True"
+                                                        Text="{Binding ProjectNameInRevit.Name, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                                        VerticalContentAlignment="Center"/>
+                                                    
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+        <StackPanel
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Right"
+            Grid.Row="2">
+            <StackPanel 
+                Orientation="Horizontal">
+                <Button
+                    Command="{Binding OnSaveSheetsCmd}"
+                    Padding="10,0,10,0"
+                    Content="Save Sheets"
+                    Width="auto"/>
+                <Button
+                    Command="{Binding OnRemoveSheetCmd}"
+                    Margin="10,0,0,0"
+                    Padding="10,0,10,0"
+                    Content="Remove Sheet"
+                    Width="auto"/>
+                <Button
+                    Command="{Binding OnNewSheetCmd}"
+                    Margin="10,0,0,0"
+                    Padding="10,0,10,0"
+                    Content="New Sheet"
+                    Width="auto"/>
+                <Button
+                    Command="{Binding OnSettingModelsCmd}"
+                    Margin="10,0,0,0"
+                    Content="Models"
+                    Width="70"/>
+                <Button
+                    Command="{Binding OnSettingMappingCmd}"
+                    Margin="10,0,0,0"
+                    Content="Mapping"
+                    Width="70"/>
+                <Button
+                    Command="{Binding OnOkCmd}"
+                    Margin="10,0,0,0"
+                    Content="OK"
+                    Width="70"/>
+                <Button
+                    Command="{Binding OnCancelCmd}"
+                    Margin="10,0,0,0"
+                    Content="Cancel"
+                    Width="70"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
