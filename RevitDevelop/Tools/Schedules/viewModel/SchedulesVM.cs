@@ -63,5 +63,6 @@ namespace RevitDevelop.Tools.Schedules.viewModel
         public RelayCommand OnSettingModelsCmd { get; set; }
         public RelayCommand OnNewSheetCmd { get; set; }
         public RelayCommand OnRemoveSheetCmd { get; set; }
+        public RelayCommand OnSaveSheetsCmd { get; set; }
     }
 }

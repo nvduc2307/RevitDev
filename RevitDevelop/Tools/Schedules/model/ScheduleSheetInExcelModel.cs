@@ -35,7 +35,7 @@ namespace RevitDevelop.Tools.Schedules.model
                 OnPropertyChanged();
             }
         }
-        public List<string> ScheduleNameInRevits { get; set; }
+        //public List<string> ScheduleNameInRevits { get; set; }
         public Action<ScheduleSheetInExcelModelUI> ScheduleNameInRevitAction {  get; set; }
         public RelayCommand<ScheduleSheetInExcelModelUI> OnAddModelCmd { get; set; }
         public RelayCommand<ScheduleSheetInExcelModelUI> OnRemoveModelCmd { get; set; }
@@ -44,7 +44,7 @@ namespace RevitDevelop.Tools.Schedules.model
     {
         public string SheetName { get; set; }
         public string ScheduleNameInRevit { get; set; }
-        public List<string> ScheduleNameInRevits { get; set; }
+        //public List<string> ScheduleNameInRevits { get; set; }
         public List<ProjectInfomationModel> ProjectInfomationModels { get; set; }
     }
 }

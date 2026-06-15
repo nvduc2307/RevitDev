@@ -165,7 +165,13 @@
             <StackPanel 
                 Orientation="Horizontal">
                 <Button
+                    Command="{Binding OnSaveSheetsCmd}"
+                    Padding="10,0,10,0"
+                    Content="Save Sheets"
+                    Width="auto"/>
+                <Button
                     Command="{Binding OnRemoveSheetCmd}"
+                    Margin="10,0,0,0"
                     Padding="10,0,10,0"
                     Content="Remove Sheet"
                     Width="auto"/>

@@ -1,7 +1,7 @@
-﻿using ClosedXML.Excel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RevitDevelop.Tools.Schedules.model;
 using RevitDevelop.Tools.Schedules.utils;
+using RevitDevelop.Utils;
 using System.IO;
 using System.Windows.Forms;
 
@@ -9,6 +9,44 @@ namespace RevitDevelop.Tools.Schedules.action
 {
     public partial class ScheduleAction
     {
+        private void _OnSaveSheetsCmd()
+        {
+            if (!_viewModel.ScheduleSheets.Any()) return;
+            var data = new List<ScheduleSheetInExcelModel>();
+            try
+            {
+                var path = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\daito_schedule_sheets.json";
+                var pathTemplate = $"{PathUtils.FolderTemplate}\\daito_schedule_sheets.json";
+                if (!File.Exists(path)) File.Copy(pathTemplate, path, true);
+                if (!File.Exists(path)) throw new Exception($"File: {path} is not found");
+                foreach (var sheet in _viewModel.ScheduleSheets)
+                {
+                    var item = new ScheduleSheetInExcelModel
+                    {
+                        SheetName = sheet.SheetName,
+                        ScheduleNameInRevit = sheet.ScheduleNameInRevit,
+                        //ScheduleNameInRevits = [.. sheet.ScheduleNameInRevits],
+                        ProjectInfomationModels = new List<ProjectInfomationModel>()
+                    };
+                    foreach (var projectInfomationModel in sheet.ProjectInfomationModels)
+                    {
+                        var item1 = new ProjectInfomationModel();
+                        item1.ProjectNameInExcel = projectInfomationModel.ProjectNameInExcel;
+                        item1.ProjectNameInRevit = projectInfomationModel.ProjectNameInRevit;
+                        item1.ProjectNameInExcels = [.. projectInfomationModel.ProjectNameInExcels];
+                        item1.ProjectNameInRevits = [.. projectInfomationModel.ProjectNameInRevits];
+                        item.ProjectInfomationModels.Add(item1);
+                    }
+                    data.Add(item);
+                }
+                var content = JsonConvert.SerializeObject(data);
+                File.WriteAllText(path, content);
+            }
+            catch (Exception ex)
+            {
+                IO.ShowWarning(ex.Message);
+            }
+        }
         private void _OnRemoveSheetCmd()
         {
             if (!_viewModel.ScheduleSheets.Any()) return;
