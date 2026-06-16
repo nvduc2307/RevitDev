@@ -3,7 +3,7 @@
     public class ProjectInfomationModelUI : ObservableObject
     {
         private string _projectNameInExcel;
-        private ProjectRevitInfomationModel _projectNameInRevit;
+        private List<ProjectRevitInfomationModelUI> _projectNameInRevits;
         public string ProjectNameInExcel
         {
             get => _projectNameInExcel;
@@ -14,19 +14,7 @@
                 ProjectNameInExcelAction?.Invoke(this);
             }
         }
-        public Action<ProjectInfomationModelUI> ProjectNameInExcelAction { get; set;  }
-        public List<string> ProjectNameInExcels { get; set; }
-        public ProjectRevitInfomationModel ProjectNameInRevit
-        {
-            get => _projectNameInRevit;
-            set
-            {
-                _projectNameInRevit = value;
-                OnPropertyChanged();
-            }
-        }
-        private List<ProjectRevitInfomationModel> _projectNameInRevits;
-        public List<ProjectRevitInfomationModel> ProjectNameInRevits
+        public List<ProjectRevitInfomationModelUI> ProjectNameInRevits
         {
             get => _projectNameInRevits;
             set
@@ -35,17 +23,32 @@
                 OnPropertyChanged();
             }
         }
+        public Action<ProjectInfomationModelUI> ProjectNameInExcelAction { get; set;  }
     }
     public class ProjectInfomationModel
     {
         public string ProjectNameInExcel { get; set; }
-        public List<string> ProjectNameInExcels { get; set; }
-        public ProjectRevitInfomationModel ProjectNameInRevit { get; set; }
         public List<ProjectRevitInfomationModel> ProjectNameInRevits { get; set; }
+    }
+    public class ProjectRevitInfomationModelUI : ObservableObject
+    {
+        public string Name { get; set; }
+        public string Path { get; set; }
+        private bool _isSelected;
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                _isSelected = value;
+                OnPropertyChanged();
+            }
+        }
     }
     public class ProjectRevitInfomationModel
     {
         public string Name { get; set; }
         public string Path { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace RevitDevelop.Tools.Schedules.action
     {
         private void _OnSaveSheetsCmd()
         {
-            if (!_viewModel.ScheduleSheets.Any()) return;
+            if (!_viewModel.ScheduleSetting.ScheduleSheets.Any()) return;
             var data = new List<ScheduleSheetInExcelModel>();
             try
             {
@@ -19,7 +19,7 @@ namespace RevitDevelop.Tools.Schedules.action
                 var pathTemplate = $"{PathUtils.FolderTemplate}\\daito_schedule_sheets.json";
                 if (!File.Exists(path)) File.Copy(pathTemplate, path, true);
                 if (!File.Exists(path)) throw new Exception($"File: {path} is not found");
-                foreach (var sheet in _viewModel.ScheduleSheets)
+                foreach (var sheet in _viewModel.ScheduleSetting.ScheduleSheets)
                 {
                     var item = new ScheduleSheetInExcelModel
                     {
@@ -32,9 +32,9 @@ namespace RevitDevelop.Tools.Schedules.action
                     {
                         var item1 = new ProjectInfomationModel();
                         item1.ProjectNameInExcel = projectInfomationModel.ProjectNameInExcel;
-                        item1.ProjectNameInRevit = projectInfomationModel.ProjectNameInRevit;
-                        item1.ProjectNameInExcels = [.. projectInfomationModel.ProjectNameInExcels];
-                        item1.ProjectNameInRevits = [.. projectInfomationModel.ProjectNameInRevits];
+                        item1.ProjectNameInRevits = projectInfomationModel.ProjectNameInRevits
+                            .Select(x=>new ProjectRevitInfomationModel() { Name = x.Name, Path = x.Path, IsSelected = x.IsSelected})
+                            .ToList();
                         item.ProjectInfomationModels.Add(item1);
                     }
                     data.Add(item);
@@ -49,44 +49,27 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void _OnRemoveSheetCmd()
         {
-            if (!_viewModel.ScheduleSheets.Any()) return;
+            if (!_viewModel.ScheduleSetting.ScheduleSheets.Any()) return;
             var index = _view.TabScheduleSheets.SelectedIndex == -1
-                ? _viewModel.ScheduleSheets.Count - 1
+                ? _viewModel.ScheduleSetting.ScheduleSheets.Count - 1
                 : _view.TabScheduleSheets.SelectedIndex;
-            _viewModel.ScheduleSheets.RemoveAt(index);
+            _viewModel.ScheduleSetting.ScheduleSheets.RemoveAt(index);
         }
         private void _OnNewSheetCmd()
         {
-            if (_viewModel.ScheduleSheets == null) return;
-            var qty = _viewModel.ScheduleSheets.Count;
+            if (_viewModel.ScheduleSetting.ScheduleSheets == null) return;
+            var qty = _viewModel.ScheduleSetting.ScheduleSheets.Count;
             var newSheet = CreateNewSheet($"sheet{qty + 1}");
-            _viewModel.ScheduleSheets.Add(newSheet);
+            _viewModel.ScheduleSetting.ScheduleSheets.Add(newSheet);
             _view.TabScheduleSheets.SelectedIndex = qty;
         }
         private void _ProjectNameInExcelAction(ProjectInfomationModelUI uI)
         {
-            var path = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\daito_schedule_project_infomation.json";
-            if (!File.Exists(path)) return;
-            var data = JsonConvert.DeserializeObject<SettingProjectInfomationModel>(File.ReadAllText(path));
-            if (data == null) return;
-            var dataTarget = data.ProjectInfomations.FirstOrDefault(x => x.ProjectNameInExcel == uI.ProjectNameInExcel);
-            if (dataTarget == null) return;
-            uI.ProjectNameInExcelAction = null;
-            uI.ProjectNameInExcels = [.. dataTarget.ProjectNameInExcels];
-            uI.ProjectNameInRevits = [.. dataTarget.ProjectNameInRevits];
-            uI.ProjectNameInExcel = uI.ProjectNameInExcels.FirstOrDefault(x => x == dataTarget.ProjectNameInExcel);
-            uI.ProjectNameInRevit = uI.ProjectNameInRevits.FirstOrDefault(x => x.Name == dataTarget.ProjectNameInRevit.Name);
-            uI.ProjectNameInExcelAction = _ProjectNameInExcelAction;
+            
         }
         private void _OnSettingModelsCmd()
         {
-            _view.Hide();
-            var action = new SettingProjectInfomationAction();
-            action.Execute();
-            _projectInfomationModels = GetProjectInfomationModels();
-            _viewModel.ScheduleSheets = GetScheduleSheets();
-            _view.TabScheduleSheets.SelectedIndex = 0;
-            _view.ShowDialog();
+            
         }
         private void _OnCancelCmd()
         {
@@ -94,13 +77,13 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void _OnOkCmd()
         {
-            _scheduleWaterAndHotWateSupplyAction
-                .Execute(
-                _viewModel.PathFileOutput,
-                _viewModel.SheetNameWaterAndHotWateSupply,
-                _viewModel.ModelProjects.ToList(),
-                _viewModel.ScheduleNameWaterAndHotWateSupply.Split(',').ToList(),
-                _mappingRecords);
+            //_scheduleWaterAndHotWateSupplyAction
+            //    .Execute(
+            //    _viewModel.PathFileOutput,
+            //    _viewModel.SheetNameWaterAndHotWateSupply,
+            //    _viewModel.ModelProjects.ToList(),
+            //    _viewModel.ScheduleNameWaterAndHotWateSupply.Split(',').ToList(),
+            //    _mappingRecords);
         }
         private void _OnSettingMappingCmd()
         {
@@ -129,14 +112,7 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void _OnAddModelSheetCmd(ScheduleSheetInExcelModelUI uI)
         {
-            var item1 = new ProjectInfomationModelUI
-            {
-                ProjectNameInExcels = [.. _projectInfomationModels.FirstOrDefault()?.ProjectNameInExcels ?? new List<string>()],
-                ProjectNameInRevits = [.. _projectInfomationModels.FirstOrDefault()?.ProjectNameInRevits ?? new List<ProjectRevitInfomationModel>()],
-                ProjectNameInExcelAction = _ProjectNameInExcelAction
-            };
-            item1.ProjectNameInExcel = item1.ProjectNameInExcels.FirstOrDefault();
-            uI.ProjectInfomationModels.Add(item1);
+
         }
         private void _OnChooseFileOutputCmd()
         {
@@ -146,7 +122,17 @@ namespace RevitDevelop.Tools.Schedules.action
             };
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
-            _viewModel.PathFileOutput = openFileDialog.FileName;
+            _viewModel.ScheduleSetting.PathOutput = openFileDialog.FileName;
+        }
+        private void _OnChooseFileModelCmd()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog()
+            {
+                Filter = "Excel Files (*.rvt)|*.rvt|All Files (*.*)|*.*",
+            };
+            if (openFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+            _viewModel.ScheduleSetting.PathModels = openFileDialog.FileName;
         }
     }
 }
