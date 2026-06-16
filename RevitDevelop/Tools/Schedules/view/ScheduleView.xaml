@@ -318,7 +318,7 @@
             Grid.Row="3">
             <StackPanel 
                 Orientation="Horizontal">
-                <Button
+                <!--<Button
                     Command="{Binding OnSaveSheetsCmd}"
                     Padding="10,0,10,0"
                     Content="Save Sheets"
@@ -334,7 +334,7 @@
                     Margin="10,0,0,0"
                     Padding="10,0,10,0"
                     Content="New Sheet"
-                    Width="auto"/>
+                    Width="auto"/>-->
                 <Button
                     Command="{Binding OnSettingMappingCmd}"
                     Margin="10,0,0,0"
