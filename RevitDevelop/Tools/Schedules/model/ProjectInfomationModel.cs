@@ -11,7 +11,6 @@
             {
                 _projectNameInExcel = value;
                 OnPropertyChanged();
-                ProjectNameInExcelAction?.Invoke(this);
             }
         }
         public List<ProjectRevitInfomationModelUI> ProjectNameInRevits
@@ -23,7 +22,6 @@
                 OnPropertyChanged();
             }
         }
-        public Action<ProjectInfomationModelUI> ProjectNameInExcelAction { get; set;  }
     }
     public class ProjectInfomationModel
     {

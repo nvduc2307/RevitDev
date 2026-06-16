@@ -175,127 +175,142 @@
         </StackPanel>
         <TabControl
             x:Name="TabScheduleSheets"
+            ItemsSource="{Binding ScheduleSetting.ScheduleSheets}"
             Margin="0,10,0,0"
             Grid.Row="2">
-            <TabItem Header="Sheet1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <StackPanel>
-                        <Grid Margin="0,10,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Sheet Name"/>
-                            <TextBox
-                                Text="{Binding SheetName, UpdateSourceTrigger=PropertyChanged, Delay=100}"
-                                Grid.Column="1"/>
-                        </Grid>
-                        <Grid Margin="0,10,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="Schedules Name"/>
-                            <TextBox
-                                Text="{Binding ScheduleNameInRevit, UpdateSourceTrigger=PropertyChanged, Delay=100}"
-                                VerticalContentAlignment="Top"
-                                Grid.Column="1"
-                                TextWrapping="Wrap"
-                                Height="50"/>
-                        </Grid>
-                    </StackPanel>
-                    <GroupBox 
-                        Grid.Row="1"
-                        Margin="0,10,0,0"
-                        Padding="10"
-                        Header="Setting Models">
-                        <ScrollViewer 
-                            Style="{StaticResource MinimalScrollViewer}"
-                            HorizontalScrollBarVisibility="Auto" 
-                            VerticalScrollBarVisibility="Disabled"
-                            Padding="0"
-                            Margin="0">
-
-                            <TabControl ItemsSource="{Binding ProjectInfomationModels}"
-                                Background="White"
-                                IsHitTestVisible="False"
-                                Focusable="False"
-                                Padding="0"
-                                Margin="0"
-                                BorderThickness="0">
-                                <TabControl.ItemContainerStyle>
-                                    <Style TargetType="TabItem">
-                                        <Setter Property="MinWidth" Value="100"/>
-                                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalAlignment" Value="Stretch"/>
-                                        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="Margin" Value="0"/>
-                                        <Setter Property="Padding" Value="0"/>
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="TabItem">
-                                                    <Border Background="White" 
-                                                        BorderBrush="#E0E0E0" 
-                                                        BorderThickness="0,0,1,0"
-                                                        MinWidth="{TemplateBinding MinWidth}">
-                                                        <ContentPresenter ContentSource="Header" />
-                                                    </Border>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </TabControl.ItemContainerStyle>
-                                <TabControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <UniformGrid Rows="1" IsItemsHost="True" Margin="0"/>
-                                    </ItemsPanelTemplate>
-                                </TabControl.ItemsPanel>
-                                <TabControl.Template>
-                                    <ControlTemplate TargetType="TabControl">
-                                        <Grid Background="White">
-                                            <ItemsPresenter />
-                                        </Grid>
-                                    </ControlTemplate>
-                                </TabControl.Template>
-                                <TabControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Background="AliceBlue">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="35"/>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
-
-                                            <Border Background="#F0F4F8" BorderThickness="0,0,0,1" BorderBrush="#D0D7DE">
-                                                <TextBlock Text="{Binding ProjectNameInExcel}" 
-                                                   FontWeight="Bold"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"/>
-                                            </Border>
-                                            <ListView Grid.Row="1"
-                                              ItemsSource="{Binding Projects}"
-                                              BorderThickness="0"
-                                              Background="Transparent">
-                                                <ListView.ItemTemplate>
-                                                    <DataTemplate>
-                                                        <CheckBox 
-                                                            Content="{Binding Name}"
-                                                            IsChecked="{Binding IsChecked}"/>
-                                                    </DataTemplate>
-                                                </ListView.ItemTemplate>
-                                            </ListView>
-                                        </Grid>
-                                    </DataTemplate>
-                                </TabControl.ItemTemplate>
-                            </TabControl>
-                        </ScrollViewer>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock 
+                        Text="{Binding SheetName}" 
+                        VerticalAlignment="Center"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Sheet Name"/>
+                                <TextBox
+                                    Text="{Binding SheetName, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                    Grid.Column="1"/>
+                            </Grid>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Schedules Name"/>
+                                <TextBox
+                                    Text="{Binding ScheduleNameInRevit, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                    VerticalContentAlignment="Top"
+                                    Grid.Column="1"
+                                    TextWrapping="Wrap"
+                                    Height="50"/>
+                            </Grid>
+                        </StackPanel>
+                        <GroupBox 
+                            Grid.Row="1"
+                            Margin="0,10,0,0"
+                            Padding="10"
+                            Header="Setting Models">
+                            <Border 
+                                BorderBrush="#ACACAC" 
+                                BorderThickness="1,1,0,1">
+                                <ScrollViewer 
+                                    Style="{StaticResource MinimalScrollViewer}"
+                                    HorizontalScrollBarVisibility="Auto" 
+                                    VerticalScrollBarVisibility="Disabled"
+                                    Padding="0"
+                                    Margin="0">
+                                <TabControl 
+                                    ItemsSource="{Binding ProjectInfomationModels}"
+                                    Background="White"
+                                    IsHitTestVisible="true"
+                                    Focusable="true"
+                                    Padding="0"
+                                    Margin="0">
+                                    <TabControl.ItemContainerStyle>
+                                        <Style TargetType="TabItem">
+                                            <Setter Property="MinWidth" Value="100"/>
+                                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Margin" Value="0"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="TabItem">
+                                                        <Border Background="White" 
+                                                            BorderBrush="#ACACAC" 
+                                                            BorderThickness="0,0,1,0"
+                                                            MinWidth="{TemplateBinding MinWidth}">
+                                                            <ContentPresenter ContentSource="Header" />
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </TabControl.ItemContainerStyle>
+                                    <TabControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <UniformGrid Rows="1" IsItemsHost="True" Margin="0"/>
+                                        </ItemsPanelTemplate>
+                                    </TabControl.ItemsPanel>
+                                    <TabControl.Template>
+                                        <ControlTemplate TargetType="TabControl">
+                                            <Grid Background="White">
+                                                <ItemsPresenter />
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </TabControl.Template>
+                                    <TabControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Background="White">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="35"/>
+                                                    <RowDefinition Height="*"/>
+                                                </Grid.RowDefinitions>
+                                                <Border 
+                                                    Background="#F0F4F8" 
+                                                    BorderThickness="0,0,0,1" 
+                                                    BorderBrush="#ACACAC">
+                                                    <TextBlock Text="{Binding ProjectNameInExcel}" 
+                                                       FontWeight="Bold"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ListView Grid.Row="1"
+                                                    ItemsSource="{Binding ProjectNameInRevits}"
+                                                    BorderThickness="0"
+                                                    Background="Transparent">
+                                                    <ListView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <CheckBox 
+                                                                Content="{Binding Name}"
+                                                                IsChecked="{Binding IsSelected}"/>
+                                                        </DataTemplate>
+                                                    </ListView.ItemTemplate>
+                                                </ListView>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </TabControl.ItemTemplate>
+                                </TabControl>
+                            </ScrollViewer>
+                            </Border>
+                        </GroupBox>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
         <StackPanel
             VerticalAlignment="Bottom"

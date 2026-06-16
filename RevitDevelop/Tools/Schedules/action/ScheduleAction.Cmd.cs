@@ -77,13 +77,7 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void _OnOkCmd()
         {
-            //_scheduleWaterAndHotWateSupplyAction
-            //    .Execute(
-            //    _viewModel.PathFileOutput,
-            //    _viewModel.SheetNameWaterAndHotWateSupply,
-            //    _viewModel.ModelProjects.ToList(),
-            //    _viewModel.ScheduleNameWaterAndHotWateSupply.Split(',').ToList(),
-            //    _mappingRecords);
+            
         }
         private void _OnSettingMappingCmd()
         {

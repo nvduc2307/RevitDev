@@ -24,7 +24,7 @@ namespace RevitDevelop.Tools.Schedules.action
             _projectRevitInfomationModels = new List<ProjectRevitInfomationModel>();
             _viewModel = new SchedulesVM()
             {
-                ScheduleSetting = new ScheduleSettingModelUI(),
+                ScheduleSetting = GetScheduleSetting(),
                 OnChooseFileOutputCmd = new RelayCommand(_OnChooseFileOutputCmd),
                 OnChooseFileModelCmd = new RelayCommand(_OnChooseFileModelCmd),
                 OnSettingMappingCmd = new RelayCommand(_OnSettingMappingCmd),
@@ -39,9 +39,6 @@ namespace RevitDevelop.Tools.Schedules.action
                 new WriteScheduleWaterAndHotWateSupplyAction();
             _view = new ScheduleView() { DataContext = _viewModel };
         }
-
-        
-
         public void Execute()
         {
             _view.ShowDialog();
