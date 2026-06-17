@@ -6,7 +6,7 @@
         new List<string>()
         {
             "給水北",
-            "給水南　　バル",
+            "給水南バル",
             "給湯",
         };
         public static List<string> SHEET_MODEL_NAME_DRAIN =

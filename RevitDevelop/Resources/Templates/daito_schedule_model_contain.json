@@ -1,0 +1,58 @@
+﻿[
+  {
+    "ProjectNameInExcel": "給水北",
+    "ProjectNameContain": "ef1"
+  },
+  {
+    "ProjectNameInExcel": "給水南バル",
+    "ProjectNameContain": "ef2"
+  },
+  {
+    "ProjectNameInExcel": "合流北",
+    "ProjectNameContain": "eg1, eh1"
+  },
+  {
+    "ProjectNameInExcel": "合流南",
+    "ProjectNameContain": "eg2, eh1"
+  },
+  {
+    "ProjectNameInExcel": "分流北",
+    "ProjectNameContain": "eg1, eh2"
+  },
+  {
+    "ProjectNameInExcel": "分流南",
+    "ProjectNameContain": "eg2, eh2"
+  },
+  {
+    "ProjectNameInExcel": "1階端部住戸　LSパック",
+    "ProjectNameContain": "lg1, za31"
+  },
+  {
+    "ProjectNameInExcel": "2階端部住戸　LSパック",
+    "ProjectNameContain": "lg1, za31"
+  },
+  {
+    "ProjectNameInExcel": "1階中住戸　LSパック",
+    "ProjectNameContain": "lg1, za32"
+  },
+  {
+    "ProjectNameInExcel": "2階中住戸　LSパック",
+    "ProjectNameContain": "lg1, za32"
+  },
+  {
+    "ProjectNameInExcel": "1階端部住戸　LHパック",
+    "ProjectNameContain": "lg2, za31"
+  },
+  {
+    "ProjectNameInExcel": "2階端部住戸　LHパック",
+    "ProjectNameContain": "lg2, za31"
+  },
+  {
+    "ProjectNameInExcel": "1階中住戸　LHパック",
+    "ProjectNameContain": "lg2, za32"
+  },
+  {
+    "ProjectNameInExcel": "2階中住戸　LHパック",
+    "ProjectNameContain": "lg2, za32"
+  }
+]

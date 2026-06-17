@@ -34,6 +34,7 @@ namespace RevitDevelop.Tools.Schedules.action
                 OnRemoveSheetCmd = new RelayCommand(_OnRemoveSheetCmd),
                 OnSaveSheetsCmd = new RelayCommand(_OnSaveSheetsCmd),
             };
+            UpdateModelInSheet();
             _mappingRecords = ScheduleMappingUtils.GetMappingRecords();
             _scheduleWaterAndHotWateSupplyAction =
                 new WriteScheduleWaterAndHotWateSupplyAction();

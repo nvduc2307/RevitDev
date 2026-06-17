@@ -25,14 +25,14 @@
         <Style TargetType="DataGridColumnHeader">
             <Setter Property="HorizontalContentAlignment" Value="Center" />
         </Style>
+
         <Style x:Key="MinimalScrollBarThumb" TargetType="Thumb">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="IsTabStop" Value="False"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
-                        <Border CornerRadius="3" 
-                    Background="#95A5A6"/>
+                        <Border CornerRadius="3" Background="#95A5A6"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -63,7 +63,6 @@
                         </Setter.Value>
                     </Setter>
                 </Trigger>
-
                 <Trigger Property="Orientation" Value="Vertical">
                     <Setter Property="Width" Value="6"/>
                     <Setter Property="Height" Value="Auto"/>
@@ -102,32 +101,16 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-
                             <ScrollContentPresenter Grid.Row="0" Grid.Column="0"/>
-
-                            <ScrollBar Name="PART_HorizontalScrollBar"
-                           Orientation="Horizontal"
-                           Grid.Row="1" Grid.Column="0"
-                           Value="{TemplateBinding HorizontalOffset}"
-                           Maximum="{TemplateBinding ScrollableWidth}"
-                           ViewportSize="{TemplateBinding ViewportWidth}"
-                           Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                           Style="{StaticResource MinimalScrollBar}"/>
-
-                            <ScrollBar Name="PART_VerticalScrollBar"
-                           Orientation="Vertical"
-                           Grid.Row="0" Grid.Column="1"
-                           Value="{TemplateBinding VerticalOffset}"
-                           Maximum="{TemplateBinding ScrollableHeight}"
-                           ViewportSize="{TemplateBinding ViewportHeight}"
-                           Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                           Style="{StaticResource MinimalScrollBar}"/>
+                            <ScrollBar Name="PART_HorizontalScrollBar" Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Value="{TemplateBinding HorizontalOffset}" Maximum="{TemplateBinding ScrollableWidth}" ViewportSize="{TemplateBinding ViewportWidth}" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Style="{StaticResource MinimalScrollBar}"/>
+                            <ScrollBar Name="PART_VerticalScrollBar" Orientation="Vertical" Grid.Row="0" Grid.Column="1" Value="{TemplateBinding VerticalOffset}" Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Style="{StaticResource MinimalScrollBar}"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -135,7 +118,8 @@
             <RowDefinition/>
             <RowDefinition Height="35"/>
         </Grid.RowDefinitions>
-        <StackPanel>
+
+        <StackPanel Grid.Row="0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -143,19 +127,12 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="File Output"/>
-                <TextBox
-                    Text="{Binding ScheduleSetting.PathOutput}"
-                    Grid.Column="1"/>
-                <Button
-                    Command="{Binding OnChooseFileOutputCmd}"
-                    Margin="5,0,0,0"
-                    Content="..."
-                    Grid.Column="2"/>
+                <TextBox Text="{Binding ScheduleSetting.PathOutput}" Grid.Column="1"/>
+                <Button Command="{Binding OnChooseFileOutputCmd}" Margin="5,0,0,0" Content="..." Grid.Column="2"/>
             </Grid>
         </StackPanel>
-        <StackPanel 
-            Margin="0,10,0,0"
-            Grid.Row="1">
+
+        <StackPanel Margin="0,10,0,0" Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -163,28 +140,63 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="File Models"/>
-                <TextBox
-                    Text="{Binding ScheduleSetting.PathModels}"
-                    Grid.Column="1"/>
-                <Button
-                    Command="{Binding OnChooseFileModelCmd}"
-                    Margin="5,0,0,0"
-                    Content="..."
-                    Grid.Column="2"/>
+                <TextBox Text="{Binding ScheduleSetting.PathModels}" Grid.Column="1"/>
+                <Button Command="{Binding OnChooseFileModelCmd}" Margin="5,0,0,0" Content="..." Grid.Column="2"/>
             </Grid>
         </StackPanel>
+
         <TabControl
             x:Name="TabScheduleSheets"
             ItemsSource="{Binding ScheduleSetting.ScheduleSheets}"
             Margin="0,10,0,0"
             Grid.Row="2">
+
+            <TabControl.Template>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid KeyboardNavigation.TabNavigation="Local">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Transparent">
+                            <TabPanel IsItemsHost="True" VerticalAlignment="Center"/>
+
+                            <Button Command="{Binding DataContext.OnNewSheetCmd, RelativeSource={RelativeSource AncestorType=Window}}"
+                                    Content="+"
+                                    FontWeight="Bold"
+                                    FontSize="14"
+                                    Width="28"
+                                    Height="22"
+                                    Margin="5,0,0,0"
+                                    Padding="0,-2,0,0"
+                                    Background="#E1DFDD"
+                                    BorderBrush="#A19F9D"
+                                    VerticalAlignment="Center">
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="3"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </StackPanel>
+
+                        <Border Grid.Row="1" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter ContentSource="SelectedContent"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </TabControl.Template>
+
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock 
-                        Text="{Binding SheetName}" 
-                        VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding SheetName}" VerticalAlignment="Center" Margin="5,2"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>
+
             <TabControl.ContentTemplate>
                 <DataTemplate>
                     <Grid>
@@ -199,9 +211,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Sheet Name"/>
-                                <TextBox
-                                    Text="{Binding SheetName, UpdateSourceTrigger=PropertyChanged, Delay=100}"
-                                    Grid.Column="1"/>
+                                <TextBox Text="{Binding SheetName, UpdateSourceTrigger=PropertyChanged, Delay=100}" Grid.Column="1"/>
                             </Grid>
                             <Grid Margin="0,10,0,0">
                                 <Grid.ColumnDefinitions>
@@ -209,147 +219,80 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Schedules Name"/>
-                                <TextBox
-                                    Text="{Binding ScheduleNameInRevit, UpdateSourceTrigger=PropertyChanged, Delay=100}"
-                                    VerticalContentAlignment="Top"
-                                    Grid.Column="1"
-                                    TextWrapping="Wrap"
-                                    Height="50"/>
+                                <TextBox Text="{Binding ScheduleNameInRevit, UpdateSourceTrigger=PropertyChanged, Delay=100}" VerticalContentAlignment="Top" Grid.Column="1" TextWrapping="Wrap" Height="50"/>
                             </Grid>
                         </StackPanel>
-                        <GroupBox 
-                            Grid.Row="1"
-                            Margin="0,10,0,0"
-                            Padding="10"
-                            Header="Setting Models">
-                            <Border 
-                                BorderBrush="#ACACAC" 
-                                BorderThickness="1,1,0,1">
-                                <ScrollViewer 
-                                    Style="{StaticResource MinimalScrollViewer}"
-                                    HorizontalScrollBarVisibility="Auto" 
-                                    VerticalScrollBarVisibility="Disabled"
-                                    Padding="0"
-                                    Margin="0">
-                                <TabControl 
-                                    ItemsSource="{Binding ProjectInfomationModels}"
-                                    Background="White"
-                                    IsHitTestVisible="true"
-                                    Focusable="true"
-                                    Padding="0"
-                                    Margin="0">
-                                    <TabControl.ItemContainerStyle>
-                                        <Style TargetType="TabItem">
-                                            <Setter Property="MinWidth" Value="100"/>
-                                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="VerticalAlignment" Value="Stretch"/>
-                                            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-                                            <Setter Property="Margin" Value="0"/>
-                                            <Setter Property="Padding" Value="0"/>
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="TabItem">
-                                                        <Border Background="White" 
-                                                            BorderBrush="#ACACAC" 
-                                                            BorderThickness="0,0,1,0"
-                                                            MinWidth="{TemplateBinding MinWidth}">
-                                                            <ContentPresenter ContentSource="Header" />
-                                                        </Border>
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </TabControl.ItemContainerStyle>
-                                    <TabControl.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <UniformGrid Rows="1" IsItemsHost="True" Margin="0"/>
-                                        </ItemsPanelTemplate>
-                                    </TabControl.ItemsPanel>
-                                    <TabControl.Template>
-                                        <ControlTemplate TargetType="TabControl">
-                                            <Grid Background="White">
-                                                <ItemsPresenter />
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </TabControl.Template>
-                                    <TabControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Background="White">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="35"/>
-                                                    <RowDefinition Height="*"/>
-                                                </Grid.RowDefinitions>
-                                                <Border 
-                                                    Background="#F0F4F8" 
-                                                    BorderThickness="0,0,0,1" 
-                                                    BorderBrush="#ACACAC">
-                                                    <TextBlock Text="{Binding ProjectNameInExcel}" 
-                                                       FontWeight="Bold"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"/>
-                                                </Border>
-                                                <ListView Grid.Row="1"
-                                                    ItemsSource="{Binding ProjectNameInRevits}"
-                                                    BorderThickness="0"
-                                                    Background="Transparent">
-                                                    <ListView.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <CheckBox 
-                                                                Content="{Binding Name}"
-                                                                IsChecked="{Binding IsSelected}"/>
-                                                        </DataTemplate>
-                                                    </ListView.ItemTemplate>
-                                                </ListView>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </TabControl.ItemTemplate>
-                                </TabControl>
-                            </ScrollViewer>
+
+                        <GroupBox Grid.Row="1" Margin="0,10,0,0" Padding="10" Header="Setting Models">
+                            <Border BorderBrush="#ACACAC" BorderThickness="1,1,0,1">
+                                <ScrollViewer Style="{StaticResource MinimalScrollViewer}" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Padding="0" Margin="0">
+                                    <TabControl ItemsSource="{Binding ProjectInfomationModels}" Background="White" IsHitTestVisible="True" Focusable="True" Padding="0" Margin="0">
+                                        <TabControl.ItemContainerStyle>
+                                            <Style TargetType="TabItem">
+                                                <Setter Property="MinWidth" Value="100"/>
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                                                <Setter Property="Margin" Value="0"/>
+                                                <Setter Property="Padding" Value="0"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="TabItem">
+                                                            <Border Background="White" BorderBrush="#ACACAC" BorderThickness="0,0,1,0" MinWidth="{TemplateBinding MinWidth}">
+                                                                <ContentPresenter ContentSource="Header" />
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TabControl.ItemContainerStyle>
+                                        <TabControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <UniformGrid Rows="1" IsItemsHost="True" Margin="0"/>
+                                            </ItemsPanelTemplate>
+                                        </TabControl.ItemsPanel>
+                                        <TabControl.Template>
+                                            <ControlTemplate TargetType="TabControl">
+                                                <Grid Background="White">
+                                                    <ItemsPresenter />
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </TabControl.Template>
+                                        <TabControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Background="White">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="35"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Border Background="#F0F4F8" BorderThickness="0,0,0,1" BorderBrush="#ACACAC">
+                                                        <TextBlock Text="{Binding ProjectNameInExcel}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <ListView Grid.Row="1" ItemsSource="{Binding ProjectNameInRevits}" BorderThickness="0" Background="Transparent">
+                                                        <ListView.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected}"/>
+                                                            </DataTemplate>
+                                                        </ListView.ItemTemplate>
+                                                    </ListView>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </TabControl.ItemTemplate>
+                                    </TabControl>
+                                </ScrollViewer>
                             </Border>
                         </GroupBox>
                     </Grid>
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
-        <StackPanel
-            VerticalAlignment="Bottom"
-            HorizontalAlignment="Right"
-            Grid.Row="3">
-            <StackPanel 
-                Orientation="Horizontal">
-                <!--<Button
-                    Command="{Binding OnSaveSheetsCmd}"
-                    Padding="10,0,10,0"
-                    Content="Save Sheets"
-                    Width="auto"/>
-                <Button
-                    Command="{Binding OnRemoveSheetCmd}"
-                    Margin="10,0,0,0"
-                    Padding="10,0,10,0"
-                    Content="Remove Sheet"
-                    Width="auto"/>
-                <Button
-                    Command="{Binding OnNewSheetCmd}"
-                    Margin="10,0,0,0"
-                    Padding="10,0,10,0"
-                    Content="New Sheet"
-                    Width="auto"/>-->
-                <Button
-                    Command="{Binding OnSettingMappingCmd}"
-                    Margin="10,0,0,0"
-                    Content="Mapping"
-                    Width="70"/>
-                <Button
-                    Command="{Binding OnOkCmd}"
-                    Margin="10,0,0,0"
-                    Content="OK"
-                    Width="70"/>
-                <Button
-                    Command="{Binding OnCancelCmd}"
-                    Margin="10,0,0,0"
-                    Content="Cancel"
-                    Width="70"/>
+
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3">
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding OnSettingMappingCmd}" Margin="10,0,0,0" Content="Mapping" Width="70"/>
+                <Button Command="{Binding OnOkCmd}" Margin="10,0,0,0" Content="OK" Width="70"/>
+                <Button Command="{Binding OnCancelCmd}" Margin="10,0,0,0" Content="Cancel" Width="70"/>
             </StackPanel>
         </StackPanel>
     </Grid>

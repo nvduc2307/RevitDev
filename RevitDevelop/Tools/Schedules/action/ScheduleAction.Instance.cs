@@ -8,6 +8,16 @@ namespace RevitDevelop.Tools.Schedules.action
 {
     public partial class ScheduleAction
     {
+        private void UpdateModelInSheet()
+        {
+            foreach (var sheet in _viewModel.ScheduleSetting.ScheduleSheets)
+            {
+                foreach (var model in sheet.ProjectInfomationModels)
+                {
+                    model.ProjectNameInRevits = GetProjectRevitInfomationModelUI(model.ProjectNameInExcel);
+                }
+            }
+        }
         private ScheduleSettingModelUI GetScheduleSetting()
         {
             var result = new ScheduleSettingModelUI();
@@ -19,16 +29,17 @@ namespace RevitDevelop.Tools.Schedules.action
             if (data == null) return GetScheduleSettingDefault();
             result.PathOutput = data.PathOutput;
             result.PathModels = data.PathModels;
+            _projectRevitInfomationModels = GetProjectRevitInfomationModelUIDefault(result.PathModels);
             result.ScheduleSheets = GetScheduleSheets(data.ScheduleSheets);
-            if(data.ScheduleSheets == null)
+            if (data.ScheduleSheets == null)
                 return GetScheduleSettingDefault();
             return result;
         }
         private ObservableCollection<ScheduleSheetInExcelModelUI> GetScheduleSheets(List<ScheduleSheetInExcelModel> dataSheets)
         {
             var result = new ObservableCollection<ScheduleSheetInExcelModelUI>();
-            if(dataSheets == null) return result;
-            if(!dataSheets.Any()) return result;
+            if (dataSheets == null) return result;
+            if (!dataSheets.Any()) return result;
             foreach (var data in dataSheets)
             {
                 var schduleSheet = new ScheduleSheetInExcelModelUI
@@ -46,7 +57,7 @@ namespace RevitDevelop.Tools.Schedules.action
                     {
                         ProjectNameInExcel = item.ProjectNameInExcel,
                         ProjectNameInRevits = item.ProjectNameInRevits
-                        .Select(x=>new ProjectRevitInfomationModelUI() { Name = x.Name, Path=x.Path, IsSelected = x.IsSelected})
+                        .Select(x => new ProjectRevitInfomationModelUI() { Name = x.Name, Path = x.Path, IsSelected = x.IsSelected })
                         .ToList(),
                     };
                     schduleSheet.ProjectInfomationModels.Add(item1);
@@ -70,28 +81,72 @@ namespace RevitDevelop.Tools.Schedules.action
         private ObservableCollection<ProjectInfomationModelUI> GetProjectInfomationModelsDefault(string sheetName)
         {
             var result = new ObservableCollection<ProjectInfomationModelUI>();
-            var modelNames = new List<string>();
-            if(sheetName == ScheduleSheetNameDefault.SHEET_WATER_AND_HOT_WATER)
-                modelNames = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_WATER_AND_HOT_WATER;
+            var modelNameInExcels = new List<string>();
+            if (sheetName == ScheduleSheetNameDefault.SHEET_WATER_AND_HOT_WATER)
+                modelNameInExcels = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_WATER_AND_HOT_WATER;
             if (sheetName == ScheduleSheetNameDefault.SHEET_DRAIN)
-                modelNames = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_DRAIN;
+                modelNameInExcels = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_DRAIN;
             if (sheetName == ScheduleSheetNameDefault.SHEET_HEALTH)
-                modelNames = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_SHEET_HEALTH;
+                modelNameInExcels = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_SHEET_HEALTH;
             if (sheetName == ScheduleSheetNameDefault.SHEET_VENTILATION_LS)
-                modelNames = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_SHEET_VENTILATION_LS;
+                modelNameInExcels = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_SHEET_VENTILATION_LS;
             if (sheetName == ScheduleSheetNameDefault.SHEET_VENTILATION_LH)
-                modelNames = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_SHEET_VENTILATION_LH;
-            foreach (var modelName in modelNames)
+                modelNameInExcels = ScheduleSheetModelNameDefault.SHEET_MODEL_NAME_SHEET_VENTILATION_LH;
+            foreach (var modelNameInExcel in modelNameInExcels)
             {
-                var projectInfomationModelUI = new ProjectInfomationModelUI();
-                projectInfomationModelUI.ProjectNameInExcel = modelName;
-                projectInfomationModelUI.ProjectNameInRevits = new List<ProjectRevitInfomationModelUI>() 
-                { 
-                    new ProjectRevitInfomationModelUI() { Name = "model1", Path = "abc", IsSelected= true } ,
-                    new ProjectRevitInfomationModelUI() { Name = "model2", Path = "abc", IsSelected= true } ,
-                    new ProjectRevitInfomationModelUI() { Name = "model3", Path = "abc", IsSelected= true } ,
+                var projectInfomationModelUI = new ProjectInfomationModelUI
+                {
+                    ProjectNameInExcel = modelNameInExcel,
+                    ProjectNameInRevits = GetProjectRevitInfomationModelUI(modelNameInExcel)
                 };
                 result.Add(projectInfomationModelUI);
+            }
+            return result;
+        }
+        private List<ProjectRevitInfomationModel> GetProjectRevitInfomationModelUIDefault(string dirModels)
+        {
+            var result = new List<ProjectRevitInfomationModel>();
+            if (!Directory.Exists(dirModels)) return result;
+            var files = Directory.GetFiles(dirModels).ToList();
+            if (!files.Any()) return result;
+            files = files.Where(x => x.Contains(".rvt")).ToList();
+            if (!files.Any()) return result;
+            result = files
+                .Select(x => new ProjectRevitInfomationModel() { Name = Path.GetFileName(x).Split('.').FirstOrDefault(), Path = x, IsSelected = false })
+                .ToList();
+            return result;
+        }
+        private List<ProjectRevitInfomationModelUI> GetProjectRevitInfomationModelUI(string nameModelInSheet)
+        {
+            var result = new List<ProjectRevitInfomationModelUI>();
+            if (string.IsNullOrEmpty(nameModelInSheet)) return result;
+            if (!_projectRevitInfomationModels.Any()) return result;
+            var scheduleModelContains = GetScheduleSheetModelNameContain();
+            if (!scheduleModelContains.Any()) return result;
+            var scheduleModelContainsTarget = scheduleModelContains
+            .Where(x => x.ProjectNameInExcel == nameModelInSheet)
+            .ToList();
+            if (!scheduleModelContainsTarget.Any()) return result;
+            var nameContains = scheduleModelContainsTarget
+               .Select(x => x.ProjectNameContain)
+               .ToList();
+            foreach (var model in _projectRevitInfomationModels)
+            {
+                foreach (var nameContain in nameContains)
+                {
+                    var contents = nameContain.Split(',').Select(x=>x.Trim()).ToList();
+                    var isContain = true;
+                    foreach (var content in contents)
+                    {
+                        if (!model.Name.ToUpper().Contains(content.ToUpper()))
+                        {
+                            isContain = false;
+                            break;
+                        }
+                    }
+                    if (isContain)
+                        result.Add(new ProjectRevitInfomationModelUI() { Name = model.Name, Path = model.Path, IsSelected = model.IsSelected });
+                }
             }
             return result;
         }
@@ -113,6 +168,17 @@ namespace RevitDevelop.Tools.Schedules.action
             result.Add(CreateNewSheet(ScheduleSheetNameDefault.SHEET_HEALTH));
             result.Add(CreateNewSheet(ScheduleSheetNameDefault.SHEET_VENTILATION_LS));
             result.Add(CreateNewSheet(ScheduleSheetNameDefault.SHEET_VENTILATION_LH));
+            return result;
+        }
+        private List<ScheduleSheetModelNameContain> GetScheduleSheetModelNameContain()
+        {
+            var pathTemplate = $"{PathUtils.FolderTemplate}\\daito_schedule_model_contain.json";
+            var result = new List<ScheduleSheetModelNameContain>();
+            if (!File.Exists(pathTemplate)) return result;
+            var data = JsonConvert.DeserializeObject<List<ScheduleSheetModelNameContain>>(File.ReadAllText(pathTemplate));
+            if (data == null) return result;
+            if (!data.Any()) return result;
+            result = data;
             return result;
         }
     }

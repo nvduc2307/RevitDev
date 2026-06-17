@@ -33,7 +33,7 @@ namespace RevitDevelop.Tools.Schedules.action
                         var item1 = new ProjectInfomationModel();
                         item1.ProjectNameInExcel = projectInfomationModel.ProjectNameInExcel;
                         item1.ProjectNameInRevits = projectInfomationModel.ProjectNameInRevits
-                            .Select(x=>new ProjectRevitInfomationModel() { Name = x.Name, Path = x.Path, IsSelected = x.IsSelected})
+                            .Select(x => new ProjectRevitInfomationModel() { Name = x.Name, Path = x.Path, IsSelected = x.IsSelected })
                             .ToList();
                         item.ProjectInfomationModels.Add(item1);
                     }
@@ -65,11 +65,11 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void _ProjectNameInExcelAction(ProjectInfomationModelUI uI)
         {
-            
+
         }
         private void _OnSettingModelsCmd()
         {
-            
+
         }
         private void _OnCancelCmd()
         {
@@ -77,7 +77,7 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void _OnOkCmd()
         {
-            
+
         }
         private void _OnSettingMappingCmd()
         {
@@ -120,13 +120,16 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void _OnChooseFileModelCmd()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog()
+            var saveFileDialog = new System.Windows.Forms.FolderBrowserDialog
             {
-                Filter = "Excel Files (*.rvt)|*.rvt|All Files (*.*)|*.*",
+                SelectedPath = @"C:\",
+                ShowNewFolderButton = false
             };
-            if (openFileDialog.ShowDialog() != DialogResult.OK)
-                return;
-            _viewModel.ScheduleSetting.PathModels = openFileDialog.FileName;
+            var resultDialog = saveFileDialog.ShowDialog();
+            if (resultDialog != DialogResult.OK) return;
+            _viewModel.ScheduleSetting.PathModels = saveFileDialog.SelectedPath;
+            _projectRevitInfomationModels = GetProjectRevitInfomationModelUIDefault(_viewModel.ScheduleSetting.PathModels);
+            UpdateModelInSheet();
         }
     }
 }
