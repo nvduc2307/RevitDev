@@ -42,6 +42,7 @@ namespace RevitDevelop.Tools.Schedules.action
             if (!dataSheets.Any()) return result;
             foreach (var data in dataSheets)
             {
+                var index = dataSheets.IndexOf(data);
                 var schduleSheet = new ScheduleSheetInExcelModelUI
                 {
                     SheetName = data.SheetName,
@@ -50,7 +51,6 @@ namespace RevitDevelop.Tools.Schedules.action
                     OnAddModelCmd = new RelayCommand<ScheduleSheetInExcelModelUI>(_OnAddModelSheetCmd),
                     OnRemoveModelCmd = new RelayCommand<ScheduleSheetInExcelModelUI>(_OnRemoveModelSheetCmd)
                 };
-                //_projectInfomationModels
                 foreach (var item in data.ProjectInfomationModels)
                 {
                     var item1 = new ProjectInfomationModelUI

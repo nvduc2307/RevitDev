@@ -36,6 +36,13 @@ namespace RevitDevelop.Tools.Schedules.action
             };
             UpdateModelInSheet();
             _mappingRecords = ScheduleMappingUtils.GetMappingRecords();
+            foreach (var sheet in _viewModel.ScheduleSetting.ScheduleSheets)
+            {
+                var index = _viewModel.ScheduleSetting.ScheduleSheets.IndexOf(sheet);
+                if (index != 0) continue;
+                sheet.SheetName = "給水・給湯";
+                sheet.ScheduleNameInRevit = "フレキシブル配管集計2, 配管集計2, 配管継手集計エルボ樹脂管用2, 配管継手集計エルボ樹脂管以外2";
+            }
             _scheduleWaterAndHotWateSupplyAction =
                 new WriteScheduleWaterAndHotWateSupplyAction();
             _view = new ScheduleView() { DataContext = _viewModel };

@@ -77,12 +77,34 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void _OnOkCmd()
         {
-            var action = new WriteScheduleWaterAndHotWateSupplyAction();
-            action.Execute(_viewModel.ScheduleSetting.PathOutput, 
-                _viewModel.ScheduleSetting.ScheduleSheets.FirstOrDefault().SheetName,
-                new List<ScheduleDocument>(),
-                _viewModel.ScheduleSetting.ScheduleSheets.FirstOrDefault().ScheduleNameInRevit.Split(',').ToList(),
-                _mappingRecords);
+            try
+            {
+                var action = new WriteScheduleWaterAndHotWateSupplyAction();
+                var docs = new List<ScheduleDocument>()
+                {
+                    new ScheduleDocument() { Document = _document, Name = _document.Title, NameInExcel = "", Path = _document.PathName }
+                };
+                var nameScheduleInRevit = new List<string>()
+                {
+                    "フレキシブル配管集計2",
+                    "配管集計2",
+                    "配管継手集計エルボ樹脂管用2",
+                    "配管継手集計エルボ樹脂管以外2"
+                };
+                if (!File.Exists(_viewModel.ScheduleSetting.PathOutput)) return;
+                action.Execute(
+                    _viewModel.ScheduleSetting.PathOutput,
+                    "給水・給湯",
+                    docs,
+                    nameScheduleInRevit,
+                    _mappingRecords);
+                IO.ShowInfo("Complete");
+                _view.Close();
+            }
+            catch (Exception ex)
+            {
+                IO.ShowWarning(ex.Message);
+            }
         }
         private void _OnSettingMappingCmd()
         {

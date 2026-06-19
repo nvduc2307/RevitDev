@@ -213,14 +213,14 @@
                                 <TextBlock Text="Sheet Name"/>
                                 <TextBox Text="{Binding SheetName, UpdateSourceTrigger=PropertyChanged, Delay=100}" Grid.Column="1"/>
                             </Grid>
-                            <Grid Margin="0,10,0,0">
+                            <!--<Grid Margin="0,10,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Schedules Name"/>
                                 <TextBox Text="{Binding ScheduleNameInRevit, UpdateSourceTrigger=PropertyChanged, Delay=100}" VerticalContentAlignment="Top" Grid.Column="1" TextWrapping="Wrap" Height="50"/>
-                            </Grid>
+                            </Grid>-->
                         </StackPanel>
 
                         <GroupBox Grid.Row="1" Margin="0,10,0,0" Padding="10" Header="Setting Models">
