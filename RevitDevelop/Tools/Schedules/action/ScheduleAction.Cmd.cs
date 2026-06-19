@@ -77,7 +77,12 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void _OnOkCmd()
         {
-
+            var action = new WriteScheduleWaterAndHotWateSupplyAction();
+            action.Execute(_viewModel.ScheduleSetting.PathOutput, 
+                _viewModel.ScheduleSetting.ScheduleSheets.FirstOrDefault().SheetName,
+                new List<ScheduleDocument>(),
+                _viewModel.ScheduleSetting.ScheduleSheets.FirstOrDefault().ScheduleNameInRevit.Split(',').ToList(),
+                _mappingRecords);
         }
         private void _OnSettingMappingCmd()
         {

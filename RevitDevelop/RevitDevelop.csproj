@@ -73,8 +73,8 @@
   <ItemGroup>
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
-    <ItemGroup>
-      <PackageReference Include="ClosedXML" Version="0.95.4" />
+  <ItemGroup>
+        <PackageReference Include="ClosedXML" Version="0.95.4" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2">
           <GeneratePathProperty>False</GeneratePathProperty>
         </PackageReference>
@@ -133,6 +133,7 @@
 
     <ItemGroup>
       <Folder Include="Test\" />
+      <Folder Include="Tools\Ya\" />
     </ItemGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent">
