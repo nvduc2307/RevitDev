@@ -4,12 +4,34 @@
     {
         private string _projectNameInExcel;
         private List<ProjectRevitInfomationModelUI> _projectNameInRevits;
+        private List<ProjectRevitInfomationModelUI> _projectNameInRevitsTarget;
         public string ProjectNameInExcel
         {
             get => _projectNameInExcel;
             set
             {
                 _projectNameInExcel = value;
+                OnPropertyChanged();
+            }
+        }
+        private string _searchModelContain; 
+        public string SearchModelContain
+        {
+            get => _searchModelContain;
+            set
+            {
+                _searchModelContain = value;
+                OnPropertyChanged();
+                SearchModelContainAction?.Invoke(this);
+            }
+        }
+        public Action<ProjectInfomationModelUI> SearchModelContainAction { get; set; }
+        public List<ProjectRevitInfomationModelUI> ProjectNameInRevitsTarget
+        {
+            get => _projectNameInRevitsTarget;
+            set
+            {
+                _projectNameInRevitsTarget = value;
                 OnPropertyChanged();
             }
         }
@@ -23,11 +45,6 @@
             }
         }
     }
-    public class ProjectInfomationModel
-    {
-        public string ProjectNameInExcel { get; set; }
-        public List<ProjectRevitInfomationModel> ProjectNameInRevits { get; set; }
-    }
     public class ProjectRevitInfomationModelUI : ObservableObject
     {
         public string Name { get; set; }
@@ -40,13 +57,10 @@
             {
                 _isSelected = value;
                 OnPropertyChanged();
+                IsSelectedAction?.Invoke(this);
             }
         }
-    }
-    public class ProjectRevitInfomationModel
-    {
-        public string Name { get; set; }
-        public string Path { get; set; }
-        public bool IsSelected { get; set; }
+        public Action<ProjectRevitInfomationModelUI> IsSelectedAction { get; set; }
+        public ProjectInfomationModelUI Parent { get; set; }
     }
 }

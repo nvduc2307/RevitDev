@@ -25,9 +25,4 @@ namespace RevitDevelop.Tools.Schedules.model
             }
         }
     }
-    public class SettingProjectInfomationModel
-    {
-        public string PathFolderModel { get; set;  }
-        public List<ProjectInfomationModel> ProjectInfomations { get; set; }
-    }
 }

@@ -35,10 +35,4 @@ namespace RevitDevelop.Tools.Schedules.model
             }
         }
     }
-    public class ScheduleSettingModel
-    {
-        public string PathOutput { get; set; }
-        public string PathModels { get; set; }
-        public List<ScheduleSheetInExcelModel> ScheduleSheets { get; set; }
-    }
 }

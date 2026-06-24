@@ -15,13 +15,13 @@ namespace RevitDevelop.Tools.Schedules.action
         private SchedulesVM _viewModel;
         private List<MappingRecord> _mappingRecords;
         private WriteScheduleWaterAndHotWateSupplyAction _scheduleWaterAndHotWateSupplyAction;
-        private List<ProjectRevitInfomationModel> _projectRevitInfomationModels;
+        private List<ProjectRevitInfomationModelUI> _projectRevitInfomationModels;
         public ScheduleAction(UIApplication uiApp)
         {
             _uiApp = uiApp;
             _uidocument = _uiApp.ActiveUIDocument;
             _document = _uidocument == null ? null : _uidocument.Document;
-            _projectRevitInfomationModels = new List<ProjectRevitInfomationModel>();
+            _projectRevitInfomationModels = new List<ProjectRevitInfomationModelUI>();
             _viewModel = new SchedulesVM()
             {
                 ScheduleSetting = GetScheduleSetting(),

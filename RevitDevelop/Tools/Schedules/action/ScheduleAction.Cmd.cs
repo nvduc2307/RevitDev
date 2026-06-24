@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using RevitDevelop.Tools.Schedules.model;
+﻿using RevitDevelop.Tools.Schedules.model;
 using RevitDevelop.Tools.Schedules.utils;
 using RevitDevelop.Utils;
 using System.IO;
@@ -9,43 +8,19 @@ namespace RevitDevelop.Tools.Schedules.action
 {
     public partial class ScheduleAction
     {
+        private void _IsSelectedAction(ProjectRevitInfomationModelUI target)
+        {
+            if (!target.IsSelected) return;
+            foreach (var item in target.Parent.ProjectNameInRevits)
+            {
+                if (!item.IsSelected) continue;
+                if (item.Name == target.Name) continue;
+                item.IsSelected = !item.IsSelected;
+            }
+        }
         private void _OnSaveSheetsCmd()
         {
-            if (!_viewModel.ScheduleSetting.ScheduleSheets.Any()) return;
-            var data = new List<ScheduleSheetInExcelModel>();
-            try
-            {
-                var path = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\daito_schedule_sheets.json";
-                var pathTemplate = $"{PathUtils.FolderTemplate}\\daito_schedule_sheets.json";
-                if (!File.Exists(path)) File.Copy(pathTemplate, path, true);
-                if (!File.Exists(path)) throw new Exception($"File: {path} is not found");
-                foreach (var sheet in _viewModel.ScheduleSetting.ScheduleSheets)
-                {
-                    var item = new ScheduleSheetInExcelModel
-                    {
-                        SheetName = sheet.SheetName,
-                        ScheduleNameInRevit = sheet.ScheduleNameInRevit,
-                        //ScheduleNameInRevits = [.. sheet.ScheduleNameInRevits],
-                        ProjectInfomationModels = new List<ProjectInfomationModel>()
-                    };
-                    foreach (var projectInfomationModel in sheet.ProjectInfomationModels)
-                    {
-                        var item1 = new ProjectInfomationModel();
-                        item1.ProjectNameInExcel = projectInfomationModel.ProjectNameInExcel;
-                        item1.ProjectNameInRevits = projectInfomationModel.ProjectNameInRevits
-                            .Select(x => new ProjectRevitInfomationModel() { Name = x.Name, Path = x.Path, IsSelected = x.IsSelected })
-                            .ToList();
-                        item.ProjectInfomationModels.Add(item1);
-                    }
-                    data.Add(item);
-                }
-                var content = JsonConvert.SerializeObject(data);
-                File.WriteAllText(path, content);
-            }
-            catch (Exception ex)
-            {
-                IO.ShowWarning(ex.Message);
-            }
+
         }
         private void _OnRemoveSheetCmd()
         {
@@ -63,13 +38,14 @@ namespace RevitDevelop.Tools.Schedules.action
             _viewModel.ScheduleSetting.ScheduleSheets.Add(newSheet);
             _view.TabScheduleSheets.SelectedIndex = qty;
         }
-        private void _ProjectNameInExcelAction(ProjectInfomationModelUI uI)
+        private void _SearchModelContainAction(ProjectInfomationModelUI uI)
         {
-
-        }
-        private void _OnSettingModelsCmd()
-        {
-
+            if (string.IsNullOrEmpty(uI.SearchModelContain))
+            {
+                uI.ProjectNameInRevitsTarget = [.. uI.ProjectNameInRevits];
+                return;
+            }
+            uI.ProjectNameInRevitsTarget = uI.ProjectNameInRevits.Where(x => x.Name.Contains(uI.SearchModelContain)).ToList();
         }
         private void _OnCancelCmd()
         {
@@ -79,25 +55,35 @@ namespace RevitDevelop.Tools.Schedules.action
         {
             try
             {
-                var action = new WriteScheduleWaterAndHotWateSupplyAction();
-                var docs = new List<ScheduleDocument>()
+                var pathSetting = $"{PathUtils.AppDataDirectory}\\daito_schedule_setting.json";
+                var pathSettingTemplate = $"{PathUtils.FolderTemplate}\\daito_schedule_setting.json";
+                if (!File.Exists(pathSettingTemplate)) return;
+                if (!File.Exists(pathSetting)) File.Copy(pathSettingTemplate, pathSetting);
+                var content = new ScheduleSettingModelUI()
                 {
-                    new ScheduleDocument() { Document = _document, Name = _document.Title, NameInExcel = "", Path = _document.PathName }
+                    PathOutput = _viewModel.ScheduleSetting.PathOutput,
+                    PathModels = _viewModel.ScheduleSetting.PathModels,
                 };
-                var nameScheduleInRevit = new List<string>()
-                {
-                    "フレキシブル配管集計2",
-                    "配管集計2",
-                    "配管継手集計エルボ樹脂管用2",
-                    "配管継手集計エルボ樹脂管以外2"
-                };
-                if (!File.Exists(_viewModel.ScheduleSetting.PathOutput)) return;
-                action.Execute(
-                    _viewModel.ScheduleSetting.PathOutput,
-                    "給水・給湯",
-                    docs,
-                    nameScheduleInRevit,
-                    _mappingRecords);
+                File.WriteAllText(pathSetting, Newtonsoft.Json.JsonConvert.SerializeObject(content));
+                //var action = new WriteScheduleWaterAndHotWateSupplyAction();
+                //var docs = new List<ScheduleDocument>()
+                //{
+                //    new ScheduleDocument() { Document = _document, Name = _document.Title, NameInExcel = "", Path = _document.PathName }
+                //};
+                //var nameScheduleInRevit = new List<string>()
+                //{
+                //    "フレキシブル配管集計2",
+                //    "配管集計2",
+                //    "配管継手集計エルボ樹脂管用2",
+                //    "配管継手集計エルボ樹脂管以外2"
+                //};
+                //if (!File.Exists(_viewModel.ScheduleSetting.PathOutput)) return;
+                //action.Execute(
+                //    _viewModel.ScheduleSetting.PathOutput,
+                //    "給水・給湯",
+                //    docs,
+                //    nameScheduleInRevit,
+                //    _mappingRecords);
                 IO.ShowInfo("Complete");
                 _view.Close();
             }

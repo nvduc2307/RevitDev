@@ -37,10 +37,4 @@ namespace RevitDevelop.Tools.Schedules.model
         public RelayCommand<ScheduleSheetInExcelModelUI> OnAddModelCmd { get; set; }
         public RelayCommand<ScheduleSheetInExcelModelUI> OnRemoveModelCmd { get; set; }
     }
-    public class ScheduleSheetInExcelModel
-    {
-        public string SheetName { get; set; }
-        public string ScheduleNameInRevit { get; set; }
-        public List<ProjectInfomationModel> ProjectInfomationModels { get; set; }
-    }
 }

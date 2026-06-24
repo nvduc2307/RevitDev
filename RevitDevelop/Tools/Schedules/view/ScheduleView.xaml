@@ -151,55 +151,24 @@
             Margin="0,10,0,0"
             Grid.Row="2">
 
-            <TabControl.Template>
-                <ControlTemplate TargetType="TabControl">
-                    <Grid KeyboardNavigation.TabNavigation="Local">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Transparent">
-                            <TabPanel IsItemsHost="True" VerticalAlignment="Center"/>
-
-                            <Button Command="{Binding DataContext.OnNewSheetCmd, RelativeSource={RelativeSource AncestorType=Window}}"
-                                    Content="+"
-                                    FontWeight="Bold"
-                                    FontSize="14"
-                                    Width="28"
-                                    Height="22"
-                                    Margin="5,0,0,0"
-                                    Padding="0,-2,0,0"
-                                    Background="#E1DFDD"
-                                    BorderBrush="#A19F9D"
-                                    VerticalAlignment="Center">
-                                <Button.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="3"/>
-                                    </Style>
-                                </Button.Resources>
-                            </Button>
-                        </StackPanel>
-
-                        <Border Grid.Row="1" 
-                                Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{TemplateBinding BorderBrush}">
-                            <ContentPresenter ContentSource="SelectedContent"/>
-                        </Border>
-                    </Grid>
-                </ControlTemplate>
-            </TabControl.Template>
+            <TabControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </TabControl.ItemsPanel>
 
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding SheetName}" VerticalAlignment="Center" Margin="5,2"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding SheetName}" VerticalAlignment="Center" Margin="5,2"/>
+
+                    </StackPanel>
                 </DataTemplate>
             </TabControl.ItemTemplate>
 
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition/>
@@ -213,14 +182,6 @@
                                 <TextBlock Text="Sheet Name"/>
                                 <TextBox Text="{Binding SheetName, UpdateSourceTrigger=PropertyChanged, Delay=100}" Grid.Column="1"/>
                             </Grid>
-                            <!--<Grid Margin="0,10,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="Schedules Name"/>
-                                <TextBox Text="{Binding ScheduleNameInRevit, UpdateSourceTrigger=PropertyChanged, Delay=100}" VerticalContentAlignment="Top" Grid.Column="1" TextWrapping="Wrap" Height="50"/>
-                            </Grid>-->
                         </StackPanel>
 
                         <GroupBox Grid.Row="1" Margin="0,10,0,0" Padding="10" Header="Setting Models">
@@ -269,13 +230,31 @@
                                                     <Border Background="#F0F4F8" BorderThickness="0,0,0,1" BorderBrush="#ACACAC">
                                                         <TextBlock Text="{Binding ProjectNameInExcel}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                     </Border>
-                                                    <ListView Grid.Row="1" ItemsSource="{Binding ProjectNameInRevits}" BorderThickness="0" Background="Transparent">
-                                                        <ListView.ItemTemplate>
-                                                            <DataTemplate>
-                                                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected}"/>
-                                                            </DataTemplate>
-                                                        </ListView.ItemTemplate>
-                                                    </ListView>
+                                                    <Grid Grid.Row="1">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="auto"/>
+                                                            <RowDefinition/>
+                                                        </Grid.RowDefinitions>
+                                                        <TextBox 
+                                                            Margin="5,0,5,0"
+                                                            Padding="5,0,0,0"
+                                                            VerticalAlignment="Top"
+                                                            Text="{Binding SearchModelContain, UpdateSourceTrigger=PropertyChanged, Delay=100}"
+                                                            Grid.Row="0" />
+                                                        <ListView 
+                                                            VerticalAlignment="Top"
+                                                            Margin="0,10,0,0"
+                                                            Grid.Row="1" 
+                                                            ItemsSource="{Binding ProjectNameInRevitsTarget}" 
+                                                            BorderThickness="0" 
+                                                            Background="Transparent">
+                                                            <ListView.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected}" Margin="5,2"/>
+                                                                </DataTemplate>
+                                                            </ListView.ItemTemplate>
+                                                        </ListView>
+                                                    </Grid>
                                                 </Grid>
                                             </DataTemplate>
                                         </TabControl.ItemTemplate>
@@ -287,6 +266,10 @@
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
+
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="3">
+            <Button Command="{Binding OnNewSheetCmd}" Content="+ New Sheet" Width="90" FontWeight="Bold"/>
+        </StackPanel>
 
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3">
             <StackPanel Orientation="Horizontal">
