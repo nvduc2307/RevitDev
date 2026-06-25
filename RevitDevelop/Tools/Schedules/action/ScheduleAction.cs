@@ -14,13 +14,17 @@ namespace RevitDevelop.Tools.Schedules.action
         private ScheduleView _view;
         private SchedulesVM _viewModel;
         private List<MappingRecord> _mappingRecords;
-        private WriteScheduleWaterAndHotWateSupplyAction _scheduleWaterAndHotWateSupplyAction;
         private List<ProjectRevitInfomationModelUI> _projectRevitInfomationModels;
+        private List<ScheduleSheetInExcelToFillModel> _scheduleSheetInExcelToFillModel;
+
+        private ScheduleExcelAction _scheduleExcelAction;
+        private WriteScheduleWaterAndHotWateSupplyAction _scheduleWaterAndHotWateSupplyAction;
         public ScheduleAction(UIApplication uiApp)
         {
             _uiApp = uiApp;
             _uidocument = _uiApp.ActiveUIDocument;
             _document = _uidocument == null ? null : _uidocument.Document;
+            _scheduleExcelAction = new ScheduleExcelAction();
             _projectRevitInfomationModels = new List<ProjectRevitInfomationModelUI>();
             _viewModel = new SchedulesVM()
             {
@@ -30,19 +34,10 @@ namespace RevitDevelop.Tools.Schedules.action
                 OnSettingMappingCmd = new RelayCommand(_OnSettingMappingCmd),
                 OnOkCmd = new RelayCommand(_OnOkCmd),
                 OnCancelCmd = new RelayCommand(_OnCancelCmd),
-                OnNewSheetCmd = new RelayCommand(_OnNewSheetCmd),
-                OnRemoveSheetCmd = new RelayCommand(_OnRemoveSheetCmd),
-                OnSaveSheetsCmd = new RelayCommand(_OnSaveSheetsCmd),
             };
+            UpdateSheets();
             UpdateModelInSheet();
             _mappingRecords = ScheduleMappingUtils.GetMappingRecords();
-            foreach (var sheet in _viewModel.ScheduleSetting.ScheduleSheets)
-            {
-                var index = _viewModel.ScheduleSetting.ScheduleSheets.IndexOf(sheet);
-                if (index != 0) continue;
-                sheet.SheetName = "給水・給湯";
-                sheet.ScheduleNameInRevit = "フレキシブル配管集計2, 配管集計2, 配管継手集計エルボ樹脂管用2, 配管継手集計エルボ樹脂管以外2";
-            }
             _scheduleWaterAndHotWateSupplyAction =
                 new WriteScheduleWaterAndHotWateSupplyAction();
             _view = new ScheduleView() { DataContext = _viewModel };

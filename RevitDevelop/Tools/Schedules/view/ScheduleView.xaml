@@ -266,11 +266,6 @@
                 </DataTemplate>
             </TabControl.ContentTemplate>
         </TabControl>
-
-        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="3">
-            <Button Command="{Binding OnNewSheetCmd}" Content="+ New Sheet" Width="90" FontWeight="Bold"/>
-        </StackPanel>
-
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="3">
             <StackPanel Orientation="Horizontal">
                 <Button Command="{Binding OnSettingMappingCmd}" Margin="10,0,0,0" Content="Mapping" Width="70"/>

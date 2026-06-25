@@ -1,4 +1,5 @@
-﻿using RevitDevelop.Tools.Schedules.model;
+﻿using Autodesk.Revit.UI;
+using RevitDevelop.Tools.Schedules.model;
 using RevitDevelop.Tools.Schedules.utils;
 using RevitDevelop.Utils;
 using System.IO;
@@ -17,26 +18,6 @@ namespace RevitDevelop.Tools.Schedules.action
                 if (item.Name == target.Name) continue;
                 item.IsSelected = !item.IsSelected;
             }
-        }
-        private void _OnSaveSheetsCmd()
-        {
-
-        }
-        private void _OnRemoveSheetCmd()
-        {
-            if (!_viewModel.ScheduleSetting.ScheduleSheets.Any()) return;
-            var index = _view.TabScheduleSheets.SelectedIndex == -1
-                ? _viewModel.ScheduleSetting.ScheduleSheets.Count - 1
-                : _view.TabScheduleSheets.SelectedIndex;
-            _viewModel.ScheduleSetting.ScheduleSheets.RemoveAt(index);
-        }
-        private void _OnNewSheetCmd()
-        {
-            if (_viewModel.ScheduleSetting.ScheduleSheets == null) return;
-            var qty = _viewModel.ScheduleSetting.ScheduleSheets.Count;
-            var newSheet = CreateNewSheet($"sheet{qty + 1}");
-            _viewModel.ScheduleSetting.ScheduleSheets.Add(newSheet);
-            _view.TabScheduleSheets.SelectedIndex = qty;
         }
         private void _SearchModelContainAction(ProjectInfomationModelUI uI)
         {
@@ -121,6 +102,9 @@ namespace RevitDevelop.Tools.Schedules.action
             if (openFileDialog.ShowDialog() != DialogResult.OK)
                 return;
             _viewModel.ScheduleSetting.PathOutput = openFileDialog.FileName;
+            _scheduleSheetInExcelToFillModel = _scheduleExcelAction.GetSheets(_viewModel.ScheduleSetting.PathOutput);
+            UpdateSheets();
+            UpdateModelInSheet();
         }
         private void _OnChooseFileModelCmd()
         {
@@ -133,6 +117,7 @@ namespace RevitDevelop.Tools.Schedules.action
             if (resultDialog != DialogResult.OK) return;
             _viewModel.ScheduleSetting.PathModels = saveFileDialog.SelectedPath;
             _projectRevitInfomationModels = GetProjectRevitInfomationModelUIDefault(_viewModel.ScheduleSetting.PathModels);
+            UpdateSheets();
             UpdateModelInSheet();
         }
     }

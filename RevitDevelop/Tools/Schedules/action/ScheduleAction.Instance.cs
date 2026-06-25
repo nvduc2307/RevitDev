@@ -122,7 +122,7 @@ namespace RevitDevelop.Tools.Schedules.action
             {
                 PathOutput = "",
                 PathModels = "",
-                ScheduleSheets = GetScheduleSheetsDefault()
+                ScheduleSheets = new ObservableCollection<ScheduleSheetInExcelModelUI>()
             };
             if (!File.Exists(pathSetting)) return result;
             var setting = JsonConvert.DeserializeObject<ScheduleSettingModelUI>(File.ReadAllText(pathSetting));
@@ -130,8 +130,31 @@ namespace RevitDevelop.Tools.Schedules.action
             result.PathOutput = setting.PathOutput;
             result.PathModels = setting.PathModels;
             _projectRevitInfomationModels = GetProjectRevitInfomationModelUIDefault(result.PathModels);
+            _scheduleSheetInExcelToFillModel = _scheduleExcelAction.GetSheets(result.PathOutput);
+            UpdateSheets();
             UpdateModelInSheet();
             return result;
+        }
+        private void UpdateSheets()
+        {
+            if (!_scheduleSheetInExcelToFillModel.Any()) return;
+            if (_viewModel == null) return;
+            foreach (var sheetFill in _scheduleSheetInExcelToFillModel)
+            {
+                var item = new ScheduleSheetInExcelModelUI
+                {
+                    SheetName = sheetFill.SheetName,
+                    ScheduleNameInRevit = "フレキシブル配管集計2, 配管集計2, 配管継手集計エルボ樹脂管用2, 配管継手集計エルボ樹脂管以外2",
+                    ProjectInfomationModels = new ObservableCollection<ProjectInfomationModelUI>()
+                };
+                foreach (var scheduleFieldValue in sheetFill.ExcelScheduleFields.FirstOrDefault().ScheduleFieldValues)
+                {
+                    var projectInfomationModelUI = new ProjectInfomationModelUI();
+                    projectInfomationModelUI.ProjectNameInExcel = scheduleFieldValue.ProjectName;
+                    item.ProjectInfomationModels.Add(projectInfomationModelUI);
+                }
+                _viewModel.ScheduleSetting.ScheduleSheets.Add(item);
+            }
         }
         private ObservableCollection<ScheduleSheetInExcelModelUI> GetScheduleSheetsDefault()
         {
