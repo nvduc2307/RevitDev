@@ -24,7 +24,7 @@ namespace RevitDevelop.Tools.Schedules.action
             _projectRevitInfomationModels = new List<ProjectRevitInfomationModelUI>();
             _viewModel = new SchedulesVM()
             {
-                ScheduleSetting = GetScheduleSetting(),
+                ScheduleSetting = GetScheduleSettingDefault(),
                 OnChooseFileOutputCmd = new RelayCommand(_OnChooseFileOutputCmd),
                 OnChooseFileModelCmd = new RelayCommand(_OnChooseFileModelCmd),
                 OnSettingMappingCmd = new RelayCommand(_OnSettingMappingCmd),

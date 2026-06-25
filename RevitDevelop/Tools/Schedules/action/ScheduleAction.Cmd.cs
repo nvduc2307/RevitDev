@@ -55,16 +55,7 @@ namespace RevitDevelop.Tools.Schedules.action
         {
             try
             {
-                var pathSetting = $"{PathUtils.AppDataDirectory}\\daito_schedule_setting.json";
-                var pathSettingTemplate = $"{PathUtils.FolderTemplate}\\daito_schedule_setting.json";
-                if (!File.Exists(pathSettingTemplate)) return;
-                if (!File.Exists(pathSetting)) File.Copy(pathSettingTemplate, pathSetting);
-                var content = new ScheduleSettingModelUI()
-                {
-                    PathOutput = _viewModel.ScheduleSetting.PathOutput,
-                    PathModels = _viewModel.ScheduleSetting.PathModels,
-                };
-                File.WriteAllText(pathSetting, Newtonsoft.Json.JsonConvert.SerializeObject(content));
+                SaveSetting();
                 //var action = new WriteScheduleWaterAndHotWateSupplyAction();
                 //var docs = new List<ScheduleDocument>()
                 //{
@@ -84,7 +75,7 @@ namespace RevitDevelop.Tools.Schedules.action
                 //    docs,
                 //    nameScheduleInRevit,
                 //    _mappingRecords);
-                IO.ShowInfo("Complete");
+                //IO.ShowInfo("Complete");
                 _view.Close();
             }
             catch (Exception ex)

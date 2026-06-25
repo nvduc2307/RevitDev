@@ -8,6 +8,19 @@ namespace RevitDevelop.Tools.Schedules.action
 {
     public partial class ScheduleAction
     {
+        private void SaveSetting()
+        {
+            var pathSetting = $"{PathUtils.AppDataDirectory}\\daito_schedule_setting.json";
+            var pathSettingTemplate = $"{PathUtils.FolderTemplate}\\daito_schedule_setting.json";
+            if (!File.Exists(pathSettingTemplate)) return;
+            if (!File.Exists(pathSetting)) File.Copy(pathSettingTemplate, pathSetting);
+            var content = new ScheduleSettingModelUI()
+            {
+                PathOutput = _viewModel.ScheduleSetting.PathOutput,
+                PathModels = _viewModel.ScheduleSetting.PathModels,
+            };
+            File.WriteAllText(pathSetting, Newtonsoft.Json.JsonConvert.SerializeObject(content));
+        }
         private void UpdateModelInSheet()
         {
             if (_viewModel == null) return;
@@ -25,13 +38,6 @@ namespace RevitDevelop.Tools.Schedules.action
                     model.SearchModelContainAction = _SearchModelContainAction;
                 }
             }
-        }
-
-
-        private ScheduleSettingModelUI GetScheduleSetting()
-        {
-            var result = GetScheduleSettingDefault();
-            return result;
         }
         private ScheduleSheetInExcelModelUI CreateNewSheet(string name)
         {
@@ -135,6 +141,13 @@ namespace RevitDevelop.Tools.Schedules.action
             result.Add(CreateNewSheet(ScheduleSheetNameDefault.SHEET_HEALTH));
             result.Add(CreateNewSheet(ScheduleSheetNameDefault.SHEET_VENTILATION_LS));
             result.Add(CreateNewSheet(ScheduleSheetNameDefault.SHEET_VENTILATION_LH));
+            return result;
+        }
+        private List<ScheduleSheetInExcelModelUI> GetScheduleSheets(string pathExcelOutput)
+        {
+            var result = new List<ScheduleSheetInExcelModelUI>();
+            if(!File.Exists(pathExcelOutput)) return result;
+            if(!File.Exists(pathExcelOutput)) return result;
             return result;
         }
     }
