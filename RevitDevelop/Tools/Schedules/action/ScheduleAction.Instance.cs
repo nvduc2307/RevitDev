@@ -137,10 +137,12 @@ namespace RevitDevelop.Tools.Schedules.action
         }
         private void UpdateSheets()
         {
+            if (_scheduleSheetInExcelToFillModel == null) return;
             if (!_scheduleSheetInExcelToFillModel.Any()) return;
             if (_viewModel == null) return;
             foreach (var sheetFill in _scheduleSheetInExcelToFillModel)
             {
+                if (_viewModel.ScheduleSetting.ScheduleSheets.Any(x => x.SheetName == sheetFill.SheetName)) continue;
                 var item = new ScheduleSheetInExcelModelUI
                 {
                     SheetName = sheetFill.SheetName,
